@@ -6,6 +6,7 @@ import Router from 'next/router'
 import "./index.css"
 import MainSideNav from "./sidenav";
 import cookie from 'js-cookie'
+import SpinnerLoader from "../../global/loaders/spinnerLoader";
 
 
 export const redirectNoUser = () => {
@@ -33,8 +34,8 @@ class MainLayout extends React.Component {
 
   render() {
     const {title, secure, data: {user, loading, error}} = this.props;
-    if (loading) return null;
-    if (error) return null;
+    if (loading) return <SpinnerLoader/>;
+    if (error) return <h1 className={"text-center"}>{error.message}</h1>;
     if (!user && secure) redirectNoUser();
 
     return (
