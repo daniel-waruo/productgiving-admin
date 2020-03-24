@@ -41,7 +41,7 @@ class MainLayout extends React.Component {
       <>
         <NextSeo title={title}/>
         <div className={"mx-2 overflow-hidden"}>
-          <MDBRow className={"f-100"}>
+          <MDBRow className={"f-100-no-mobile"}>
             <MainSideNav toggleFunction={this.toggleFunction}
                          isOpen={this.state.isOpen}
                          user={user}

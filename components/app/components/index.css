@@ -14,12 +14,12 @@
   opacity: 1;
 }
 
-.f-85-no-mobile {
-  height: 85vh;
+.f-100-no-mobile {
+  height: 100vh;
 }
 
 @media (max-width: 768px) {
-  .f-85-no-mobile {
+  .f-100-no-mobile {
     height: 100%;
   }
 }
