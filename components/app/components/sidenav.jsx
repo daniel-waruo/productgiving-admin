@@ -23,7 +23,7 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
           <MDBIcon far icon={"user"} className={"mr-2"}/>
           My Account
         </SideNavItem>
-        <SideNavItem pathname={pathname} className={listClass} href={"/#"}>
+        <SideNavItem pathname={pathname} className={listClass} href={"/vote"}>
           <MDBIcon fas icon={"person-booth"} className={"mr-2"}/>
           Vote
         </SideNavItem>

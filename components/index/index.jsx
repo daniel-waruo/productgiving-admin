@@ -3,10 +3,9 @@ import "./index.css"
 
 class Home extends Component {
   render() {
-
     return (
       <>
-        <h1 className={"text-center"}>2020 June Election</h1>
+        <h1 className={"text-center"}>KYCA Elections</h1>
         <h3 className={"text-center"}>How to Vote</h3>
         <div className="col-lg-12 mx-auto">
           <ol className="step pl-0">
