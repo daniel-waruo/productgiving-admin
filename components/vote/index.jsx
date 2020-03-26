@@ -6,6 +6,7 @@ import {graphql} from 'react-apollo';
 import {voteQuery} from "./queries";
 
 class Vote extends Component {
+
   render() {
     const {data: {loading, error, election}} = this.props;
 
@@ -17,10 +18,9 @@ class Vote extends Component {
 
     const seatLists = seats.map(
       (seat, key) => {
-        const {name, slug} = seat;
         return (
           <MDBCol size={"12"} md={"6"} key={key}>
-            <SeatCard title={name} className={"my-3 mx-1"} href={`vote/${slug}`}/>
+            <SeatCard seat={seat} className={"my-3 mx-1"}/>
           </MDBCol>
         )
       }

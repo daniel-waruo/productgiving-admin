@@ -52,7 +52,7 @@ export default {
     await request.post({
       url: REGISTER_URL, // registration url
       data: args, // data to be sent to the server
-      success: data => {
+      success: () => {
         // set success as true
         success = true;
       },// if the request was successful call the function

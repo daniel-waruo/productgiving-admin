@@ -12,7 +12,11 @@ export default gql`
     login : [Message]
   }
   
-  extend type Mutation {  
+  extend type SeatType{
+    voted: CategoryType
+  }
+  
+  extend type Mutation {
     
     login(email:String! ,password:String) : Boolean
     
@@ -24,10 +28,13 @@ export default gql`
       password1 : String!,
       password2 : String!
     ) : Boolean
-      
+    
     logout : Boolean
     
     
     addMessage(message:String!) : Boolean
+    
+    
+    vote(seatSlug:String!,candidateID:String!) : String
   }
 `;

@@ -70,7 +70,7 @@ export default function createApolloClient(initialState, ctx) {
       authMiddleware,
       batchHttpLink
     ),
-    types,
+    typeDefs:types,
     resolvers
   });
 }
