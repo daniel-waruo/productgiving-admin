@@ -2,6 +2,15 @@ import gql from 'graphql-tag';
 
 export default gql`
   
+  extend type SeatType{
+    voted : CategoryType
+  }
+  
+  extend type CandidateType{
+    selected : Boolean
+  }
+  
+  
   type Message{
     type : String
     text : String
@@ -10,10 +19,6 @@ export default gql`
   extend type Query {
     messages : [Message]
     login : [Message]
-  }
-  
-  extend type SeatType{
-    voted: CategoryType
   }
   
   extend type Mutation {

@@ -14,18 +14,18 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
 
   if (user) {
     return (
-      <MDBListGroup>
+      <MDBListGroup className={"px-1"}>
         <SideNavItem pathname={pathname} className={listClass} href={"/"}>
           <MDBIcon icon={"home"} className={"mr-2"}/>
           Home
         </SideNavItem>
-        <SideNavItem pathname={pathname} className={listClass} href={"/account"}>
-          <MDBIcon far icon={"user"} className={"mr-2"}/>
-          My Account
-        </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/vote"}>
           <MDBIcon fas icon={"person-booth"} className={"mr-2"}/>
           Vote
+        </SideNavItem>
+        <SideNavItem pathname={pathname} className={listClass} href={"/account"}>
+          <MDBIcon far icon={"user"} className={"mr-2"}/>
+          My Account
         </SideNavItem>
         <SideNavItem pathname={pathname} isLogout className={`${listClass} bg-warning my-5`} href={"/#"}>
           <MDBIcon fas icon={"sign-out-alt"} className={"mr-2 "}/>
@@ -49,7 +49,7 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
 };
 
 function SideNavItem(props) {
-  const {pathname, className, children, href,isLogout} = props;
+  const {pathname, className, children, href, isLogout} = props;
   const [logout, {data}] = useMutation(gql`
       mutation Logout{
         logout @client
@@ -66,7 +66,7 @@ function SideNavItem(props) {
       redirect(href)
   };
   return (
-    <MDBListGroupItem active={pathname === href} hover className={className} onClick={onClick}>
+    <MDBListGroupItem active={pathname === href} hover className={`z-depth-1 my-2 ${className}`} onClick={onClick}>
       {children}
     </MDBListGroupItem>
   )

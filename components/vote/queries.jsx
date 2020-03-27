@@ -33,6 +33,10 @@ export const candidatesQuery = gql`
       firstName
       lastName
       image
+      seat{
+        slug
+      }
+      selected @client
     }
   }
 `;
@@ -45,5 +49,11 @@ export const candidateQuery = gql`
       lastName
       image
     }
+  }
+`;
+
+export const voteMutation = gql`
+  mutation Vote($seatSlug:String!,$candidateID:String!){
+    vote(seatSlug:$seatSlug,candidateID:$candidateID) @client
   }
 `;

@@ -1,5 +1,6 @@
 import {APP_QUERY} from "../../components/app/queries";
 import cookie from 'js-cookie';
+import {candidatesQuery} from "../../components/vote/queries";
 
 const getUserSelection = (userID) => {
   let votes = cookie.get("votes");
@@ -24,6 +25,7 @@ const getUserSelection = (userID) => {
 };
 
 const vote = (userID, {seatSlug, candidateID}) => {
+
   // initialize votes as an empty project
   let votes = {};
   // get the parsed user selection from votes
@@ -32,7 +34,7 @@ const vote = (userID, {seatSlug, candidateID}) => {
   // set the seat and candidate
   userSelection[seatSlug] = candidateID;
 
-  // stringify the cbject and set the cookie
+  // stringify the object and set the cookie
   votes[userID] = userSelection;
 
   // set the votes to cookie
@@ -41,16 +43,18 @@ const vote = (userID, {seatSlug, candidateID}) => {
 
 
 export const Mutation = {
-  vote: async (obj, args, {cache}, info) => {
+  vote: async (obj, args, {cache,getCacheKey}, info) => {
     // get seat id and candidate id from arguments
     const {seatSlug, candidateID} = args;
+
     // get user id from apollo cache
     const {user: {id}} = cache.readQuery({
       query: APP_QUERY
     });
-
-    // vote
+    // call vote function which will save current data in the cookies
     await vote(id, {seatSlug, candidateID});
+    // return true
+    return true
   }
 };
 
@@ -79,5 +83,19 @@ export const SeatType = {
     }
     // return null if the candidate has not been selected
     return null;
+  }
+};
+
+export const CandidateType = {
+  selected: async (obj, args, {cache}, info) => {
+    const {user: {id}} = cache.readQuery({
+      query: APP_QUERY
+    });
+    // get user selection from cookies
+    const selection = getUserSelection(id);
+    // get slug from object
+    const {seat: {slug}} = obj;
+    // check if the id in the selection is equal to the object id
+    return selection[slug] === obj.id;
   }
 };

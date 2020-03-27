@@ -1,6 +1,6 @@
 import messageResolvers from "./messages";
 import authResolvers from "./auth";
-import {Mutation as votingMutation, SeatType} from "./voting";
+import {Mutation as votingMutation, SeatType,CandidateType} from "./voting";
 
 export default {
   Mutation: {
@@ -8,5 +8,6 @@ export default {
     ...messageResolvers,
     ...votingMutation
   },
-  SeatType
+  SeatType,
+  CandidateType
 };

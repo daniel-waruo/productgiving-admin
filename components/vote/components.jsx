@@ -1,18 +1,18 @@
 import React from 'react'
 import Link from 'next/link'
-import {MDBCard, MDBCardBody, MDBCardTitle, MDBIcon} from "mdbreact";
+import {MDBCard, MDBCardBody, MDBIcon} from "mdbreact";
+import {candidatesQuery, voteQuery} from "./queries";
 
-// user icon
-const noUserIcon = (
-  <MDBIcon fas icon={"user-alt-slash"} className={"float-right mr-3"}/>
-);
-
-const userIcon = (
-  <MDBIcon far icon={"user"} className={"float-right mr-3"}/>
-);
+function SeatCardImage(props) {
+  const {alt, src} = props;
+  return (
+    <img className={"float-right rounded-circle z-depth-1"}
+         alt={alt}
+         src={src}/>
+  )
+}
 
 export class SeatCard extends React.Component {
-
   render() {
     // get data from props
     const {
@@ -24,24 +24,28 @@ export class SeatCard extends React.Component {
       }
     } = this.props;
 
-    let imageContent = noUserIcon;
+    let imageContent = (
+      <SeatCardImage
+        alt={`No user has been selected for ${name} seat`}
+        src={'/unknownPerson.png'}/>
+    );
 
     if (voted) {
-      const {image,firstName,lastName} = voted;
+      const {image, firstName, lastName} = voted;
       imageContent = (
-        <img className={"float-right rounded-circle z-depth-1"}
-             alt={`Picture of ${firstName} ${lastName} selected for ${name} seat`}
-             src={`${image}-/resize/75x75/`}/>
+        <SeatCardImage
+          alt={`Picture of ${firstName} ${lastName} selected for ${name} seat`}
+          src={`${image}-/resize/75x75/`}/>
       )
     }
     return (
       <Link href={"vote/[slug]"} as={`vote/${slug}`} passHref>
         <MDBCard tag={"a"} className={className + " text-dark"}>
           <MDBCardBody>
-            <MDBCardTitle className={"pl-5"}>
-              {name}
+            <h4 className={"pl-5"}>
+              <span className={" position-absolute pt-4"}>{name}</span>
               {imageContent}
-            </MDBCardTitle>
+            </h4>
           </MDBCardBody>
         </MDBCard>
       </Link>
@@ -49,30 +53,62 @@ export class SeatCard extends React.Component {
   }
 }
 
-export function CandidateCard(props) {
-  const {className, candidate, selected} = props;
+export class CandidateCard extends React.Component {
+  // event to be called on click
+  onClick = () => {
+    const {id, seat: {slug}} = this.props.candidate;
+    this.props.vote({
+      variables: {
+        candidateID: id,
+        seatSlug: slug
+      },
+      refetchQueries: [
+        {
+          query: candidatesQuery,
+          variables: {
+            slug: slug
+          }
+        },
+        {query: voteQuery}
+      ]
+    })
+  };
 
-  const {firstName, lastName, image} = candidate;
+  render() {
+    // get data from props
+    const {className, candidate} = this.props;
+    const {firstName, lastName, image, selected} = candidate;
 
-  let icon = (<MDBIcon size={"2x"} far icon={"circle"} className={"float-right mx-1 text-light"}/>);
+    // set default candidate icon
+    let icon = (<MDBIcon size={"2x"} far icon={"circle"} className={"float-right mx-1 text-light"}/>);
 
-  if (selected) {
-    icon = (
-      <MDBIcon size={"2x"} far icon={"check-circle"} className={"float-right mx-1 text-success"}/>
+    // if the candidate has been selected set the success icon
+    if (selected) {
+      icon = (
+        <MDBIcon size={"2x"} far icon={"check-circle"} className={"float-right mx-1 text-success"}/>
+      )
+    }
+
+    return (
+      <MDBCard className={className} onClick={this.onClick}>
+        <MDBCardBody>
+          <img className={"float-left rounded-circle z-depth-1"}
+               alt={`Picture of ${firstName} ${lastName}`}
+               src={`${image}-/resize/75x75/`}/>
+          <h4 className={"mt-3"} style={{marginLeft: "30%"}}>
+            {`${firstName} ${lastName}`}
+            {icon}
+          </h4>
+        </MDBCardBody>
+      </MDBCard>
     )
   }
+}
 
-  return (
-    <MDBCard className={className}>
-      <MDBCardBody>
-        <img className={"float-left rounded-circle z-depth-1"}
-             alt={`Picture of ${firstName} ${lastName}`}
-             src={`${image}-/resize/75x75/`}/>
-        <h4 className={"mt-3"} style={{marginLeft: "30%"}}>
-          {`${firstName} ${lastName}`}
-          {icon}
-        </h4>
-      </MDBCardBody>
-    </MDBCard>
-  )
+export class NoCandidatesPage extends React.Component {
+  render(){
+    return (
+      <h1 className={"text-center"}>No candidates found</h1>
+    )
+  }
 }
