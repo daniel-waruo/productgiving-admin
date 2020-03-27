@@ -3,7 +3,7 @@ import AccountEdit from "../../components/account/edit";
 import {withApp} from "../../components/app/index";
 import {withAuthSync} from "../../utils/auth";
 
-export default withApollo()(
+export default withApollo({ssr:false})(
   withAuthSync(// auth hoc
     withApp(AccountEdit)//with app account//
   )
