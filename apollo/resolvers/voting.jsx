@@ -1,28 +1,6 @@
 import {APP_QUERY} from "../../components/app/queries";
 import cookie from 'js-cookie';
-import {candidatesQuery} from "../../components/vote/queries";
-
-const getUserSelection = (userID) => {
-  let votes = cookie.get("votes");
-  if (votes) {
-    votes = JSON.parse(votes);
-
-    const keys = Object.keys(votes);
-    if (keys.find(value => value === userID) && (keys.length > 1)) {
-      // remove other user ids from cookies to prevent voting leaks
-      keys.forEach(
-        value => {
-          if (value !== userID)
-            delete votes[value]
-        }
-      );
-      // set the cookies
-      cookie.set("votes", votes);
-    }
-    return votes[userID]
-  }
-  return {}
-};
+import {getUserSelection} from "../../_helpers";
 
 const vote = (userID, {seatSlug, candidateID}) => {
 
@@ -43,7 +21,7 @@ const vote = (userID, {seatSlug, candidateID}) => {
 
 
 export const Mutation = {
-  vote: async (obj, args, {cache,getCacheKey}, info) => {
+  vote: async (obj, args, {cache, getCacheKey}, info) => {
     // get seat id and candidate id from arguments
     const {seatSlug, candidateID} = args;
 

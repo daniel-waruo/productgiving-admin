@@ -2,6 +2,10 @@ import gql from 'graphql-tag'
 
 export const voteQuery = gql`
   query {
+    user{
+      id
+      voted
+    }
     election {
       id
       name
@@ -56,4 +60,14 @@ export const voteMutation = gql`
   mutation Vote($seatSlug:String!,$candidateID:String!){
     vote(seatSlug:$seatSlug,candidateID:$candidateID) @client
   }
+`;
+
+export const submitVoteMutation = gql`
+ mutation SubmitVote($candidateIds:[String]!){
+   submitVote(candidateIds:$candidateIds){
+     candidates{
+       id
+     }
+   }
+ }
 `;

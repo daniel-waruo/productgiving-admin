@@ -5,9 +5,41 @@ import {SideNav} from "../../global/sidenav";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
 import {APP_QUERY} from "../queries";
+import Link from "next/link"
 
-const redirect = (href) => {
-  Router.push(href);
+function SideNavItem(props) {
+  const {pathname, className, children, href} = props;
+  return (
+    <Link href={href}>
+      <a>
+        <MDBListGroupItem active={pathname === href} hover className={`z-depth-1 my-2 ${className}`}>
+          {children}
+        </MDBListGroupItem>
+      </a>
+    </Link>
+  )
+}
+
+const SidenavLogout = (props) => {
+  const {className, children} = props;
+  const [logout] = useMutation(gql`
+      mutation Logout{
+        logout @client
+      }
+    `);
+  const onClick = () => {
+    logout({
+      refetchQueries: [
+        {query: APP_QUERY}
+      ]
+    });
+  };
+
+  return (
+    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} bg-warning mt-5`} onClick={onClick}>
+      {children}
+    </MDBListGroupItem>
+  )
 };
 
 const getSideNavChildren = (listClass, pathname, user, logout) => {
@@ -27,10 +59,10 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
           <MDBIcon far icon={"user"} className={"mr-2"}/>
           My Account
         </SideNavItem>
-        <SideNavItem pathname={pathname} isLogout className={`${listClass} bg-warning my-5`} href={"/#"}>
+        <SidenavLogout className={listClass}>
           <MDBIcon fas icon={"sign-out-alt"} className={"mr-2 "}/>
           Logout
-        </SideNavItem>
+        </SidenavLogout>
       </MDBListGroup>
     )
   }
@@ -48,29 +80,6 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
   )
 };
 
-function SideNavItem(props) {
-  const {pathname, className, children, href, isLogout} = props;
-  const [logout, {data}] = useMutation(gql`
-      mutation Logout{
-        logout @client
-      }
-    `);
-  const onClick = () => {
-    if (isLogout)
-      logout({
-        refetchQueries: [
-          {query: APP_QUERY}
-        ]
-      });
-    else
-      redirect(href)
-  };
-  return (
-    <MDBListGroupItem active={pathname === href} hover className={`z-depth-1 my-2 ${className}`} onClick={onClick}>
-      {children}
-    </MDBListGroupItem>
-  )
-}
 
 function MainSideNav(props) {
   const {isOpen, toggleFunction, user} = props;

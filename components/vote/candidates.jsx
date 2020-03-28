@@ -3,7 +3,7 @@ import {withRouter} from "next/router";
 import {graphql} from 'react-apollo';
 import {candidatesQuery, voteMutation} from "./queries";
 import SpinnerLoader from "../global/loaders/spinnerLoader";
-import {CandidateCard, NoCandidatesPage} from "./components";
+import {CandidateCard, NoCandidatesPage} from "./components/candidates";
 import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdbreact";
 import compose from "lodash.flowright"
 import Link from "next/link"
@@ -40,7 +40,6 @@ class CandidateVote extends React.Component {
       )
     );
 
-
     return (
       <>
         <div className={"px-2"}>
@@ -49,11 +48,13 @@ class CandidateVote extends React.Component {
           </h1>
           <MDBRow>
             {candidatesList}
-            <Link passHref href={"/vote"}>
-              <MDBBtn tag={"a"} className={"w-75 rounded-pill position-sticky mx-auto p"}>
-                <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
-                Continue Voting
-              </MDBBtn>
+            <Link href={"/vote"} >
+              <a className={"w-75 mx-auto"}>
+                <MDBBtn className={"w-100 rounded-pill position-sticky "} style={{fontSize:"1rem"}} >
+                  <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
+                  Continue Voting
+                </MDBBtn>
+              </a>
             </Link>
           </MDBRow>
         </div>
