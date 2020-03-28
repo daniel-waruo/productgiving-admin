@@ -10,7 +10,7 @@ export default function LoginForm(props) {
   const nonFieldErrors = props.loginErrors ?
     props.loginErrors.map(
       (error, key) => (
-        <MDBAlert key={key} color={error.type}>{error.text}</MDBAlert>
+        <MDBAlert key={key} color={error.type} className={"text-center z-depth-1 mb-4"}>{error.text}</MDBAlert>
       )
     ) : null;
 

@@ -53,11 +53,13 @@ class Login extends Component {
             "Login through FaceBook , Google and Instagram"
           }
         />
-        <LoginForm onChange={this.onChange}
-                   socialLogin={this.props.socialLogin}
-                   login={this.login}
-                   loginErrors={loginErrors}
-                   loading={false}/>
+        <div className={"pt-5"}>
+          <LoginForm onChange={this.onChange}
+                     socialLogin={this.props.socialLogin}
+                     login={this.login}
+                     loginErrors={loginErrors}
+                     loading={false}/>
+        </div>
       </>
     )
   }

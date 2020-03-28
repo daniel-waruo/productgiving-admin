@@ -36,7 +36,7 @@ const SidenavLogout = (props) => {
   };
 
   return (
-    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} bg-warning mt-5`} onClick={onClick}>
+    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} cyan darken-4 text-white mt-5`} onClick={onClick}>
       {children}
     </MDBListGroupItem>
   )
@@ -89,7 +89,7 @@ function MainSideNav(props) {
   const children = getSideNavChildren;
   return (
     <>
-      <MDBBtn className={"position-fixed d-md-block d-lg-none rounded-pill hover-fade"}
+      <MDBBtn className={"position-fixed d-md-block d-lg-none rounded-pill hover-fade cyan darken-4"}
               style={{
                 zIndex: 1,
                 display: isOpen ? "none!important" : "",

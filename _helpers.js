@@ -47,7 +47,7 @@ export const parseError = error => {
         message => {
           errors.push({
             text: message,
-            type: 'warning',
+            type: 'danger',
             __typename: 'Message'
           });
         }

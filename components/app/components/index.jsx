@@ -34,8 +34,11 @@ class MainLayout extends React.Component {
 
   render() {
     const {title, secure, data: {user, loading, error}} = this.props;
+
     if (loading) return <SpinnerLoader/>;
+
     if (error) return <h1 className={"text-center"}>{error.message}</h1>;
+
     if (!user && secure) redirectNoUser();
 
     return (

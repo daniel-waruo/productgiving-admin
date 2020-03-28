@@ -48,9 +48,17 @@ class SocialLogin extends React.PureComponent {
           <GoogleLogin
             clientId={google}
             render={renderProps => (
-              <MDBBtn onClick={renderProps.onClick} color={"transparent"} disabled={renderProps.disabled}
-                      className={"rounded-pill w-75"}>
-                <MDBIcon className={"mx-4 align-middle"} size={"2x"} fab icon="google"/> Google
+              <MDBBtn onClick={renderProps.onClick}
+                      color={"transparent"}
+                      disabled={renderProps.disabled}
+                      className={"rounded-pill cyan darken-3 text-white w-100"}>
+                <MDBIcon className={"mx-4 align-middle"} size={"2x"} fab icon="google"/>
+                <span
+                  style={{
+                    fontSize: "1rem"
+                  }}>
+                  Google
+                </span>
                 {loader}
               </MDBBtn>
             )}

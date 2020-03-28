@@ -50,7 +50,7 @@ class CandidateVote extends React.Component {
             {candidatesList}
             <Link href={"/vote"} >
               <a className={"w-75 mx-auto"}>
-                <MDBBtn className={"w-100 rounded-pill position-sticky "} style={{fontSize:"1rem"}} >
+                <MDBBtn className={"w-100 rounded-pill position-sticky cyan darken-4"} style={{fontSize:"1rem"}} >
                   <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
                   Continue Voting
                 </MDBBtn>

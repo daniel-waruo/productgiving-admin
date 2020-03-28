@@ -62,7 +62,8 @@ class Vote extends Component {
         </div>
         <MDBRow center>
           {seatLists}
-          <MDBBtn disabled={!finished} className={"w-75 rounded-pill position-sticky mx-auto"}
+          <MDBBtn disabled={!finished}
+                  className={"w-75 rounded-pill position-sticky cyan darken-4 mx-auto"}
                   onClick={() => this.submitVote(id)}
                   style={{textSize: "2rem!important"}}>
             <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
