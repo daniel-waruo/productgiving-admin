@@ -42,6 +42,14 @@ export const candidatesQuery = gql`
       }
       selected @client
     }
+    candidateDialog @client{
+      open
+      candidate{
+        id
+        firstName
+        lastName
+      }
+    }
   }
 `;
 
@@ -70,4 +78,10 @@ export const submitVoteMutation = gql`
      }
    }
  }
+`;
+
+export const closeCandidateDialog = gql`
+  mutation {
+    closeCandidateDialog @client
+  }
 `;

@@ -193,3 +193,231 @@
   background-color: #bdbdbd;
   border-color: #bdbdbd
 }
+
+.md-progress {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: .25rem;
+    margin-bottom: 1rem;
+    overflow: hidden;
+    background-color: #eee;
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.md-progress .progress-bar {
+    height: .25rem;
+    background-color: #0d47a1;
+    border-radius: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none
+}
+
+.md-progress .progress-bar-animated {
+    -webkit-transition: width 2s ease-in-out;
+    transition: width 2s ease-in-out
+}
+
+.md-progress .indeterminate {
+    background-color: #90caf9
+}
+
+.md-progress .indeterminate:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background-color: inherit;
+    -webkit-animation: indeterminate 2.1s cubic-bezier(0.65,0.815,0.735,0.395) infinite;
+    animation: indeterminate 2.1s cubic-bezier(0.65,0.815,0.735,0.395) infinite;
+    will-change: left,right
+}
+
+.md-progress .indeterminate:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    content: "";
+    background-color: inherit;
+    -webkit-animation: indeterminate 2.1s cubic-bezier(0.165,0.84,0.44,1) infinite;
+    animation: indeterminate 2.1s cubic-bezier(0.165,0.84,0.44,1) infinite;
+    -webkit-animation-delay: 1.15s;
+    animation-delay: 1.15s;
+    will-change: left,right
+}
+
+@-webkit-keyframes indeterminate {
+    0% {
+        right: 100%;
+        left: -35%
+    }
+
+    60% {
+        right: -90%;
+        left: 100%
+    }
+
+    100% {
+        right: -90%;
+        left: 100%
+    }
+}
+
+@keyframes indeterminate {
+    0% {
+        right: 100%;
+        left: -35%
+    }
+
+    60% {
+        right: -90%;
+        left: 100%
+    }
+
+    100% {
+        right: -90%;
+        left: 100%
+    }
+}
+
+@-webkit-keyframes indeterminate-short {
+    0% {
+        right: 100%;
+        left: -200%
+    }
+
+    60% {
+        right: -8%;
+        left: 107%
+    }
+
+    100% {
+        right: -8%;
+        left: 107%
+    }
+}
+
+@keyframes indeterminate-short {
+    0% {
+        right: 100%;
+        left: -200%
+    }
+
+    60% {
+        right: -8%;
+        left: 107%
+    }
+
+    100% {
+        right: -8%;
+        left: 107%
+    }
+}
+
+.preloader-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 3rem;
+    height: 3rem;
+    font-size: 0
+}
+
+.preloader-wrapper.small {
+    width: 2.25rem;
+    height: 2.25rem
+}
+
+.preloader-wrapper.big {
+    width: 4rem;
+    height: 4rem
+}
+
+.preloader-wrapper.active {
+    -webkit-animation: container-rotate 1568ms linear infinite;
+    animation: container-rotate 1568ms linear infinite
+}
+
+.preloader-wrapper.crazy {
+    -webkit-animation-duration: 333ms;
+    animation-duration: 333ms
+}
+
+.preloader-wrapper .spinner-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0
+}
+
+.preloader-wrapper .spinner-layer .gap-patch {
+    position: absolute;
+    top: 0;
+    left: 45%;
+    width: 10%;
+    height: 100%;
+    overflow: hidden;
+    border-color: inherit
+}
+
+.preloader-wrapper .spinner-layer .gap-patch .circle {
+    left: -450%;
+    width: 1000%
+}
+
+.preloader-wrapper .spinner-layer .circle-clipper {
+    position: relative;
+    display: inline-block;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    border-color: inherit
+}
+
+.preloader-wrapper .spinner-layer .circle-clipper .circle {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 200%;
+    height: 100%;
+    border-color: inherit;
+    border-style: solid;
+    border-width: .1875rem;
+    border-bottom-color: transparent !important;
+    border-radius: 50%;
+    -webkit-animation: none;
+    animation: none
+}
+
+.preloader-wrapper .spinner-layer .circle-clipper.left .circle {
+    left: 0;
+    border-right-color: transparent !important;
+    -webkit-transform: rotate(129deg);
+    transform: rotate(129deg)
+}
+
+.preloader-wrapper .spinner-layer .circle-clipper.right .circle {
+    left: -100%;
+    border-left-color: transparent !important;
+    -webkit-transform: rotate(-129deg);
+    transform: rotate(-129deg)
+}
+
+.preloader-wrapper .spinner-blue,.preloader-wrapper .spinner-blue-only {
+    border-color: #4285f4
+}
+
+.preloader-wrapper .spinner-red,.preloader-wrapper .spinner-red-only {
+    border-color: #db4437
+}
+
+.preloader-wrapper .spinner-yellow,.preloader-wrapper .spinner-yellow-only {
+    border-color: #f4b400
+}
+
+.preloader-wrapper .spinner-green,.preloader-wrapper .spinner-green-only {
+    border-color: #0f9d58
+}

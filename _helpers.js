@@ -19,7 +19,9 @@ export const getUserSelection = (userID) => {
     }
     return votes[userID]
   }
-  return {}
+  votes = {};
+  votes[userID] = {};
+  return votes
 };
 
 export const getCandidateIds = (userID) => {

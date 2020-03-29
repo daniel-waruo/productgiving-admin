@@ -1,6 +1,5 @@
 // IMPORT MD-BOOTSTRAP CSS
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import '../assets/css/mdb-pro.css';
 import '../assets/css/dist/style.css';
 import React from 'react';
 import Head from 'next/head';

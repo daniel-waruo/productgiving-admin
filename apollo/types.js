@@ -10,7 +10,10 @@ export default gql`
     selected : Boolean
   }
   
-  
+  type CandidateDialog{
+    open:Boolean
+    candidate:CandidateType
+  }
   type Message{
     type : String
     text : String

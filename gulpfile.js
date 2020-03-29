@@ -55,6 +55,7 @@ gulp.task('combine-clean-css', function () {
     `${destination}/bootstrap.min.css`,
     `${destination}/mdb.css`,
     'assets/css/index.css',
+    'assets/css/mdb-pro.css'
   ]).pipe(concat('style.css'))
     .pipe(gulp.dest(destination));
 });

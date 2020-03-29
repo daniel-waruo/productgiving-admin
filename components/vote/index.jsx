@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCol, MDBIcon, MDBProgress, MDBRow} from "mdbreact";
 import {SeatCard, UserVoted} from "./components/seats";
 import SpinnerLoader from "../global/loaders/spinnerLoader";
 import {graphql} from 'react-apollo';
@@ -24,18 +24,22 @@ class Vote extends Component {
   }
 
   render() {
+    // get data from props
     const {data: {loading, error, election, user}} = this.props;
-
+    // if loading return a spinner loader
     if (loading) return <SpinnerLoader/>;
-
+    // if there is an error show the error message
+    // TODO: in future redirect to a something wrong page
     if (error) return <h1>{error.message}</h1>;
 
+    // get id and voted from the user
     const {id, voted} = user;
 
+    // if user has voted return user has voted
     if (voted) return <UserVoted/>;
-
+    // get name and seat fro election
     const {name, seats} = election;
-
+    // create a list of components from seats
     const seatLists = seats.map(
       (seat, key) => {
         return (
@@ -46,16 +50,36 @@ class Vote extends Component {
       }
     );
 
-    // return true when all seat candidates have been selected
-    const finished = seats.reduce(
-      (accumulator, seat) => {
+
+    // get the total number of seats voted for
+    // return an array which if the seat has a selected voter it will return
+    // 1 else it will return 0
+    let votedSeats = seats.map(
+      (seat) => {
         const {voted} = seat;
-        return accumulator && Boolean(voted);
+        if (voted)
+          return 1;
+        return 0;
+      }
+    );
+    // reduce the votedSeats into the sum of all elements which is the number of
+    // selected items
+    votedSeats = votedSeats.reduce(
+      (total, num) => {
+        return total + num
       }
     );
 
+    console.log(votedSeats);
+    // check if all seats are voted for
+    // this is done by checking whether the length
+    // of the voted seats is equal to the total number of seats
+    const finished = seats.length === votedSeats ;
+    // get the percentage of voting finished to be indicated by the loader
+    const percentage= (votedSeats /seats.length) * 100 ;
     return (
       <>
+        <MDBProgress material animated height={"0.5rem"} value={percentage} className="my-1" barClassName={"cyan darken-4"}/>
         <div className={"py-3"}>
           <h1 className={"text-center"}>{name}</h1>
           <h3 className={"text-center"}> Select Seat To Start Voting</h3>

@@ -7,7 +7,7 @@ import {CandidateCard, NoCandidatesPage} from "./components/candidates";
 import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdbreact";
 import compose from "lodash.flowright"
 import Link from "next/link"
-
+import CandidateDialog from "./components/candidateDialog"
 
 class CandidateVote extends React.Component {
 
@@ -17,7 +17,8 @@ class CandidateVote extends React.Component {
       data: {
         loading,
         error,
-        candidates
+        candidates,
+        candidateDialog
       }
     } = this.props;
     // if loading return a loader
@@ -42,15 +43,16 @@ class CandidateVote extends React.Component {
 
     return (
       <>
+        <CandidateDialog candidateDialog={candidateDialog} loading={loading} />
         <div className={"px-2"}>
           <h1 className={"text-center py-1"}>
             Select Candidate to Vote for
           </h1>
           <MDBRow>
             {candidatesList}
-            <Link href={"/vote"} >
+            <Link href={"/vote"}>
               <a className={"w-75 mx-auto"}>
-                <MDBBtn className={"w-100 rounded-pill position-sticky cyan darken-4"} style={{fontSize:"1rem"}} >
+                <MDBBtn className={"w-100 rounded-pill position-sticky cyan darken-4"} style={{fontSize: "1rem"}}>
                   <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
                   Continue Voting
                 </MDBBtn>
