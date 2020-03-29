@@ -34,4 +34,14 @@ class Results extends React.Component {
   }
 }
 
-export default graphql(resultsQuery)(Results)
+export default graphql(
+  resultsQuery,
+  {
+    options: () => {
+      return {
+        fetchPolicy: "network-only",
+        pollInterval:5000
+      }
+    }
+  }
+)(Results)
