@@ -64,6 +64,27 @@ export const Mutation = {
     // return true
     return true
   },
+  toggleVoteSubmit: async (obj, args, {cache}) => {
+    // get the current state of submit vote
+    const {submitVote: {open}} = cache.readQuery({
+      query: gql`
+        query {
+          submitVote @client{
+            open
+          }
+        }
+      `
+    });
+    // negate the state and write to cache
+    cache.writeData({
+      data: {
+        submitVote: {
+          __typename: "SubmitVote",
+          open: !open
+        }
+      }
+    });
+  },
   closeCandidateDialog: async (obj, args, {cache}) => {
     // close the candidate dialog
     cache.writeData({

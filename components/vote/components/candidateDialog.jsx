@@ -45,7 +45,7 @@ class CandidateDialog extends Component {
           <MDBModalFooter className={"justify-content-around"}>
             <Link href={"/vote"}>
               <a>
-                <MDBBtn outline className={"rounded-pill"}>
+                <MDBBtn outline className={"rounded-pill"} onClick={this.toggle}>
                   <MDBIcon icon="arrow-left" style={{fontSize: "1rem"}} className={"mx-2"}/>
                   Continue Voting
                 </MDBBtn>

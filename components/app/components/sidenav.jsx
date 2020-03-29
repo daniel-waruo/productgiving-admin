@@ -52,8 +52,12 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
           Home
         </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/vote"}>
-          <MDBIcon fas icon={"person-booth"} className={"mr-2"}/>
+          <MDBIcon  icon={"person-booth"} className={"mr-2"}/>
           Vote
+        </SideNavItem>
+        <SideNavItem pathname={pathname} className={listClass} href={"/vote/results"}>
+          <MDBIcon  icon={"poll-h"} className={"mr-2"}/>
+          Results
         </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/account"}>
           <MDBIcon far icon={"user"} className={"mr-2"}/>
@@ -101,8 +105,8 @@ function MainSideNav(props) {
       <SideNav hide={"lg"} isOpen={isOpen} toggleFunction={toggleFunction} className={"bg-white text-black z-depth-1"}>
         {children(listClassSide, pathname, user)}
       </SideNav>
-      <MDBCol lg={"3"} className={"d-none d-lg-block my-auto z-depth-1 f-100"}>
-        <div className={"mt-5 rounded f-50 h-100"}>
+      <MDBCol lg={"3"} className={"d-none d-lg-block  f-100 px-0"}>
+        <div className={"pt-5 rounded f-50 h-100 z-depth-1 position-fixed col-lg-3"}>
           {children(listClass, pathname, user)}
         </div>
       </MDBCol>

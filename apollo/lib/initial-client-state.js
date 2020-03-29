@@ -4,6 +4,10 @@ export const initialClientStateCache = {
   candidateDialog: {
     __typename: "CandidateDialog",
     open: false,
-    candidate:null
+    candidate: null
+  },
+  submitVote: {
+    __typename: "SubmitVote",
+    open: false
   }
 };

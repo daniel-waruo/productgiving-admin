@@ -2,6 +2,9 @@ import gql from 'graphql-tag'
 
 export const voteQuery = gql`
   query {
+    submitVote @client{
+      open
+    }
     user{
       id
       voted
@@ -83,5 +86,34 @@ export const submitVoteMutation = gql`
 export const closeCandidateDialog = gql`
   mutation {
     closeCandidateDialog @client
+  }
+`;
+
+export const toggleVoteSubmit = gql`
+  mutation {
+    toggleVoteSubmit @client
+  }
+`;
+
+
+export const resultsQuery = gql`
+  query{
+    election{
+      id
+      name
+      seats {
+        id
+        name
+        candidates{
+          id
+          image
+          firstName
+          lastName
+          votes{
+            number
+          }
+        }
+      }
+    }
   }
 `;

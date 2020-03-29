@@ -3,38 +3,26 @@ import {MDBBtn, MDBCol, MDBIcon, MDBProgress, MDBRow} from "mdbreact";
 import {SeatCard, UserVoted} from "./components/seats";
 import SpinnerLoader from "../global/loaders/spinnerLoader";
 import {graphql} from 'react-apollo';
-import {submitVoteMutation, voteQuery} from "./queries";
+import {toggleVoteSubmit, voteQuery} from "./queries";
 import compose from "lodash.flowright";
-import {getCandidateIds} from "../../_helpers";
-
+import SubmitVoteDialog from "./components/submitVoteDialog"
 
 class Vote extends Component {
 
-  submitVote(userID) {
-    this.props.submitVote(
-      {
-        variables: {
-          candidateIds: getCandidateIds(userID)
-        },
-        refetchQueries: [
-          {query: voteQuery}
-        ]
-      }
-    )
-  }
+  onClick = () => {
+    this.props.toggleVoteSubmit()
+  };
 
   render() {
     // get data from props
-    const {data: {loading, error, election, user}} = this.props;
+    const {data: {loading, error, election, user, submitVote}} = this.props;
     // if loading return a spinner loader
     if (loading) return <SpinnerLoader/>;
     // if there is an error show the error message
     // TODO: in future redirect to a something wrong page
     if (error) return <h1>{error.message}</h1>;
-
     // get id and voted from the user
-    const {id, voted} = user;
-
+    const {voted} = user;
     // if user has voted return user has voted
     if (voted) return <UserVoted/>;
     // get name and seat fro election
@@ -49,7 +37,6 @@ class Vote extends Component {
         )
       }
     );
-
 
     // get the total number of seats voted for
     // return an array which if the seat has a selected voter it will return
@@ -70,16 +57,20 @@ class Vote extends Component {
       }
     );
 
-    console.log(votedSeats);
     // check if all seats are voted for
     // this is done by checking whether the length
     // of the voted seats is equal to the total number of seats
-    const finished = seats.length === votedSeats ;
+    const finished = seats.length === votedSeats;
     // get the percentage of voting finished to be indicated by the loader
-    const percentage= (votedSeats /seats.length) * 100 ;
+    const percentage = (votedSeats / seats.length) * 100;
+
     return (
       <>
-        <MDBProgress material animated height={"0.5rem"} value={percentage} className="my-1" barClassName={"cyan darken-4"}/>
+        <SubmitVoteDialog loading={loading} submitVote={submitVote}/>
+        <MDBProgress material animated height={"0.9rem"} value={percentage} className="my-1"
+                     barClassName={"cyan darken-4"}>
+          <strong>{percentage + "%"}</strong>
+        </MDBProgress>
         <div className={"py-3"}>
           <h1 className={"text-center"}>{name}</h1>
           <h3 className={"text-center"}> Select Seat To Start Voting</h3>
@@ -88,7 +79,7 @@ class Vote extends Component {
           {seatLists}
           <MDBBtn disabled={!finished}
                   className={"w-75 rounded-pill position-sticky cyan darken-4 mx-auto"}
-                  onClick={() => this.submitVote(id)}
+                  onClick={this.onClick}
                   style={{textSize: "2rem!important"}}>
             <MDBIcon icon={"arrow-left"} className={"mx-2"}/>
             <span style={{fontSize: "1rem"}}>Finish Voting</span>
@@ -101,5 +92,5 @@ class Vote extends Component {
 
 export default compose(
   graphql(voteQuery),
-  graphql(submitVoteMutation, {name: "submitVote"}),
+  graphql(toggleVoteSubmit, {name: "toggleVoteSubmit"})
 )(Vote)

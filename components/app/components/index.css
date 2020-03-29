@@ -15,7 +15,8 @@
 }
 
 .f-100-no-mobile {
-  height: 100vh;
+  min-height: 100vh;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
