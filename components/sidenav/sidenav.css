@@ -29,6 +29,11 @@
   }
 }
 
+@media (max-width: 450px) {
+  .sidenav-open {
+    width: 100%;
+  }
+}
 
 .sidenav.navlink {
   padding: 8px 8px 8px 32px;
