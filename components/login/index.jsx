@@ -4,7 +4,7 @@ import Router from "next/router";
 import {login, loginQueries, socialLogin} from "./queries";
 import {graphql} from "react-apollo";
 import compose from "lodash.flowright";
-import SpinnerLoader from "../global/loaders/spinnerLoader"
+import Loader from "../loaders"
 import {NextSeo} from "next-seo"
 import {LoginForm} from "./components"
 
@@ -34,7 +34,7 @@ class Login extends Component {
     // get loginErrors and the user from the props
     const {data: {loginErrors, user}, loading} = this.props;
     // if still loading show spinner loader
-    if (loading) return <SpinnerLoader/>;
+    if (loading) return <Loader/>;
 
     // if user redirect to  redirect home or next
     //TODO : implement next

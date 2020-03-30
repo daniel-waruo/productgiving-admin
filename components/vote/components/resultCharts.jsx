@@ -20,7 +20,7 @@ export class SeatChart extends React.Component {
     );
 
     const percentageVotes = votes.map(
-      (value) => (value / totalVotes) * 100
+      (value) => Math.round((value / totalVotes) * 100)
     );
 
     const labels = sorted.map(
@@ -36,23 +36,25 @@ export class SeatChart extends React.Component {
           data: percentageVotes,
           fill: true,
           borderWidth: 1,
-          tooltips: {
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    let label = data.datasets[tooltipItem.datasetIndex].label || '';
-
-                    if (label) {
-                        label += ': ';
-                    }
-                    label += Math.round(tooltipItem.yLabel * 100) / 100;
-                    return label;
-                }
-            }
-        }
         }
       ]
     };
-
+    const options = {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }],
+        yAxes: [{
+          barPercentage: 0.5,
+          barThickness: 6,
+          maxBarThickness: 8,
+          minBarLength: 2,
+        }]
+      }
+    };
     return (
       <>
         <MDBCard style={{marginTop: "1rem"}}>
@@ -62,7 +64,7 @@ export class SeatChart extends React.Component {
               data={data}
               width={100}
               height={30}
-              options={{responsive: true}}
+              options={options}
             />
           </MDBCardBody>
         </MDBCard>

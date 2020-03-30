@@ -40,7 +40,7 @@ export default graphql(
     options: () => {
       return {
         fetchPolicy: "network-only",
-        pollInterval:5000
+        pollInterval:1000
       }
     }
   }

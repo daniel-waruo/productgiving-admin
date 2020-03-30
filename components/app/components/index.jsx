@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MDBCol, MDBRow} from "mdbreact";
+import {MDBCol, MDBRow, MDBAnimation} from "mdbreact";
 import {NextSeo} from "next-seo"
 import Router from 'next/router'
 import "./index.css"
 import MainSideNav from "./sidenav";
 import cookie from 'js-cookie'
-import SpinnerLoader from "../../global/loaders/spinnerLoader";
+import Loader from "../../loaders";
+import {graphql} from "react-apollo";
+import {APP_QUERY} from "../queries";
 
 
 export const redirectNoUser = () => {
@@ -35,26 +37,28 @@ class MainLayout extends React.Component {
   render() {
     const {title, secure, data: {user, loading, error}} = this.props;
 
-    if (loading) return <SpinnerLoader/>;
+    if (loading) return <Loader fullScreen={true}/>;
 
     if (error) return <h1 className={"text-center"}>{error.message}</h1>;
 
-    if (!user && secure) redirectNoUser();
+    if (!user && secure) return redirectNoUser();
 
     return (
       <>
         <NextSeo title={title}/>
-        <div className={"mx-2 overflow-hidden"}>
-          <MDBRow className={"f-100-no-mobile"}>
-            <MainSideNav toggleFunction={this.toggleFunction}
-                         isOpen={this.state.isOpen}
-                         user={user}
-                         className={"z-depth-1 px-0"}/>
-            <MDBCol size={"12"} lg={"9"} className={"my-auto"}>
-              {this.props.children}
-            </MDBCol>
-          </MDBRow>
-        </div>
+        <MDBAnimation type={"fadeIn"}>
+          <div className={"mx-2 overflow-hidden"}>
+            <MDBRow className={"f-100-no-mobile"}>
+              <MainSideNav toggleFunction={this.toggleFunction}
+                           isOpen={this.state.isOpen}
+                           user={user}
+                           className={"z-depth-1 px-0"}/>
+              <MDBCol size={"12"} lg={"9"} className={"my-auto"}>
+                {this.props.children}
+              </MDBCol>
+            </MDBRow>
+          </div>
+        </MDBAnimation>
       </>
     )
   }
@@ -65,4 +69,6 @@ MainLayout.propTypes = {
   user: PropTypes.object
 };
 
-export {MainLayout}
+export default graphql(
+  APP_QUERY
+)(MainLayout);

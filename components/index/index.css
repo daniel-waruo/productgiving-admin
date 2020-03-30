@@ -49,3 +49,20 @@
 .step .step-element:last-child .step-number::before {
   bottom: 1rem;
 }
+
+@media (max-width: 768px) {
+  .step-number {
+    width: 4rem;
+  }
+
+  .step-number .number {
+    color: black;
+    background-color: #80deea;
+    font-size: 1rem;
+  }
+  .step-number .number {
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+  }
+}

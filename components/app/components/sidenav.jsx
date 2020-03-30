@@ -1,7 +1,7 @@
 import React from 'react';
-import {MDBBtn, MDBCol, MDBIcon, MDBListGroup, MDBListGroupItem} from "mdbreact";
-import Router, {useRouter} from 'next/router'
-import {SideNav} from "../../global/sidenav";
+import {MDBBtn, MDBCol, MDBIcon, MDBListGroup, MDBListGroupItem, MDBAnimation} from "mdbreact";
+import {useRouter} from 'next/router'
+import {SideNav} from "../../sidenav";
 import gql from 'graphql-tag';
 import {useMutation} from '@apollo/react-hooks';
 import {APP_QUERY} from "../queries";
@@ -42,9 +42,10 @@ const SidenavLogout = (props) => {
   )
 };
 
-const getSideNavChildren = (listClass, pathname, user, logout) => {
+const getSideNavChildren = (listClass, pathname, user) => {
 
-  if (user) {
+  if (user)
+  // if user is authenticated return links which the user can access when logged in
     return (
       <MDBListGroup className={"px-1"}>
         <SideNavItem pathname={pathname} className={listClass} href={"/"}>
@@ -52,11 +53,11 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
           Home
         </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/vote"}>
-          <MDBIcon  icon={"person-booth"} className={"mr-2"}/>
+          <MDBIcon icon={"person-booth"} className={"mr-2"}/>
           Vote
         </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/vote/results"}>
-          <MDBIcon  icon={"poll-h"} className={"mr-2"}/>
+          <MDBIcon icon={"poll-h"} className={"mr-2"}/>
           Results
         </SideNavItem>
         <SideNavItem pathname={pathname} className={listClass} href={"/account"}>
@@ -68,8 +69,7 @@ const getSideNavChildren = (listClass, pathname, user, logout) => {
           Logout
         </SidenavLogout>
       </MDBListGroup>
-    )
-  }
+    );
   return (
     <MDBListGroup>
       <SideNavItem pathname={pathname} className={listClass} href={"/"}>

@@ -2,7 +2,7 @@ import React from "react";
 import {withRouter} from "next/router";
 import {graphql} from 'react-apollo';
 import {candidatesQuery, voteMutation} from "./queries";
-import SpinnerLoader from "../global/loaders/spinnerLoader";
+import Loader from "../loaders";
 import {CandidateCard, NoCandidatesPage} from "./components/candidates";
 import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdbreact";
 import compose from "lodash.flowright"
@@ -22,7 +22,7 @@ class CandidateVote extends React.Component {
       }
     } = this.props;
     // if loading return a loader
-    if (loading) return <SpinnerLoader/>;
+    if (loading) return <Loader/>;
 
     // if the is an error show it in this error message
     // TODO: redirect the  error page

@@ -3,7 +3,8 @@ import {AccountCard, redirectNoUser} from './components'
 import {MDBCol, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import {userQuery} from "./queries";
-import SpinnerLoader from "../global/loaders/spinnerLoader";
+import Loader from "../loaders";
+
 
 class Account extends React.Component {
 
@@ -15,7 +16,7 @@ class Account extends React.Component {
         user
       }
     } = this.props;
-    if (loading) return <SpinnerLoader/>;
+    if (loading) return <Loader />;
 
     // if error  return null
     //TODO:create an error page

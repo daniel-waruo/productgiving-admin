@@ -11,7 +11,7 @@ import {
   MDBListGroupItem
 } from "mdbreact";
 import Router from 'next/router'
-import {SideNav} from '../../global/sidenav'
+import {SideNav} from '../../sidenav'
 import cookie from 'js-cookie'
 
 

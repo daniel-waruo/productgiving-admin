@@ -3,7 +3,7 @@ import {redirectNoUser} from "./components";
 import {UserEditForm} from "./components/edit";
 import {addMessageMutation, userEditMutation, userQuery} from "./queries";
 import {graphql} from "react-apollo";
-import SpinnerLoader from "../global/loaders/spinnerLoader";
+import Loader from "../loaders";
 import compose from 'lodash.flowright'
 import {MDBAlert} from "mdbreact";
 
@@ -18,7 +18,7 @@ class AccountEdit extends React.Component {
       }
     } = this.props;
 
-    if (loading) return <SpinnerLoader/>;
+    if (loading) return <Loader/>;
 
     if (error) return null;
 

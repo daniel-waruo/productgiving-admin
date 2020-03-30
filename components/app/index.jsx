@@ -1,11 +1,5 @@
 import React from 'react';
-import {MainLayout} from "./components";
-import {graphql} from "react-apollo";
-import {APP_QUERY} from "./queries";
-
-const LayoutWithApollo = graphql(
-  APP_QUERY
-)(MainLayout);
+import MainLayout from "./components";
 
 export const withApp =
   (PageComponent, config = {secure: true}) => {
@@ -14,9 +8,9 @@ export const withApp =
     return props => {
       const {title} = props;
       return (
-        <LayoutWithApollo secure={secure} title={title}>
+        <MainLayout secure={secure} title={title}>
           <PageComponent {...props} />
-        </LayoutWithApollo>
+        </MainLayout>
       )
     };
   };
