@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {MDBCol, MDBRow, MDBAnimation} from "mdbreact";
+import {MDBAnimation, MDBCol, MDBRow} from "mdbreact";
 import {NextSeo} from "next-seo"
 import Router from 'next/router'
 import "./index.css"
-import MainSideNav from "./sidenav";
+import MainSideNav, {NavSmall} from "./sidenav";
 import cookie from 'js-cookie'
 import Loader from "../../loaders";
 import {graphql} from "react-apollo";
 import {APP_QUERY} from "../queries";
-
 
 export const redirectNoUser = () => {
   if (typeof window !== "undefined") {
@@ -47,7 +46,8 @@ class MainLayout extends React.Component {
       <>
         <NextSeo title={title}/>
         <MDBAnimation type={"fadeIn"}>
-          <div className={"mx-2 overflow-hidden"}>
+          <NavSmall toggleFunction={this.toggleFunction}/>
+          <div className={"overflow-hidden"}>
             <MDBRow className={"f-100-no-mobile"}>
               <MainSideNav toggleFunction={this.toggleFunction}
                            isOpen={this.state.isOpen}

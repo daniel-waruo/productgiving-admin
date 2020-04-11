@@ -1,5 +1,14 @@
 import React from 'react';
-import {MDBBtn, MDBCol, MDBIcon, MDBListGroup, MDBListGroupItem, MDBAnimation} from "mdbreact";
+import {
+  MDBCol,
+  MDBIcon,
+  MDBListGroup,
+  MDBListGroupItem,
+  MDBNavbar,
+  MDBNavbarNav,
+  MDBNavbarToggler,
+  MDBNavItem
+} from "mdbreact";
 import {useRouter} from 'next/router'
 import {SideNav} from "../../sidenav";
 import gql from 'graphql-tag';
@@ -84,6 +93,20 @@ const getSideNavChildren = (listClass, pathname, user) => {
   )
 };
 
+export const NavSmall = ({toggleFunction}) => {
+
+  return (
+    <>
+      <MDBNavbar color="cyan darken-4" dark sticky={"top"} className={"mb-2 d-md-block d-lg-none z-depth-0"}>
+        <MDBNavbarNav left >
+          <MDBNavItem>
+            <MDBNavbarToggler onClick={toggleFunction}/>
+          </MDBNavItem>
+        </MDBNavbarNav>
+      </MDBNavbar>
+    </>
+  )
+};
 
 function MainSideNav(props) {
   const {isOpen, toggleFunction, user} = props;
@@ -93,15 +116,6 @@ function MainSideNav(props) {
   const children = getSideNavChildren;
   return (
     <>
-      <MDBBtn className={"position-fixed d-md-block d-lg-none rounded-pill hover-fade cyan darken-4"}
-              style={{
-                zIndex: 1,
-                display: isOpen ? "none!important" : "",
-                left: "1rem"
-              }}
-              onClick={toggleFunction}>
-        <MDBIcon icon={"bars"}/>
-      </MDBBtn>
       <SideNav hide={"lg"} isOpen={isOpen} toggleFunction={toggleFunction} className={"bg-white text-black z-depth-1"}>
         {children(listClassSide, pathname, user)}
       </SideNav>
