@@ -38,9 +38,12 @@ class CandidateDialog extends Component {
             <span>Voting Successful</span>
           </MDBModalHeader>
           <MDBModalBody>
-            You Voted for {firstName} {lastName}<br/>
-            If you change your mind you can close the dialog or click on 'change my mind'
-            If you choose to continue you will not be allowed to select a candidate.
+            You Voted for {firstName} {lastName}
+            <br/>
+            <small className={"text-info"}>
+              If you change your mind you can close the dialog or click on
+              <strong>'change my mind'</strong>
+            </small>
           </MDBModalBody>
           <MDBModalFooter className={"justify-content-around"}>
             <Link href={"/vote"}>

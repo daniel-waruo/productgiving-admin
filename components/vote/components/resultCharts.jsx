@@ -13,16 +13,16 @@ export class CandidateResultsCard extends React.Component {
     return (
       <MDBCard className={"my-2 hoverable"}>
         <MDBCardBody className={"p-2"}>
-          <MDBRow>
-            <MDBCol size={"2"}>
+          <MDBRow center>
+            <MDBCol size={"3"} sm={"2"}>
               <img className={"rounded-circle z-depth-1 mx-auto"}
                    alt={`Picture of ${firstName} ${lastName}`}
                    height={"50px"}
                    width={"50px"}
                    src={`${image}-/resize/50x50/`}/>
             </MDBCol>
-            <MDBCol size={"10"}>
-              <small >
+            <MDBCol size={"12"} sm={"10"} className={"text-center"}>
+              <small className={"text-center text-capitalize"}>
                 {`${firstName} ${lastName} - ${votes} votes`}
               </small>
               <MDBProgress material
@@ -76,7 +76,7 @@ export class SeatResults extends React.Component {
     // return the component
     return (
       <>
-        <MDBCard style={{marginTop: "1rem"}}>
+        <MDBCard style={{marginTop: "1rem"}} className={"mx-1"}>
           <MDBCardHeader color="cyan darken-2" >{name}</MDBCardHeader>
           <MDBCardBody>
             {candidatesList}

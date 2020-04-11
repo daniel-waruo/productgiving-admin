@@ -69,7 +69,19 @@ export default {
     return success;
   },
   socialLogin: async (obj, args, {cache}, info) => {
+    if (!args.accessToken) {
+      cache.writeData({
+        data: {
+          loginErrors: [{
+            text: "User Cancelled Login.Click the Login Button",
+            type: 'danger',
+            __typename: 'Message'
+          }]
+        }
+      });
 
+      return false
+    }
     await request.post({
       url: args.url,
       data: {
@@ -90,5 +102,6 @@ export default {
         })
       }
     });
+    return true;
   }
 }

@@ -16,9 +16,9 @@ export default function LoginForm(props) {
 
   return (
     <>
-      {nonFieldErrors}
       <MDBRow className={"h-100"}>
         <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
+          {nonFieldErrors}
           <div className={"p-3"}>
             <SocialLogin socialLogin={props.socialLogin}/>
           </div>

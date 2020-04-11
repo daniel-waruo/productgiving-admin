@@ -26,7 +26,7 @@ class Results extends React.Component {
       <>
         <h1 className={"text-center"}>{name}</h1>
         <h3 className={"text-center"}>Election Results</h3>
-        <MDBRow>
+        <MDBRow >
           {seatPanels}
         </MDBRow>
       </>
