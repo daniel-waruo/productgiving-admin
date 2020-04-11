@@ -19,7 +19,7 @@ class SideNav extends React.Component {
               onClick={this.props.toggleFunction}>&times;</span>
           {this.props.children}
         </div>
-        <div className={`sidenav-overlay ${overlayClass}`} onClick={this.props.toggleFunction}/>
+        <div className={`sidenav-overlay ${overlayClass} ${hideClass}`} onClick={this.props.toggleFunction}/>
       </>
     )
   }

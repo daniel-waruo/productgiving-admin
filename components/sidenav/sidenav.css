@@ -101,3 +101,23 @@
 .overlay-open {
   display: block;
 }
+
+/*Hide Side Nav responsive */
+
+@media (min-width: 992px) {
+  .sidenav-hide-lg {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidenav-hide-md {
+    display: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .sidenav-hide-sm {
+    display: none;
+  }
+}
