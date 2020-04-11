@@ -2,7 +2,7 @@ import React from "react";
 import {graphql} from "react-apollo";
 import {resultsQuery} from "./queries";
 import {MDBCol, MDBProgress, MDBRow} from "mdbreact";
-import {SeatChart} from "./components/resultCharts";
+import {SeatResults} from "./components/resultCharts";
 
 class Results extends React.Component {
   render() {
@@ -18,7 +18,7 @@ class Results extends React.Component {
     const seatPanels = seats.map(
       (seat, key) => (
         <MDBCol size={"12"} md={"6"} key={key}>
-          <SeatChart seat={seat}/>
+          <SeatResults seat={seat}/>
         </MDBCol>
       )
     );

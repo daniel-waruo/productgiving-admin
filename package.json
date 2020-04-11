@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "analyze": "cross-env BUNDLE_ANALYZE=both next build",
-    "dev": "next",
+    "dev": "next -p 3030",
     "build": "next build",
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build"
