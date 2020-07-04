@@ -1,38 +1,23 @@
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {APP_QUERY} from "../app/queries";
 import Router from "next/router";
-import {login, loginQueries, socialLogin} from "./queries";
+import {loginWithGoogle} from "./queries";
 import {graphql} from "react-apollo";
 import compose from "lodash.flowright";
 import Loader from "../loaders"
 import {NextSeo} from "next-seo"
-import {LoginForm} from "./components"
+import {MDBAlert, MDBCol, MDBRow} from "mdbreact";
+import SocialLogin from "./components/socialLogin";
+import LoginForm from "./components/loginForm";
 
-class Login extends Component {
+class Login extends PureComponent {
   state = {
-    email: '',
-    password: ''
-  };
-
-  onChange = object => {
-    this.setState(object)
-  };
-
-  login = event => {
-    // prevent default submit behaviour
-    event.preventDefault();
-    // run the login mutation
-    this.props.login({
-      variables: this.state,
-      refetchQueries: [
-        {query: APP_QUERY}
-      ],
-    })
-  };
+    errors: []
+  }
 
   render() {
     // get loginErrors and the user from the props
-    const {data: {loginErrors, user}, loading} = this.props;
+    const {data: {user}, loading} = this.props;
     // if still loading show spinner loader
     if (loading) return <Loader/>;
 
@@ -42,23 +27,33 @@ class Login extends Component {
       // redirect to home if there is user
       Router.push('/')
     }
-    // return login form for rendering
 
+    // format form errors for display
+    const nonFieldErrors = this.state.errors ?
+      this.state.errors.map(
+        (error, key) => (
+          <MDBAlert key={key} color={error.type} className={"text-center z-depth-1 mb-4"}>{error.text}</MDBAlert>
+        )
+      ) : null;
+
+    // return login form for rendering
     return (
       <>
         <NextSeo
           title={"Login"}
           description={
-            "Login into Next JS E-commerce using our secure social login feature." +
-            "Login through FaceBook , Google and Instagram"
+            "Login to our Class Pay Website to monetize your google classroom classes"
           }
         />
         <div className={"pt-5"}>
-          <LoginForm onChange={this.onChange}
-                     socialLogin={this.props.socialLogin}
-                     login={this.login}
-                     loginErrors={loginErrors}
-                     loading={false}/>
+          <MDBRow className={"h-100"}>
+            <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
+              {nonFieldErrors}
+              <div className={"p-3"}>
+                <LoginForm socialLogin={this.props.loginWithGoogle}/>
+              </div>
+            </MDBCol>
+          </MDBRow>
         </div>
       </>
     )
@@ -66,7 +61,6 @@ class Login extends Component {
 }
 
 export default compose(
-  graphql(loginQueries),
-  graphql(login, {name: 'login'}),
-  graphql(socialLogin, {name: 'socialLogin'})
+  graphql(APP_QUERY),
+  graphql(loginWithGoogle, {name: 'loginWithGoogle'})
 )(Login)

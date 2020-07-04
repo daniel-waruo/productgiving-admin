@@ -2,7 +2,7 @@
 const dev = process.env.NODE_ENV !== 'production';
 export const API_URL =  dev ? 'http://127.0.0.1:8000' : 'https://api-voting.herokuapp.com';
 
-export const GRAPHQL_ENDPOINT = `${API_URL}/graph-ql`;
+export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 /******************************
  * AUTH API ENDPOINTS
  ******************************/
@@ -17,7 +17,7 @@ export const REGISTER_URL = `${API_URL}/accounts/registration/`;
  ******************************/
 
 export const CLIENT_IDS = {
-  google: '204156967691-p6ccivajak50m6nkh55l56g0f5hkbst8.apps.googleusercontent.com'
+  google: '934662047815-n7tknpd3tq3g7uc6fmqmmqssj8rudmm3.apps.googleusercontent.com'
 };
 
 export const GOOGLE_LOGIN_URL = `${API_URL}/accounts/social/google/`;

@@ -1,6 +1,8 @@
 // IMPORT MD-BOOTSTRAP CSS
-import '@fortawesome/fontawesome-free/css/all.min.css';
+//import '../assets/css/dist/all.min.css';
 import '../assets/css/dist/style.css';
+import "../assets/css/home.css"
+
 import React from 'react';
 import Head from 'next/head';
 import {DefaultSeo} from 'next-seo';
@@ -12,13 +14,16 @@ function App({Component, pageProps}) {
     <>
       <Head>
         <link rel="shortcut icon" href={"/favicon.ico"}/>
-        <title>Voting Website</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
+              integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA=="
+              crossOrigin="anonymous"/>
+        <title>Class Pay</title>
       </Head>
       <DefaultSeo
         title={""}
-        titleTemplate={" %s | Voting Website"}
+        titleTemplate={" %s | Class Pay"}
         description={
-          "Voting System"
+          "Class Pay"
         }
       />
       <Component {...pageProps} />

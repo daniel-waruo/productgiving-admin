@@ -1,0 +1,93 @@
+/* landing page css*/
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+.bg {
+    /* The image used */
+    background-image: url('/girlMoney.jpg');
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Steps */
+.step {
+    list-style: none;
+    margin: 0;
+}
+
+.step-element {
+    display: flex;
+    padding: 1rem 0;
+}
+
+.step-number {
+    position: relative;
+    width: 7rem;
+    flex-shrink: 0;
+    text-align: center;
+}
+
+.step-number .number {
+    color: black;
+    background-color: #80deea;
+    font-size: 1.5rem;
+}
+
+.step-number .number {
+    width: 48px;
+    height: 48px;
+    line-height: 48px;
+}
+
+.number {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 38px;
+    border-radius: 10rem;
+}
+
+.step-number::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 48px;
+    bottom: -2rem;
+    margin-left: -1px;
+    border-left: 2px dashed #eaeff4;
+}
+
+.step .step-element:last-child .step-number::before {
+    bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .step-number {
+        width: 4rem;
+    }
+
+    .step-number .number {
+        color: black;
+        background-color: #80deea;
+        font-size: 1rem;
+    }
+
+    .step-number .number {
+        width: 32px;
+        height: 32px;
+        line-height: 32px;
+    }
+}
+
+.bg-gradient-cool {
+    background: rgb(30, 186, 179);
+    background: radial-gradient(circle, rgba(30, 186, 179, 0.7035189075630253) 5%, rgba(224, 214, 8, 0.4682247899159664) 74%, rgba(194, 224, 8, 0.4682247899159664) 93%);
+}

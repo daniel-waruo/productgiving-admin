@@ -1,29 +1,45 @@
 const withCSS = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
-const withFonts = require('next-fonts');
 const withImages = require('next-images');
 const withPlugins = require("next-compose-plugins");
 const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
+const withFonts = require('next-fonts');
 
 module.exports = withPlugins(
   [
-
-    withBundleAnalyzer({
-      analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-      analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-      bundleAnalyzerConfig: {
-        server: {
-          analyzerMode: 'static',
-          reportFilename: '../../bundles/server.html'
-        },
-        browser: {
-          analyzerMode: 'static',
-          reportFilename: '../bundles/client.html'
+    withFonts({
+        enableSvg: true,
+        webpack(config, options) {
+          config.module.rules.push(
+            {
+              test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+              use: [
+                {
+                  loader: 'file-loader',
+                },
+              ],
+            },
+            // ...
+          );
+          return config;
         }
       }
+    ),
+    withCSS({
+      webpack: function (config) {
+        config.module.rules.push({
+          test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
+          use: {
+            loader: 'url-loader',
+            options: {
+              limit: 100000,
+              name: '[name].[ext]'
+            }
+          }
+        })
+        return config
+      }
     }),
-    withCSS,
-    withFonts,
     withSass,
     withImages
   ]
