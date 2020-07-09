@@ -2,7 +2,6 @@ const withCSS = require('@zeit/next-css');
 const withSass = require('@zeit/next-sass');
 const withImages = require('next-images');
 const withPlugins = require("next-compose-plugins");
-const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
 const withFonts = require('next-fonts');
 
 module.exports = withPlugins(
