@@ -6,7 +6,7 @@ import Router from 'next/router'
 import "./index.css"
 import MainSideNav, {NavSmall} from "./sidenav";
 import cookie from 'js-cookie'
-import Loader from "../../loaders";
+import Loader from "../../Loader";
 import {graphql} from "react-apollo";
 import {APP_QUERY} from "../queries";
 
@@ -48,12 +48,12 @@ class MainLayout extends React.Component {
         <MDBAnimation type={"fadeIn"}>
           <NavSmall toggleFunction={this.toggleFunction}/>
           <div className={"overflow-hidden"}>
-            <MDBRow className={"f-100-no-mobile"}>
+            <MDBRow className={"f-100-no-mobile"} center>
               <MainSideNav toggleFunction={this.toggleFunction}
                            isOpen={this.state.isOpen}
                            user={user}
                            className={"z-depth-1 px-0"}/>
-              <MDBCol size={"12"} lg={"9"} className={"my-auto"}>
+              <MDBCol size={"12"} lg={"9"} className={"my-auto pl-0"}>
                 {this.props.children}
               </MDBCol>
             </MDBRow>

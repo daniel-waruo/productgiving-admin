@@ -2,7 +2,7 @@ import React from "react";
 import {withRouter} from "next/router";
 import {graphql} from 'react-apollo';
 import {candidatesQuery, voteMutation} from "./queries";
-import Loader from "../loaders";
+import Loader from "../Loader";
 import {CandidateCard, NoCandidatesPage} from "./components/candidates";
 import {MDBBtn, MDBCol, MDBIcon, MDBRow} from "mdbreact";
 import compose from "lodash.flowright"

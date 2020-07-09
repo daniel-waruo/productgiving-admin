@@ -61,13 +61,13 @@ const SideNavChildren = props => {
           <MDBIcon icon={"home"} className={"mr-2"}/>
           Home
         </SideNavItem>
-        <SideNavItem pathname={pathname} className={className} href={"/vote"}>
-          <MDBIcon icon={"person-booth"} className={"mr-2"}/>
-          Vote
+        <SideNavItem pathname={pathname} className={className} href={"/courses"}>
+          <MDBIcon icon={"graduation-cap"} className={"mr-2"}/>
+          Courses
         </SideNavItem>
-        <SideNavItem pathname={pathname} className={className} href={"/vote/results"}>
-          <MDBIcon icon={"poll-h"} className={"mr-2"}/>
-          Results
+        <SideNavItem pathname={pathname} className={className} href={"/wallet"}>
+          <MDBIcon icon={"wallet"} className={"mr-2"}/>
+          Wallet
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/account"}>
           <MDBIcon far icon={"user"} className={"mr-2"}/>
@@ -81,6 +81,10 @@ const SideNavChildren = props => {
     );
   return (
     <MDBListGroup className={"px-1"}>
+      <SideNavItem pathname={pathname} className={className} href={"/"}>
+          <MDBIcon icon={"home"} className={"mr-2"}/>
+          Home
+        </SideNavItem>
       <SideNavItem pathname={pathname} className={className} href={"/login"}>
         <MDBIcon fas icon={"sign-in-alt"} className={"mr-2"}/>
         Login/Register

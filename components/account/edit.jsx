@@ -3,7 +3,7 @@ import {redirectNoUser} from "./components";
 import {UserEditForm} from "./components/edit";
 import {addMessageMutation, userEditMutation, userQuery} from "./queries";
 import {graphql} from "react-apollo";
-import Loader from "../loaders";
+import Loader from "../Loader";
 import compose from 'lodash.flowright'
 import {MDBAlert} from "mdbreact";
 

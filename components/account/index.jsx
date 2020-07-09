@@ -3,7 +3,7 @@ import {AccountCard, redirectNoUser} from './components'
 import {MDBCol, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import {userQuery} from "./queries";
-import Loader from "../loaders";
+import Loader from "../Loader";
 
 
 class Account extends React.Component {

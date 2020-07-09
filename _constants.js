@@ -16,8 +16,13 @@ export const REGISTER_URL = `${API_URL}/accounts/registration/`;
  * SOCIAL LOGIN CLIENT IDS
  ******************************/
 
-export const CLIENT_IDS = {
-  google: '934662047815-n7tknpd3tq3g7uc6fmqmmqssj8rudmm3.apps.googleusercontent.com'
+export const GOOGLE_CONFIG = {
+  client_id: '934662047815-n7tknpd3tq3g7uc6fmqmmqssj8rudmm3.apps.googleusercontent.com',
+  scope:'openid ' +
+        'https://www.googleapis.com/auth/userinfo.profile ' +
+        'https://www.googleapis.com/auth/userinfo.email '+
+        'https://www.googleapis.com/auth/classroom.courses.readonly '+
+        'https://www.googleapis.com/auth/classroom.rosters '
 };
 
 export const GOOGLE_LOGIN_URL = `${API_URL}/accounts/social/google/`;

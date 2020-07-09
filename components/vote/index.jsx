@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {MDBAnimation, MDBBtn, MDBCol, MDBIcon, MDBProgress, MDBRow} from "mdbreact";
 import {SeatCard, UserVoted} from "./components/seats";
-import Loader from "../loaders";
+import Loader from "../Loader";
 import {graphql} from 'react-apollo';
 import {toggleVoteSubmit, voteQuery} from "./queries";
 import compose from "lodash.flowright";

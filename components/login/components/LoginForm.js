@@ -1,16 +1,21 @@
 import React from 'react';
-import {MDBAlert, MDBBtn, MDBCol, MDBIcon, MDBRow} from 'mdbreact';
+import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBIcon, MDBRow} from 'mdbreact';
 import {GoogleLogin} from "react-google-login";
-import {CLIENT_IDS} from "../../../_constants";
+import {GOOGLE_CONFIG} from "../../../_constants";
 import {APP_QUERY} from "../../app/queries";
+import {login} from "../../../apollo/resolvers/auth";
+import compose from "lodash.flowright";
+import {graphql} from "react-apollo";
+import {loginWithGoogle} from "../queries";
 
-const {google} = CLIENT_IDS;
+const {client_id, scope} = GOOGLE_CONFIG;
 
 const refetchQueries = [
   {query: APP_QUERY},
 ];
 
-export default class LoginForm extends React.PureComponent {
+
+class LoginForm extends React.PureComponent {
   state = {
     errors: [],
     loading: false
@@ -18,20 +23,20 @@ export default class LoginForm extends React.PureComponent {
 
   responseGoogle = async response => {
     await this.setState({loading: true});
-    console.log(response)
-    await this.props.socialLogin({
+    await this.props.loginWithGoogle({
       variables: {
-        accessToken: response.accessToken
+        code: response.code
       },
       refetchQueries: refetchQueries
     }).then(
       ({data: {loginWithGoogle}}) => {
-        if (loginWithGoogle.token)
-          // operation successfull
-          console.log('successful')
-        else {
+        // check if the token is in the data
+        // call the login function
+        if (loginWithGoogle.token) {
+          // operation successful
+          login(loginWithGoogle.token)
+        } else {
           this.setState({errors: loginWithGoogle.errors})
-          console.log('failed')
         }
         this.setState({loading: false})
       }
@@ -45,7 +50,9 @@ export default class LoginForm extends React.PureComponent {
           if (error.field === 'non_field_errors') {
             return error.errors.map(
               (error, key) => (
-                <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
+                <MDBAnimation type={"fadeInDown"}>
+                  <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
+                </MDBAnimation>
               )
             )
           }
@@ -71,7 +78,8 @@ export default class LoginForm extends React.PureComponent {
               <h1 className={"text-center text-grey"}>Log in with</h1>
               <div className={"d-flex justify-content-center mb-3"}>
                 <GoogleLogin
-                  clientId={google}
+                  clientId={client_id}
+                  scope={scope}
                   render={renderProps => (
                     <MDBBtn onClick={renderProps.onClick} disabled={renderProps.disabled}
                             className={"rounded-pill w-100"}>
@@ -84,7 +92,7 @@ export default class LoginForm extends React.PureComponent {
                   approvalPrompt="force"
                   accessType="offline"
                   prompt={"consent"}
-                  responseType={"code token id_token"}
+                  responseType={"code"}
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}
                 />
@@ -96,3 +104,7 @@ export default class LoginForm extends React.PureComponent {
     );
   }
 }
+
+export default compose(
+  graphql(loginWithGoogle, {name: 'loginWithGoogle'})
+)(LoginForm)

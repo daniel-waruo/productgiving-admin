@@ -1,16 +1,16 @@
 import React, {PureComponent} from 'react'
 
-import {MDBBtn, MDBCardTitle, MDBCol, MDBIcon, MDBJumbotron, MDBMask, MDBView} from "mdbreact";
+import {MDBCardTitle, MDBCol, MDBIcon, MDBJumbotron, MDBMask, MDBView} from "mdbreact";
 import Link from "next/link";
 
 
-class Home extends PureComponent {
+class HomeLanding extends PureComponent {
 
   render() {
     return (
       <div className={"bg"}>
         <MDBView className={"f-100"}>
-          <MDBMask className="flex-center bg-gradient-cool">
+          <MDBMask className="flex-center" overlay={"black-strong"}>
             <MDBJumbotron style={{padding: 0}} className={"bg-transparent f-100"}>
               <MDBCol className="text-white text-center  py-md-1 py-5 px-md-1 px-4 ">
                 <MDBCol className="py-5 py-sm-2">
@@ -22,10 +22,10 @@ class Home extends PureComponent {
                     receive and verify payments made to your class.
                   </p>
                   <Link href={"/login"} as={"/login"}>
-                    <MDBBtn tag={"a"} className="mb-5 rounded-pill">
+                    <a className="btn btn-default mb-5 rounded-pill">
                       <MDBIcon icon="dollar" className="mr-2"/>
                       Set Up Your Account
-                    </MDBBtn>
+                    </a>
                   </Link>
                 </MDBCol>
               </MDBCol>
@@ -37,4 +37,4 @@ class Home extends PureComponent {
   }
 }
 
-export default Home;
+export default HomeLanding;
