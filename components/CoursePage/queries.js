@@ -7,5 +7,13 @@ export const COURSE_QUERY = gql`
       id
       name
       descriptionHeading
+      students{
+        userId
+        name
+        email
+      }
+      subscription{
+        id
+      }
     }
   }`;

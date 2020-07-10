@@ -9067,198 +9067,198 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
 
 
 [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
-  position: absolute;
-  pointer-events: none;
-  opacity: 0
+    position: absolute;
+    pointer-events: none;
+    opacity: 0
 }
 
 .form-check-input[type="checkbox"] + label, label.btn input[type="checkbox"] + label {
-  position: relative;
-  display: inline-block;
-  height: 1.5625rem;
-  padding-left: 35px;
-  line-height: 1.5625rem;
-  cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none
+    position: relative;
+    display: inline-block;
+    height: 1.5625rem;
+    padding-left: 35px;
+    line-height: 1.5625rem;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none
 }
 
 .form-check-input[type="checkbox"] + label.form-check-label-left, label.btn input[type="checkbox"] + label.form-check-label-left {
-  padding: 0 35px 0 0 !important
+    padding: 0 35px 0 0 !important
 }
 
 .form-check-input[type="checkbox"] + label.form-check-label-left:before, label.btn input[type="checkbox"] + label.form-check-label-left:before {
-  right: 0;
-  left: 100% !important;
-  -webkit-transform: translateX(-100%);
-  transform: translateX(-100%)
+    right: 0;
+    left: 100% !important;
+    -webkit-transform: translateX(-100%);
+    transform: translateX(-100%)
 }
 
 .form-check-input[type="checkbox"] + label:before, .form-check-input[type="checkbox"]:not(.filled-in) + label:after, label.btn input[type="checkbox"] + label:before, label.btn input[type="checkbox"]:not(.filled-in) + label:after {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  width: 18px;
-  height: 18px;
-  margin-top: 3px;
-  content: "";
-  border: 2px solid #8a8a8a;
-  border-radius: 1px;
-  -webkit-transition: .2s;
-  transition: .2s
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 18px;
+    height: 18px;
+    margin-top: 3px;
+    content: "";
+    border: 2px solid #8a8a8a;
+    border-radius: 1px;
+    -webkit-transition: .2s;
+    transition: .2s
 }
 
 .form-check-input[type="checkbox"]:not(.filled-in) + label:after, label.btn input[type="checkbox"]:not(.filled-in) + label:after {
-  border: 0;
-  -webkit-transform: scale(0);
-  transform: scale(0)
+    border: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0)
 }
 
 .form-check-input[type="checkbox"]:not(:checked):disabled + label:before, label.btn input[type="checkbox"]:not(:checked):disabled + label:before {
-  background-color: #bdbdbd;
-  border: none
+    background-color: #bdbdbd;
+    border: none
 }
 
 .form-check-input[type="checkbox"]:checked + label:before, label.btn input[type="checkbox"]:checked + label:before {
-  top: -4px;
-  left: -5px;
-  width: 12px;
-  height: 1.375rem;
-  border-top: 2px solid transparent;
-  border-right: 2px solid #4285f4;
-  border-bottom: 2px solid #4285f4;
-  border-left: 2px solid transparent;
-  -webkit-transform: rotate(40deg);
-  transform: rotate(40deg);
-  -webkit-transform-origin: 100% 100%;
-  transform-origin: 100% 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden
+    top: -4px;
+    left: -5px;
+    width: 12px;
+    height: 1.375rem;
+    border-top: 2px solid transparent;
+    border-right: 2px solid #4285f4;
+    border-bottom: 2px solid #4285f4;
+    border-left: 2px solid transparent;
+    -webkit-transform: rotate(40deg);
+    transform: rotate(40deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden
 }
 
 .form-check-input[type="checkbox"]:checked + label.form-check-label-left:before, label.btn input[type="checkbox"]:checked + label.form-check-label-left:before {
-  -webkit-transform: translateX(0) rotateZ(40deg);
-  transform: translateX(0) rotateZ(40deg);
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0
+    -webkit-transform: translateX(0) rotateZ(40deg);
+    transform: translateX(0) rotateZ(40deg);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0
 }
 
 .form-check-input[type="checkbox"]:checked:disabled + label:before, label.btn input[type="checkbox"]:checked:disabled + label:before {
-  border-right: 2px solid #bdbdbd;
-  border-bottom: 2px solid #bdbdbd
+    border-right: 2px solid #bdbdbd;
+    border-bottom: 2px solid #bdbdbd
 }
 
 .form-check-input[type="checkbox"]:indeterminate + label:before, label.btn input[type="checkbox"]:indeterminate + label:before {
-  top: -11px;
-  left: -12px;
-  width: 10px;
-  height: 1.375rem;
-  border-top: none;
-  border-right: 2px solid #4285f4;
-  border-bottom: none;
-  border-left: none;
-  -webkit-transform: rotate(90deg);
-  transform: rotate(90deg);
-  -webkit-transform-origin: 100% 100%;
-  transform-origin: 100% 100%;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden
+    top: -11px;
+    left: -12px;
+    width: 10px;
+    height: 1.375rem;
+    border-top: none;
+    border-right: 2px solid #4285f4;
+    border-bottom: none;
+    border-left: none;
+    -webkit-transform: rotate(90deg);
+    transform: rotate(90deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden
 }
 
 .form-check-input[type="checkbox"]:indeterminate + label.form-check-label-left:before, label.btn input[type="checkbox"]:indeterminate + label.form-check-label-left:before {
-  top: 0;
-  -webkit-transform-origin: 0 0;
-  transform-origin: 0 0
+    top: 0;
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0
 }
 
 .form-check-input[type="checkbox"]:indeterminate:disabled + label:before, label.btn input[type="checkbox"]:indeterminate:disabled + label:before {
-  background-color: transparent;
-  border-right: 2px solid rgba(0, 0, 0, 0.46)
+    background-color: transparent;
+    border-right: 2px solid rgba(0, 0, 0, 0.46)
 }
 
 .form-check-input[type="checkbox"].filled-in + label:after, label.btn input[type="checkbox"].filled-in + label:after {
-  border-radius: .125rem
+    border-radius: .125rem
 }
 
 .form-check-input[type="checkbox"].filled-in + label:before, .form-check-input[type="checkbox"].filled-in + label:after, label.btn input[type="checkbox"].filled-in + label:before, label.btn input[type="checkbox"].filled-in + label:after {
-  position: absolute;
-  left: 0;
-  z-index: 1;
-  content: "";
-  -webkit-transition: border 0.25s, background-color 0.25s, width 0.2s .1s, height 0.2s .1s, top 0.2s .1s, left 0.2s .1s;
-  transition: border 0.25s, background-color 0.25s, width 0.2s .1s, height 0.2s .1s, top 0.2s .1s, left 0.2s .1s
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    content: "";
+    -webkit-transition: border 0.25s, background-color 0.25s, width 0.2s .1s, height 0.2s .1s, top 0.2s .1s, left 0.2s .1s;
+    transition: border 0.25s, background-color 0.25s, width 0.2s .1s, height 0.2s .1s, top 0.2s .1s, left 0.2s .1s
 }
 
 .form-check-input[type="checkbox"].filled-in:not(:checked) + label:before, label.btn input[type="checkbox"].filled-in:not(:checked) + label:before {
-  top: 10px;
-  left: 6px;
-  width: 0;
-  height: 0;
-  border: 3px solid transparent;
-  -webkit-transform: rotateZ(37deg);
-  transform: rotateZ(37deg);
-  -webkit-transform-origin: 100% 100%;
-  transform-origin: 100% 100%
+    top: 10px;
+    left: 6px;
+    width: 0;
+    height: 0;
+    border: 3px solid transparent;
+    -webkit-transform: rotateZ(37deg);
+    transform: rotateZ(37deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
 }
 
 .form-check-input[type="checkbox"].filled-in:not(:checked) + label:after, label.btn input[type="checkbox"].filled-in:not(:checked) + label:after {
-  top: 0;
-  z-index: 0;
-  width: 20px;
-  height: 20px;
-  background-color: transparent;
-  border: 2px solid #5a5a5a
+    top: 0;
+    z-index: 0;
+    width: 20px;
+    height: 20px;
+    background-color: transparent;
+    border: 2px solid #5a5a5a
 }
 
 .form-check-input[type="checkbox"].filled-in:checked + label:before, label.btn input[type="checkbox"].filled-in:checked + label:before {
-  top: 0;
-  left: 1px;
-  width: 8px;
-  height: 13px;
-  border-top: 2px solid transparent;
-  border-right: 2px solid #fff;
-  border-bottom: 2px solid #fff;
-  border-left: 2px solid transparent;
-  -webkit-transform: rotateZ(37deg);
-  transform: rotateZ(37deg);
-  -webkit-transform-origin: 100% 100%;
-  transform-origin: 100% 100%
+    top: 0;
+    left: 1px;
+    width: 8px;
+    height: 13px;
+    border-top: 2px solid transparent;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid transparent;
+    -webkit-transform: rotateZ(37deg);
+    transform: rotateZ(37deg);
+    -webkit-transform-origin: 100% 100%;
+    transform-origin: 100% 100%
 }
 
 .form-check-input[type="checkbox"].filled-in:checked + label:after, label.btn input[type="checkbox"].filled-in:checked + label:after {
-  top: 0;
-  z-index: 0;
-  width: 20px;
-  height: 20px;
-  background-color: #a6c;
-  border: 2px solid #a6c
+    top: 0;
+    z-index: 0;
+    width: 20px;
+    height: 20px;
+    background-color: #a6c;
+    border: 2px solid #a6c
 }
 
 .form-check-input[type="checkbox"].filled-in.filled-in-danger:checked + label:after, label.btn input[type="checkbox"].filled-in.filled-in-danger:checked + label:after {
-  background-color: #f44336;
-  border-color: #f44336
+    background-color: #f44336;
+    border-color: #f44336
 }
 
 .form-check-input[type="checkbox"]:disabled:not(:checked) + label:before, label.btn input[type="checkbox"]:disabled:not(:checked) + label:before {
-  background-color: #bdbdbd;
-  border-color: #bdbdbd
+    background-color: #bdbdbd;
+    border-color: #bdbdbd
 }
 
 .form-check-input[type="checkbox"]:disabled:not(:checked) + label:after, label.btn input[type="checkbox"]:disabled:not(:checked) + label:after {
-  background-color: #bdbdbd;
-  border-color: #bdbdbd
+    background-color: #bdbdbd;
+    border-color: #bdbdbd
 }
 
 .form-check-input[type="checkbox"]:disabled:checked + label:before, label.btn input[type="checkbox"]:disabled:checked + label:before {
-  background-color: transparent
+    background-color: transparent
 }
 
 .form-check-input[type="checkbox"]:disabled:checked + label:after, label.btn input[type="checkbox"]:disabled:checked + label:after {
-  background-color: #bdbdbd;
-  border-color: #bdbdbd
+    background-color: #bdbdbd;
+    border-color: #bdbdbd
 }
 
 .md-progress {
@@ -9297,9 +9297,9 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
     left: 0;
     content: "";
     background-color: inherit;
-    -webkit-animation: indeterminate 2.1s cubic-bezier(0.65,0.815,0.735,0.395) infinite;
-    animation: indeterminate 2.1s cubic-bezier(0.65,0.815,0.735,0.395) infinite;
-    will-change: left,right
+    -webkit-animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    animation: indeterminate 2.1s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+    will-change: left, right
 }
 
 .md-progress .indeterminate:after {
@@ -9309,11 +9309,11 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
     left: 0;
     content: "";
     background-color: inherit;
-    -webkit-animation: indeterminate 2.1s cubic-bezier(0.165,0.84,0.44,1) infinite;
-    animation: indeterminate 2.1s cubic-bezier(0.165,0.84,0.44,1) infinite;
+    -webkit-animation: indeterminate 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+    animation: indeterminate 2.1s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
     -webkit-animation-delay: 1.15s;
     animation-delay: 1.15s;
-    will-change: left,right
+    will-change: left, right
 }
 
 @-webkit-keyframes indeterminate {
@@ -9473,18 +9473,629 @@ a.border.nav-link.border-light.rounded.mr-1:hover {
     transform: rotate(-129deg)
 }
 
-.preloader-wrapper .spinner-blue,.preloader-wrapper .spinner-blue-only {
+.preloader-wrapper .spinner-blue, .preloader-wrapper .spinner-blue-only {
     border-color: #4285f4
 }
 
-.preloader-wrapper .spinner-red,.preloader-wrapper .spinner-red-only {
+.preloader-wrapper .spinner-red, .preloader-wrapper .spinner-red-only {
     border-color: #db4437
 }
 
-.preloader-wrapper .spinner-yellow,.preloader-wrapper .spinner-yellow-only {
+.preloader-wrapper .spinner-yellow, .preloader-wrapper .spinner-yellow-only {
     border-color: #f4b400
 }
 
-.preloader-wrapper .spinner-green,.preloader-wrapper .spinner-green-only {
+.preloader-wrapper .spinner-green, .preloader-wrapper .spinner-green-only {
     border-color: #0f9d58
+}
+
+.md-tabs {
+    position: relative;
+    z-index: 1;
+    padding: .7rem;
+    margin-right: 1rem;
+    margin-bottom: -20px;
+    margin-left: 1rem;
+    background-color: #2bbbad;
+    border: 0;
+    border-radius: .25rem;
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
+}
+
+.md-tabs .nav-item + .nav-item {
+    margin-left: 0
+}
+
+.md-tabs .nav-item.disabled {
+    pointer-events: none !important
+}
+
+.md-tabs .nav-item.disabled .nav-link {
+    color: #6c757d
+}
+
+.md-tabs .nav-link {
+    color: #fff;
+    border: 0;
+    -webkit-transition: all .4s;
+    transition: all .4s
+}
+
+.md-tabs .nav-link.active, .md-tabs .nav-item.open .nav-link {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: .25rem;
+    -webkit-transition: all 1s;
+    transition: all 1s
+}
+
+.md-tabs .nav-item.show .nav-link {
+    color: #fff;
+    background-color: #2bbbad;
+    border-radius: .25rem;
+    -webkit-transition: all 1s;
+    transition: all 1s
+}
+
+.md-tabs .nav-item.show .nav-link.dropdown-toggle {
+    background-color: rgba(0, 0, 0, 0.2)
+}
+
+.tab-content {
+    padding: 1rem;
+    padding-top: 2rem
+}
+
+.tab-content.vertical {
+    padding-top: 0
+}
+
+.md-pills {
+    border: 0
+}
+
+.md-pills li {
+    padding: .6rem
+}
+
+.md-pills .show > .nav-link {
+    color: #fff;
+    background-color: #2bbbad;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+}
+
+.md-pills .nav-link {
+    color: #666;
+    text-align: center;
+    border-radius: 2px;
+    -webkit-transition: all .4s;
+    transition: all .4s
+}
+
+.md-pills .nav-link.active {
+    color: #fff;
+    background-color: #2bbbad;
+    -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12)
+}
+
+.md-pills .nav-link.active:hover {
+    -webkit-box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15)
+}
+
+.pills-primary .show > .nav-link {
+    background-color: #4285f4 !important
+}
+
+.pills-primary .nav-link.active {
+    background-color: #4285f4 !important
+}
+
+.tabs-primary {
+    background-color: #4285f4 !important
+}
+
+.pills-danger .show > .nav-link {
+    background-color: #ff3547 !important
+}
+
+.pills-danger .nav-link.active {
+    background-color: #ff3547 !important
+}
+
+.tabs-danger {
+    background-color: #ff3547 !important
+}
+
+.pills-warning .show > .nav-link {
+    background-color: #fb3 !important
+}
+
+.pills-warning .nav-link.active {
+    background-color: #fb3 !important
+}
+
+.tabs-warning {
+    background-color: #fb3 !important
+}
+
+.pills-success .show > .nav-link {
+    background-color: #00c851 !important
+}
+
+.pills-success .nav-link.active {
+    background-color: #00c851 !important
+}
+
+.tabs-success {
+    background-color: #00c851 !important
+}
+
+.pills-info .show > .nav-link {
+    background-color: #33b5e5 !important
+}
+
+.pills-info .nav-link.active {
+    background-color: #33b5e5 !important
+}
+
+.tabs-info {
+    background-color: #33b5e5 !important
+}
+
+.pills-default .show > .nav-link {
+    background-color: #2bbbad !important
+}
+
+.pills-default .nav-link.active {
+    background-color: #2bbbad !important
+}
+
+.tabs-default {
+    background-color: #2bbbad !important
+}
+
+.pills-secondary .show > .nav-link {
+    background-color: #a6c !important
+}
+
+.pills-secondary .nav-link.active {
+    background-color: #a6c !important
+}
+
+.tabs-secondary {
+    background-color: #a6c !important
+}
+
+.pills-elegant .show > .nav-link {
+    background-color: #2e2e2e !important
+}
+
+.pills-elegant .nav-link.active {
+    background-color: #2e2e2e !important
+}
+
+.tabs-elegant {
+    background-color: #2e2e2e !important
+}
+
+.pills-unique .show > .nav-link {
+    background-color: #880e4f !important
+}
+
+.pills-unique .nav-link.active {
+    background-color: #880e4f !important
+}
+
+.tabs-unique {
+    background-color: #880e4f !important
+}
+
+.pills-dark-green .show > .nav-link {
+    background-color: #388e3c !important
+}
+
+.pills-dark-green .nav-link.active {
+    background-color: #388e3c !important
+}
+
+.tabs-dark-green {
+    background-color: #388e3c !important
+}
+
+.pills-mdb-color .show > .nav-link {
+    background-color: #59698d !important
+}
+
+.pills-mdb-color .nav-link.active {
+    background-color: #59698d !important
+}
+
+.tabs-mdb-color {
+    background-color: #59698d !important
+}
+
+.pills-red .show > .nav-link {
+    background-color: #d32f2f !important
+}
+
+.pills-red .nav-link.active {
+    background-color: #d32f2f !important
+}
+
+.tabs-red {
+    background-color: #d32f2f !important
+}
+
+.pills-pink .show > .nav-link {
+    background-color: #ec407a !important
+}
+
+.pills-pink .nav-link.active {
+    background-color: #ec407a !important
+}
+
+.tabs-pink {
+    background-color: #ec407a !important
+}
+
+.pills-purple .show > .nav-link {
+    background-color: #8e24aa !important
+}
+
+.pills-purple .nav-link.active {
+    background-color: #8e24aa !important
+}
+
+.tabs-purple {
+    background-color: #8e24aa !important
+}
+
+.pills-deep-purple .show > .nav-link {
+    background-color: #512da8 !important
+}
+
+.pills-deep-purple .nav-link.active {
+    background-color: #512da8 !important
+}
+
+.tabs-deep-purple {
+    background-color: #512da8 !important
+}
+
+.pills-indigo .show > .nav-link {
+    background-color: #3f51b5 !important
+}
+
+.pills-indigo .nav-link.active {
+    background-color: #3f51b5 !important
+}
+
+.tabs-indigo {
+    background-color: #3f51b5 !important
+}
+
+.pills-blue .show > .nav-link {
+    background-color: #1976d2 !important
+}
+
+.pills-blue .nav-link.active {
+    background-color: #1976d2 !important
+}
+
+.tabs-blue {
+    background-color: #1976d2 !important
+}
+
+.pills-light-blue .show > .nav-link {
+    background-color: #82b1ff !important
+}
+
+.pills-light-blue .nav-link.active {
+    background-color: #82b1ff !important
+}
+
+.tabs-light-blue {
+    background-color: #82b1ff !important
+}
+
+.pills-cyan .show > .nav-link {
+    background-color: #00bcd4 !important
+}
+
+.pills-cyan .nav-link.active {
+    background-color: #00bcd4 !important
+}
+
+.tabs-cyan {
+    background-color: #00bcd4 !important
+}
+
+.pills-teal .show > .nav-link {
+    background-color: #00796b !important
+}
+
+.pills-teal .nav-link.active {
+    background-color: #00796b !important
+}
+
+.tabs-teal {
+    background-color: #00796b !important
+}
+
+.pills-green .show > .nav-link {
+    background-color: #388e3c !important
+}
+
+.pills-green .nav-link.active {
+    background-color: #388e3c !important
+}
+
+.tabs-green {
+    background-color: #388e3c !important
+}
+
+.pills-light-green .show > .nav-link {
+    background-color: #8bc34a !important
+}
+
+.pills-light-green .nav-link.active {
+    background-color: #8bc34a !important
+}
+
+.tabs-light-green {
+    background-color: #8bc34a !important
+}
+
+.pills-lime .show > .nav-link {
+    background-color: #afb42b !important
+}
+
+.pills-lime .nav-link.active {
+    background-color: #afb42b !important
+}
+
+.tabs-lime {
+    background-color: #afb42b !important
+}
+
+.pills-yellow .show > .nav-link {
+    background-color: #fbc02d !important
+}
+
+.pills-yellow .nav-link.active {
+    background-color: #fbc02d !important
+}
+
+.tabs-yellow {
+    background-color: #fbc02d !important
+}
+
+.pills-amber .show > .nav-link {
+    background-color: #ffa000 !important
+}
+
+.pills-amber .nav-link.active {
+    background-color: #ffa000 !important
+}
+
+.tabs-amber {
+    background-color: #ffa000 !important
+}
+
+.pills-orange .show > .nav-link {
+    background-color: #f57c00 !important
+}
+
+.pills-orange .nav-link.active {
+    background-color: #f57c00 !important
+}
+
+.tabs-orange {
+    background-color: #f57c00 !important
+}
+
+.pills-deep-orange .show > .nav-link {
+    background-color: #ff7043 !important
+}
+
+.pills-deep-orange .nav-link.active {
+    background-color: #ff7043 !important
+}
+
+.tabs-deep-orange {
+    background-color: #ff7043 !important
+}
+
+.pills-brown .show > .nav-link {
+    background-color: #795548 !important
+}
+
+.pills-brown .nav-link.active {
+    background-color: #795548 !important
+}
+
+.tabs-brown {
+    background-color: #795548 !important
+}
+
+.pills-grey .show > .nav-link {
+    background-color: #616161 !important
+}
+
+.pills-grey .nav-link.active {
+    background-color: #616161 !important
+}
+
+.tabs-grey {
+    background-color: #616161 !important
+}
+
+.pills-blue-grey .show > .nav-link {
+    background-color: #78909c !important
+}
+
+.pills-blue-grey .nav-link.active {
+    background-color: #78909c !important
+}
+
+.tabs-blue-grey {
+    background-color: #78909c !important
+}
+
+.pills-dark .show > .nav-link {
+    background-color: #212121 !important
+}
+
+.pills-dark .nav-link.active {
+    background-color: #212121 !important
+}
+
+.tabs-dark {
+    background-color: #212121 !important
+}
+
+.pills-light .show > .nav-link {
+    background-color: #e0e0e0 !important
+}
+
+.pills-light .nav-link.active {
+    background-color: #e0e0e0 !important
+}
+
+.tabs-light {
+    background-color: #e0e0e0 !important
+}
+
+.pills-white .show > .nav-link {
+    background-color: #fff !important
+}
+
+.pills-white .nav-link.active {
+    background-color: #fff !important
+}
+
+.tabs-white {
+    background-color: #fff !important
+}
+
+.pills-black .show > .nav-link {
+    background-color: #000 !important
+}
+
+.pills-black .nav-link.active {
+    background-color: #000 !important
+}
+
+.tabs-black {
+    background-color: #000 !important
+}
+
+.classic-tabs .nav {
+    position: relative;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-radius: .3rem .3rem 0 0
+}
+
+@media (min-width: 62rem) {
+    .classic-tabs .nav {
+        overflow-x: hidden
+    }
+}
+
+.classic-tabs .nav li a {
+    display: block;
+    padding: 20px 24px;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    text-transform: uppercase;
+    border-radius: 0
+}
+
+.classic-tabs .nav li a:not(.active) {
+    margin-bottom: 3px
+}
+
+.classic-tabs .nav li a.active {
+    color: #fff;
+    border-bottom: 3px solid
+}
+
+@media (min-width: 62em) {
+    .classic-tabs .nav li:first-child {
+        margin-left: 56px
+    }
+}
+
+.classic-tabs .nav.tabs-cyan li a.active {
+    border-color: #ffeb3b
+}
+
+.classic-tabs .nav.tabs-orange li a.active {
+    border-color: #e53935
+}
+
+.classic-tabs .nav.tabs-grey li a.active {
+    border-color: #fff
+}
+
+.classic-tabs .nav.tabs-pink li a.active {
+    border-color: #673ab7
+}
+
+.classic-tabs .nav.tabs-green li a.active {
+    border-color: #1565c0
+}
+
+.classic-tabs .nav.tabs-primary li a.active {
+    border-color: #fff
+}
+
+.classic-tabs .nav.tabs-animated li a.active {
+    border: 0
+}
+
+.classic-tabs .nav.tabs-animated.tabs-cyan .floor {
+    background-color: #ffeb3b
+}
+
+.classic-tabs .nav.tabs-animated.tabs-orange .floor {
+    background-color: #e53935
+}
+
+.classic-tabs .nav.tabs-animated.tabs-grey .floor {
+    background-color: #fff
+}
+
+.classic-tabs .nav.tabs-animated.tabs-pink .floor {
+    background-color: #673ab7
+}
+
+.classic-tabs .nav.tabs-animated.tabs-green .floor {
+    background-color: #1565c0
+}
+
+.classic-tabs .nav.tabs-animated.tabs-primary .floor {
+    background-color: #fff
+}
+
+.classic-tabs .nav.tabs-animated .floor {
+    position: absolute;
+    bottom: 0;
+    z-index: 1200;
+    display: inline-block;
+    width: 30px;
+    height: 3px;
+    -webkit-transition: all .4s linear;
+    transition: all .4s linear
+}
+
+.classic-tabs .tab-content.card {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0
 }

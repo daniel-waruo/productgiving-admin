@@ -1,9 +1,9 @@
 import React, {PureComponent} from 'react'
-import HomeLanding from "./HomeLanding";
+import HomeLanding from "./components/HomeLanding";
 import {graphql} from "react-apollo";
 import {APP_QUERY} from "../app/queries";
 import Loader from '../Loader'
-import HomeUserPage from "./HomeUserPage";
+import HomeUserPage from "./components/HomeUserPage";
 
 class HomePage extends PureComponent {
   render() {

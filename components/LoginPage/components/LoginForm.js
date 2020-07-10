@@ -1,5 +1,5 @@
 import React from 'react';
-import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBIcon, MDBRow} from 'mdbreact';
+import {MDBAlert, MDBAnimation, MDBCol, MDBRow} from 'mdbreact';
 import {GoogleLogin} from "react-google-login";
 import {GOOGLE_CONFIG} from "../../../_constants";
 import {APP_QUERY} from "../../app/queries";
@@ -7,6 +7,7 @@ import {login} from "../../../apollo/resolvers/auth";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
 import {loginWithGoogle} from "../queries";
+import GoogleButton from "./GoogleButton";
 
 const {client_id, scope} = GOOGLE_CONFIG;
 
@@ -61,37 +62,22 @@ class LoginForm extends React.PureComponent {
 
     const {loading} = this.state;
 
-    const loader = loading ? (
-      <div className="spinner-border text-primary mx-3" style={{width: "1rem", height: "1rem"}} role="status">
-          <span className="sr-only">
-            Loading...
-          </span>
-      </div>
-    ) : null;
-
     return (
       <>
-        <MDBRow className={"h-100"}>
-          <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
+        <MDBRow className={"h-100"} center>
+          <MDBCol size={"11"}
+                  md="6" lg={"5"} className={"m-auto z-depth-3 bg-white"}
+                  style={{borderRadius:"1rem"}}>
             {nonFieldErrors}
             <div className={"p-3"}>
-              <h1 className={"text-center text-grey"}>Log in with</h1>
-              <div className={"d-flex justify-content-center mb-3"}>
+              <h2 className={"text-center text-dark"}>Sign In With Google</h2>
+              <div className={"d-flex justify-content-right mt-4 mb-5 ml-3"}>
                 <GoogleLogin
                   clientId={client_id}
                   scope={scope}
-                  render={renderProps => (
-                    <MDBBtn onClick={renderProps.onClick} disabled={renderProps.disabled}
-                            className={"rounded-pill w-100"}>
-                      <MDBIcon className={"mx-4 align-middle"} size={"2x"} fab icon="google"/>
-                      <span style={{fontSize: "1rem"}}>Google</span>
-                      {loader}
-                    </MDBBtn>
-                  )}
+                  render={renderProps => <GoogleButton {...renderProps} loading={loading}/>}
                   buttonText="Login"
-                  approvalPrompt="force"
                   accessType="offline"
-                  prompt={"consent"}
                   responseType={"code"}
                   onSuccess={this.responseGoogle}
                   onFailure={this.responseGoogle}

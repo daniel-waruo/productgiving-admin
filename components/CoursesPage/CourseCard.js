@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 export default class CourseCard extends React.PureComponent {
   render() {
     return (
-      <MDBCard className={"my-3"} {...this.props} role={"button"} >
+      <MDBCard className={"my-3"} {...this.props} role={"button"} style={{borderRadius:"1rem"}}>
         <MDBCardBody>
-          <MDBCardTitle className={"pl-2 pb-2 border-bottom border-dark"} style={{fontSize:"1.2rem"}}>
+          <MDBCardTitle className={"pl-2 pb-2 border-bottom border-grey mb-3"}>
             {this.props.title}
           </MDBCardTitle>
           <MDBCardText tag={"div"}>

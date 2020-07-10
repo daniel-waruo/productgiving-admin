@@ -10,13 +10,13 @@ class CoursesListSection extends React.PureComponent {
     const {courses} = this.props;
     //list of the courses
     const coursesList = courses.map(
-      ({id, name, descriptionHeading}, key) => (
+      ({id, name, description}, key) => (
         <MDBCol key={key} size={"12"} md={"4"}>
           <CourseCard title={name}>
-            {descriptionHeading}
+            {description}
             <div className={"w-100 text-center"}>
               <Link href={'/courses/[courseId]'} as={`/courses/${id}`}>
-                <a className={"btn btn-default rounded-pill mt-3 mb-1"}>VIEW</a>
+                <a className={"btn btn-default rounded-pill mt-3 mb-1"}>MANAGE SUBSCRIPTION</a>
               </Link>
             </div>
           </CourseCard>
