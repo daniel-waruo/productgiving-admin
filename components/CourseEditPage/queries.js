@@ -6,6 +6,7 @@ export const SUBSCRIPTION_QUERY = gql`
     subscription(courseId:$courseId){
       id
       price
+      courseId
     }
   }`;
 

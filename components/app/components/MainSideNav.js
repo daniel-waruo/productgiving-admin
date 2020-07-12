@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  MDBCardImage,
   MDBCol,
   MDBIcon,
   MDBListGroup,
@@ -16,10 +17,10 @@ import {useMutation} from '@apollo/react-hooks';
 import {APP_QUERY} from "../queries";
 import Link from "next/link"
 
-function SideNavItem(props) {
-  const {pathname, className, children, href} = props;
+export function SideNavItem(props) {
+  const {pathname, className, children, href,as} = props;
   return (
-    <Link href={href}>
+    <Link href={href} as={as}>
       <a>
         <MDBListGroupItem active={pathname === href} hover className={`z-depth-1 my-2 ${className}`}>
           {children}
@@ -29,7 +30,7 @@ function SideNavItem(props) {
   )
 }
 
-const SidenavLogout = (props) => {
+export const SidenavLogout = (props) => {
   const {className, children} = props;
   const [logout] = useMutation(gql`
       mutation Logout{
@@ -56,7 +57,7 @@ const SideNavChildren = props => {
   if (user)
     // if user is authenticated return links which the user can access when logged in
     return (
-      <MDBListGroup className={"px-1"}>
+      <>
         <SideNavItem pathname={pathname} className={className} href={"/"}>
           <MDBIcon icon={"home"} className={"mr-2"}/>
           Home
@@ -77,26 +78,28 @@ const SideNavChildren = props => {
           <MDBIcon fas icon={"sign-out-alt"} className={"mr-2 "}/>
           Logout
         </SidenavLogout>
-      </MDBListGroup>
+      </>
     );
   return (
-    <MDBListGroup className={"px-1"}>
+    <>
       <SideNavItem pathname={pathname} className={className} href={"/"}>
-          <MDBIcon icon={"home"} className={"mr-2"}/>
-          Home
-        </SideNavItem>
+        <MDBIcon icon={"home"} className={"mr-2"}/>
+        Home
+      </SideNavItem>
       <SideNavItem pathname={pathname} className={className} href={"/login"}>
         <MDBIcon fas icon={"sign-in-alt"} className={"mr-2"}/>
         Login/Register
       </SideNavItem>
-    </MDBListGroup>
+    </>
   )
 }
+
+
 export const NavSmall = ({toggleFunction}) => {
 
   return (
     <>
-      <MDBNavbar color="cyan darken-4" dark sticky={"top"} className={"mb-2 d-md-block d-lg-none z-depth-0"}>
+      <MDBNavbar dark sticky={"top"} className={"mb-2 d-md-block d-lg-none z-depth-0 bg-default"}>
         <MDBNavbarNav left>
           <MDBNavItem>
             <MDBNavbarToggler onClick={toggleFunction}/>
@@ -107,20 +110,46 @@ export const NavSmall = ({toggleFunction}) => {
   )
 };
 
-function MainSideNav(props) {
+export const UserImage = props => {
+  let {name, imageUrl} = props;
+  name = name ? name : "Unknown User";
+  imageUrl = imageUrl ? imageUrl : "/unknownPerson.png";
+  return (
+    <>
+      <div className={"justify-content-center d-flex"}>
+        <MDBCardImage src={imageUrl}/>
+      </div>
+      <h3 className={"text-center"}>{name}</h3>
+    </>
+  )
+}
+
+const MainSideNav = props => {
   const {isOpen, toggleFunction, user} = props;
   const listClass = "border border-0 rounded ";
   const listClassSide = `${listClass} account-list-padding`;
   const {pathname} = useRouter();
-
+  let name = "Unknown User";
+  let imageUrl = "/unknownPerson.png";
+  if (user) {
+    const {firstName, lastName, profileUrl} = user
+    name = `${firstName} ${lastName}`
+    imageUrl = profileUrl
+  }
   return (
     <>
       <SideNav hide={"lg"} isOpen={isOpen} toggleFunction={toggleFunction} className={"bg-white text-black z-depth-1"}>
-        <SideNavChildren className={listClassSide} pathname={pathname} user={user}/>
+        <MDBListGroup className={"px-1"}>
+          <UserImage name={name} imageUrl={imageUrl}/>
+          <SideNavChildren className={listClassSide} pathname={pathname} user={user}/>
+        </MDBListGroup>
       </SideNav>
       <MDBCol lg={"3"} className={"d-none d-lg-block  f-100 px-0"}>
         <div className={"pt-5 rounded f-50 h-100 z-depth-1 position-fixed col-lg-3"}>
-          <SideNavChildren className={listClass} pathname={pathname} user={user}/>
+          <MDBListGroup className={"px-1"}>
+            <UserImage name={name} imageUrl={"/unknownPerson.png"}/>
+            <SideNavChildren className={listClass} pathname={pathname} user={user}/>
+          </MDBListGroup>
         </div>
       </MDBCol>
     </>

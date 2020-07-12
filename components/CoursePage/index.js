@@ -23,6 +23,8 @@ class CoursePage extends React.PureComponent {
       return <Loader/>
     if (error)
       return <h1>ERROR {error.message}</h1>
+    if (!course)
+      return  <h1>No COurse</h1>
     const {id, name, students, subscription} = course;
 
     if (!subscription) {

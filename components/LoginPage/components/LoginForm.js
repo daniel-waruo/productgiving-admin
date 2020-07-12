@@ -9,11 +9,7 @@ import {graphql} from "react-apollo";
 import {loginWithGoogle} from "../queries";
 import GoogleButton from "./GoogleButton";
 
-const {client_id, scope} = GOOGLE_CONFIG;
-
-const refetchQueries = [
-  {query: APP_QUERY},
-];
+const {client_id} = GOOGLE_CONFIG;
 
 
 class LoginForm extends React.PureComponent {
@@ -22,24 +18,25 @@ class LoginForm extends React.PureComponent {
     loading: false
   }
 
-  responseGoogle = async response => {
-    await this.setState({loading: true});
-    await this.props.loginWithGoogle({
+  responseGoogle = response => {
+    this.setState({loading: true});
+    this.props.loginWithGoogle({
+      refetchQueries: [
+        {query: APP_QUERY},
+      ],
       variables: {
         code: response.code
-      },
-      refetchQueries: refetchQueries
+      }
     }).then(
       ({data: {loginWithGoogle}}) => {
         // check if the token is in the data
         // call the login function
         if (loginWithGoogle.token) {
           // operation successful
-          login(loginWithGoogle.token)
+          login(loginWithGoogle.token, this.props.redirectUrl)
         } else {
-          this.setState({errors: loginWithGoogle.errors})
+          this.setState({errors: loginWithGoogle.errors, loading: false})
         }
-        this.setState({loading: false})
       }
     );
   };
@@ -61,13 +58,17 @@ class LoginForm extends React.PureComponent {
       ) : null;
 
     const {loading} = this.state;
+    let {scope} = this.props;
 
+    if (!scope) {
+      scope = GOOGLE_CONFIG.scope
+    }
     return (
       <>
         <MDBRow className={"h-100"} center>
           <MDBCol size={"11"}
-                  md="6" lg={"5"} className={"m-auto z-depth-3 bg-white"}
-                  style={{borderRadius:"1rem"}}>
+                  md="6" lg={"5"} className={"m-auto z-depth-1 bg-white"}
+                  style={{borderRadius: "1rem"}}>
             {nonFieldErrors}
             <div className={"p-3"}>
               <h2 className={"text-center text-dark"}>Sign In With Google</h2>

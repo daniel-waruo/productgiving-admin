@@ -75,8 +75,6 @@ body, html {
     }
 
     .step-number .number {
-        color: black;
-        background-color: #80deea;
         font-size: 1rem;
     }
 
@@ -90,4 +88,16 @@ body, html {
 .bg-gradient-cool {
     background: rgb(30, 186, 179);
     background: radial-gradient(circle, rgba(30, 186, 179, 0.7035189075630253) 5%, rgba(224, 214, 8, 0.4682247899159664) 74%, rgba(194, 224, 8, 0.4682247899159664) 93%);
+}
+
+#payment-steps {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+@media (max-width: 768px) {
+    #payment-steps {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
 }

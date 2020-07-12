@@ -1,9 +1,12 @@
 import cookie from 'js-cookie'
 
-export const login = token => {
+export const login = (token, redirectUrl) => {
   // set token cookie
   cookie.set('token', token, {expires: 2});
-  window.location = "/"
+  if (!redirectUrl)
+    window.location = "/"
+  else
+    window.location = redirectUrl
 };
 
 export default {

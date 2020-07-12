@@ -14,6 +14,12 @@ export const COURSE_QUERY = gql`
       }
       subscription{
         id
+        courseId
+        price
+        user{
+          id
+          email
+        }
       }
     }
   }`;
