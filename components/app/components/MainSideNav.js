@@ -119,7 +119,7 @@ export const UserImage = props => {
       <div className={"justify-content-center d-flex"}>
         <MDBCardImage src={imageUrl}/>
       </div>
-      <h3 className={"text-center"}>{name}</h3>
+      <h3 className={"text-center text-capitalize"}>{name}</h3>
     </>
   )
 }

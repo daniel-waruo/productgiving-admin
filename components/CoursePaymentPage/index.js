@@ -86,7 +86,8 @@ class CoursePaymentPage extends React.PureComponent {
                   Input the amount of money you want to pay for this course.
                   Which will be charged at the rate of {subscription.price} Per Week.
                 </p>
-                <ChooseAmountForm subscription={subscription} onChange={this.changeHandler}
+                <ChooseAmountForm subscription={subscription}
+                                  onChange={this.changeHandler}
                                   nextStep={this.nextStep('amount')}/>
               </StepItem>
               <StepItem id={"finish"}
@@ -94,10 +95,8 @@ class CoursePaymentPage extends React.PureComponent {
                         name={"Finish Payment"}
                         currentID={this.state.collapseID}
                         icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
-                <p>
-                  Input the phone number which you will use to pay the money .e.g +2547xxxxxxxx
-                </p>
                 <PaymentForm subscription={subscription}
+                             amount = {this.state.amount}
                              onChange={this.changeHandler}
                              nextStep={this.nextStep('finish')}/>
               </StepItem>

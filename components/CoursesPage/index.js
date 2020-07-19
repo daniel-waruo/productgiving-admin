@@ -20,7 +20,7 @@ class CoursePage extends React.PureComponent {
 
     // if error  return null
     //TODO:create an error page
-    if (error) return null;
+    if (error) return <h1>{error.message}</h1>;
 
     return (
       <>

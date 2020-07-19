@@ -2,16 +2,15 @@ import gql from 'graphql-tag';
 
 
 export const SUBSCRIPTION_QUERY = gql`
-  query Subscription($courseId:String!) {
+  query Subscription($courseId:String) {
     subscription(courseId:$courseId){
       id
       price
-      courseId
     }
   }`;
 
 export const EDIT_WEEKLY_SUBSCRIPTION_MUTATION = gql`
-  mutation EditWeeklySubscriptionMutation($courseId:String!,$price:Float!){
+  mutation EditWeeklySubscriptionMutation($courseId:String,$price:Float!){
     editWeeklySubscription(courseId:$courseId,price:$price){
       subscription{
         id
@@ -24,3 +23,22 @@ export const EDIT_WEEKLY_SUBSCRIPTION_MUTATION = gql`
     }
   }
 `;
+export const EDIT_COURSE_MUTATION = gql`
+  mutation EditCourse($id:String,$name:String!,$price:Float!,$description:String){ 
+    editCourse(id:$id,name:$name,price:$price,description:$description){
+      course{
+        id
+        name
+        description
+        subscription{
+          id
+          price
+        }
+      }
+      errors{
+        field
+        errors
+      }
+    }
+  }
+`

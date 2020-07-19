@@ -4,12 +4,14 @@ export const SUBSCRIPTION_QUERY = gql`
   query Subscription($courseId:String!) {
     subscription(courseId:$courseId){
       id
-      courseId
-      price
-      user{
+      course{
+        id
+        user{
         id
         email
       }
+      }
+      price
     }
     user{
       id
@@ -18,3 +20,28 @@ export const SUBSCRIPTION_QUERY = gql`
       email
     }  
   }`;
+
+export const SUBSCRIPTION_PAYMENT_MUTATION = gql`
+  mutation PaySubscription($amount:Float!,$phone:String!,$subscriptionId:String!){
+    paySubscription(amount:$amount,phone:$phone,subscriptionId:$subscriptionId){
+      paymentPending
+      transaction{
+        id
+      }
+      errors{
+        field
+        errors
+      }
+    }
+  }
+`
+
+export const PAYMENT_STATUS_SUBSCRIPTION = gql`
+  subscription PaymentSubscription($transactionId:ID!){
+    transaction(transactionId:$transactionId){
+      id
+      successStatus
+      reasonFailed
+    }
+  }
+`

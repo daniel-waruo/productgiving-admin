@@ -1,5 +1,5 @@
 import React from 'react'
-import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
+import {MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
 import CourseCard from "./CourseCard";
 import PropTypes from 'prop-types'
 import Link from "next/link";
@@ -33,6 +33,17 @@ class CoursesListSection extends React.PureComponent {
               </div>
               <MDBRow>
                 {coursesList}
+                <MDBCol size={"12"} md={"4"}>
+                  <CourseCard title={'Add Course'}>
+                    <div className={"w-100 text-center"}>
+                      <Link href={'/courses/add'} as={`/courses/add`}>
+                        <a className={"btn btn-default rounded-pill mt-3 mb-1"}>
+                          <MDBIcon icon={"plus"} size={"lg"}/>
+                        </a>
+                      </Link>
+                    </div>
+                  </CourseCard>
+                </MDBCol>
               </MDBRow>
             </MDBCol>
           </MDBRow>

@@ -1,64 +1,55 @@
 import React from "react";
-import {MDBBtn, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCol, MDBContainer, MDBListGroup, MDBListGroupItem, MDBRow} from "mdbreact";
 import PropTypes from "prop-types";
 
-class PaymentForm extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      amount: props.subscription.price,
-      loading: false
+class ChooseAmountForm extends React.PureComponent {
+
+  clickHandler = no => {
+    const {subscription: {price}} = this.props;
+    return () => {
+      this.props.onChange({amount: (no * price).toString()})
+      this.props.nextStep('finish')
     }
   }
 
-  submitHandler = event => {
-    event.preventDefault();
-    this.props.nextStep('finish')
-  }
-
-  changeHandler = e => {
-    this.setState({amount: e.target.value})
-    this.props.onChange({amount: e.target.value})
-  }
-
   render() {
-    const {subscription: {id, price}} = this.props;
+    const {subscription: {price}} = this.props;
+    const weeks = [1, 2, 3, 4];
+    const weekList = weeks.map(
+      (no, key) => {
+        return (
+          <MDBListGroupItem key={key} className={"rounded border-0 my-2 z-depth-1"}>
+            <span className={"mt-2"}>
+              Ksh {price * no} for {no} week{no > 1 ? "s" : ""}
+            </span>
+            <MDBBtn
+              onClick={this.clickHandler(no)}
+              className={"rounded-pill float-right"}>
+              SELECT
+            </MDBBtn>
+          </MDBListGroupItem>
+        )
+      }
+    )
     return (
-      <form onSubmit={this.submitHandler}>
-        <MDBRow>
-          <MDBCol size={"12"} md={"10"}>
-            <MDBRow center>
-              <MDBCol size={"11"} md={"6"}>
-                <MDBInput
-                  min={price}
-                  type={"number"}
-                  required
-                  valueDefault={price}
-                  disabled={this.state.loading}
-                  label={"Amount you want to pay in Kenya shillings"}
-                  onChange={this.changeHandler}
-                />
-              </MDBCol>
-              <MDBCol size={"12"}/>
-              <MDBCol size={"11"} md={"6"} className={"text-center"}>
-                <MDBBtn className={"rounded-pill"} type={"submit"} disabled={this.state.loading}>
-                  <MDBIcon icon={"money"} className={"mx-2 rounded-pill"}/>
-                  SUBMIT AMOUNT
-                </MDBBtn>
-              </MDBCol>
-            </MDBRow>
-          </MDBCol>
-        </MDBRow>
-      </form>
+      <MDBRow center>
+        <MDBCol size={"12"} md={"10"}>
+          <MDBContainer>
+            <MDBListGroup>
+              {weekList}
+            </MDBListGroup>
+          </MDBContainer>
+        </MDBCol>
+      </MDBRow>
     )
   }
 
 }
 
 
-PaymentForm.propTypes = {
+ChooseAmountForm.propTypes = {
   subscription: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   nextStep: PropTypes.func
 }
-export default PaymentForm
+export default ChooseAmountForm

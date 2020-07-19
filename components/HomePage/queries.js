@@ -6,6 +6,6 @@ export const COURSES_QUERY = gql`
     courses{
       id
       name
-      descriptionHeading
+      description
     }
   }`;

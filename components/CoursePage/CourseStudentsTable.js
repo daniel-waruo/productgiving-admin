@@ -13,13 +13,19 @@ export default class CourseStudentsTable extends React.PureComponent {
           label: 'Name',
           field: 'name',
           sort: 'asc',
-          width: 150
+          width: 100
         },
         {
           label: 'Email Address',
           field: 'email',
           sort: 'asc',
-          width: 150
+          width: 100
+        },
+        {
+          label: 'Subscription Balance',
+          field:'balance',
+          sort: 'asc',
+          width: 100
         }
       ],
       rows: students

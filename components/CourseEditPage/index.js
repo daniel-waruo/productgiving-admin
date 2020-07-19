@@ -1,101 +1,140 @@
 import React from "react";
-import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdbreact";
-import Router, {withRouter} from "next/router";
+import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact';
+import {COURSES_QUERY} from "../HomePage/queries";
+import {MutationForm} from "../Form";
+import {Field} from "../FIeld";
+import {withRouter} from "next/router";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
-import {EDIT_WEEKLY_SUBSCRIPTION_MUTATION, SUBSCRIPTION_QUERY} from "./queries";
+import {EDIT_COURSE_MUTATION} from "./queries";
 import Loader from "../Loader";
 import {COURSE_QUERY} from "../CoursePage/queries";
 
 class CourseEditPage extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      price: 10,
-      loading: false
-    }
+
+  state = {
+    name: "",
+    description: "",
+    price: "",
+    errors: [],
+    submitted: false
   }
 
-  submitHandler = event => {
-    event.preventDefault();
-    this.setState({
-      loading: true
-    })
-    const {courseId} = this.props.router.query
-    const {price} = this.state
-    // call mutation
-    this.props.editWeeklySubscription({
-      variables: {price, courseId},
-      refetchQueries: [
-        {
-          query: COURSE_QUERY,
-          variables: {courseId}
-        }
-      ]
-    }).then(
-      ({data: {editWeeklySubscription}}) => {
-        if (editWeeklySubscription.errors)
-          this.setState({
-              errors: editWeeklySubscription.errors,
-              loading: false
-            }
-          )
-        else {
-          Router.push('/courses/[courseId]',`/courses/${courseId}`)
-        }
-      }
-    )
-  }
-  changeHandler = value => {
-    this.setState({
-      price: value
-    })
-  }
+  completeHandler = ({editCourse: {course, errors}}) => {
+    if (course) {
+      // redirect to course page
+      this.props.router.push(`/courses/[courseId]`, `/courses/${course.id}`)
+    } else {
+      // set loading state to false
+      this.setState({
+        loading: false,
+        submitted: true,
+        errors: errors
+      })
+    }
+  };
+
+  changeHandler = object => {
+    this.setState(object)
+  };
+
+  getFormData = () => {
+    const {name, price, description} = this.state;
+    const {data: {course}} = this.props;
+    const {courseId} = this.props.router.query;
+    return {
+      id: courseId ? courseId : undefined,
+      name: name ? name : course.name,
+      price: price ? price : course.subscription.price,
+      description: description ? description : course.description
+    }
+  };
+
+  mutationOptions = {
+    refetchQueries: [{query: COURSES_QUERY}]
+  };
 
   render() {
-    const {data: {error, loading, subscription}} = this.props;
+
+    const {data: {error, loading, course}} = this.props;
+
     if (error)
       return <h1>{error.message}</h1>
 
     if (loading)
       return <Loader/>
-    let defaultPrice = "10"
-    if (subscription)
-      defaultPrice = subscription;
+    const {submitted, errors} = this.state;
     return (
-      <MDBContainer>
-        <h1 className={"text-center"}>Course Weekly Subscription</h1>
-        <form onSubmit={this.submitHandler}>
-          <MDBRow center>
-            <MDBCol size={"12"} md={"6"}>
-              <p className={"mb-0"} style={{fontSize: "1rem"}}>
-                Set the price you will be charging per week (Sun - Sat) ..eg 100.
-                The value should not be less than 10 shillings
-              </p>
-            </MDBCol>
-
-            <MDBCol size={"12"}/>
-            <MDBCol size={"12"} md={"6"}>
-              <MDBInput
-                min={"10"}
-                type={"number"}
-                required
-                disabled={this.state.loading}
-                valueDefault={defaultPrice}
-                value={this.state.price}
-                label={"Weekly Charge in KES"}
-                onChange={this.changeHandler}
-              />
-            </MDBCol>
-            <MDBCol size={"12"}/>
-            <MDBCol size={"12"} md={"6"} className={"text-center"}>
-              <MDBBtn className={"rounded-pill"} type={"submit"} disabled={this.state.loading}>
-                <MDBIcon icon={"money"} className={"mx-2 rounded-pill"}/>
-                SUBMIT SUBSCRIPTION
-              </MDBBtn>
-            </MDBCol>
-          </MDBRow>
-        </form>
+      <MDBContainer className={"pr-5"}>
+        <MDBRow center>
+          <MDBCol size={"11"} md={"10"}>
+            <h1 className={"text-center"}>Course Weekly Subscription</h1>
+            <MutationForm data={this.getFormData()}
+                          onCompleted={this.completeHandler}
+                          mutation={EDIT_COURSE_MUTATION}
+                          mutationOptions={this.mutationOptions}>
+              <MDBRow center>
+                <MDBCol size={"12"}>
+                  <Field
+                    submitted={submitted}
+                    label={"Course Name"}
+                    initial={course ? course.name : ""}
+                    required
+                    fieldErrors={errors.name}
+                    onChange={
+                      e => this.changeHandler(
+                        {name: e.target.value}
+                      )
+                    }
+                  />
+                </MDBCol>
+                <MDBCol size={"12"} md={"6"}>
+                  <Field
+                    rows={"4"}
+                    type={"textarea"}
+                    submitted={submitted}
+                    label={"Course Description"}
+                    initial={course ? course.description : ""}
+                    required
+                    fieldErrors={errors.description}
+                    onChange={
+                      e => this.changeHandler(
+                        {description: e.target.value}
+                      )
+                    }
+                  />
+                </MDBCol>
+                <MDBCol size={"12"} md={"6"}>
+                  <p className={"mb-0"} style={{fontSize: "1rem"}}>
+                    Set the price you will be charging per week (Sun - Sat) ..eg 100.
+                    The value should not be less than 10 shillings
+                  </p>
+                  <Field
+                    min={"10"}
+                    type={"number"}
+                    submitted={submitted}
+                    label={"Weekly Charge in KSH"}
+                    initial={course ? course.subscription.price : ""}
+                    required
+                    fieldErrors={errors.price}
+                    onChange={
+                      e => this.changeHandler(
+                        {price: e.target.value}
+                      )
+                    }
+                  />
+                </MDBCol>
+                <MDBCol size={"12"}/>
+                <MDBCol size={"12"} md={"6"} className={"text-center"}>
+                  <MDBBtn className={"rounded-pill"} type={"submit"}>
+                    <MDBIcon icon={"money"} className={"mx-2 rounded-pill"}/>
+                    SUBMIT
+                  </MDBBtn>
+                </MDBCol>
+              </MDBRow>
+            </MutationForm>
+          </MDBCol>
+        </MDBRow>
       </MDBContainer>
     )
   }
@@ -103,14 +142,13 @@ class CourseEditPage extends React.PureComponent {
 
 export default withRouter(
   compose(
-    graphql(SUBSCRIPTION_QUERY, {
+    graphql(COURSE_QUERY, {
       options: (props) => {
         const {courseId} = props.router.query;
         return {
           variables: {courseId}
         }
       }
-    }),
-    graphql(EDIT_WEEKLY_SUBSCRIPTION_MUTATION, {name: "editWeeklySubscription"})
+    })
   )(CourseEditPage)
 )

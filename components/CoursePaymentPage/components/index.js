@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBCollapse} from "mdbreact";
+import {MDBAnimation, MDBCollapse} from "mdbreact";
 import PropTypes from "prop-types";
 
 export class StepContainer extends React.PureComponent {
@@ -33,7 +33,9 @@ export class StepItem extends React.PureComponent {
           <p className={`pt-2 ${isSelected ? "d-none" : ""}`}>{name}</p>
           <MDBCollapse id={id} isOpen={currentID}>
             <h2>{name}</h2>
-            {children}
+            <MDBAnimation type={"fadeIn"} >
+              {children}
+            </MDBAnimation>
           </MDBCollapse>
         </div>
       </li>
@@ -49,41 +51,4 @@ StepItem.propTypes = {
   currentID: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   icon: PropTypes.func.isRequired
-}
-const selectStyle = {
-  display: "block",
-  width: "393.625px",
-  position: "absolute",
-  top: "0px",
-  left: "0px",
-  opacity: "1"
-}
-
-export class Select extends React.PureComponent {
-  render() {
-    const {options} = this.props;
-    const selectOptions = options.map(
-      ({text, value}) => {
-        return (
-          <option value={value}>{text}</option>
-        )
-      }
-    )
-    return (
-      <div className="select-wrapper mdb-select md-form">
-        <div>
-          <select className="browser-default custom-select" onChange={this.props.onChange}>
-            <option>Choose your option</option>
-            {selectOptions}
-          </select>
-        </div>
-      </div>
-    )
-  }
-}
-
-Select.propTypes = {
-  label: PropTypes.string.isRequired,
-  onChange: PropTypes.string.isRequired,
-  options: PropTypes.arrayOf(PropTypes.object).isRequired
 }

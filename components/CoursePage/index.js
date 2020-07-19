@@ -7,6 +7,7 @@ import Router, {withRouter} from "next/router";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import CourseStudentsSection from "./CourseStudentsSection";
 import AdminCard from "../HomePage/components/AdminCard";
+import Link from "next/link";
 
 class CoursePage extends React.PureComponent {
   state = {
@@ -24,17 +25,15 @@ class CoursePage extends React.PureComponent {
     if (error)
       return <h1>ERROR {error.message}</h1>
     if (!course)
-      return  <h1>No COurse</h1>
+      return <h1>No COurse</h1>
     const {id, name, students, subscription} = course;
 
     if (!subscription) {
       Router.push(`/courses/${id}/edit`)
       return null
     }
-    let studentNumber = 0;
-    if (students)
-      studentNumber = students.length
     const paymentLink = `${window.location.origin}/courses/${id}/pay`
+
     return (
       <MDBContainer className={"py-3 px-3"}>
         <h1>{name}</h1>
@@ -42,34 +41,62 @@ class CoursePage extends React.PureComponent {
           <MDBCol size={"12"}>
             <MDBRow>
               <MDBCol size={"12"} md={"6"} lg={"4"}>
-                <AdminCard title={"Students"} iconClass={"fa-user"} value={studentNumber.toString()}/>
+                <AdminCard
+                  title={"Subscribers"}
+                  iconClass={"fa-user"}
+                  value={subscription ? subscription.subscriberCount : "0"}/>
               </MDBCol>
               <MDBCol size={"12"} md={"6"} lg={"4"}>
-                <AdminCard title={"Total Earnings"} iconClass={"fa-money-bill"} value={"40000"}/>
+                <AdminCard
+                  title={"Total Earnings"}
+                  iconClass={"fa-money-bill"}
+                  value={subscription ? subscription.totalPaid : "0"}/>
               </MDBCol>
               <MDBCol size={"12"} md={"6"} lg={"4"}>
-                <AdminCard title={"Total Link Visits"} iconClass={"fas fa-user"} value={"4000"}/>
+                <AdminCard
+                  title={"Total Transactions"}
+                  iconClass={"fas fa-user"}
+                  value={subscription ? subscription.transactionsCount : "0"}/>
               </MDBCol>
             </MDBRow>
           </MDBCol>
           <MDBCol size={"12"} className={"px-3"}>
-            <MDBContainer className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
-              <h2>Payment Link</h2>
-              <MDBContainer>
-                <p>
-                  <a href={paymentLink} target="_blank">{paymentLink}</a>
-                  <MDBBtn size={"sm"} className={"px-2 ml-3"} onClick={() => this.copyPaymentLink(paymentLink)}>
-                    <MDBIcon icon={"copy"} className={"mx-2 rounded"}/>
-                    {this.state.copied ? "COPIED" : "COPY"}
-                  </MDBBtn>
-                </p>
-              </MDBContainer>
-            </MDBContainer>
+            <MDBRow>
+              <MDBCol size={"12"} md={"6"} className={"h-100"}>
+                <MDBContainer className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
+                  <h2>Payment Link</h2>
+                  <MDBContainer>
+                    <p>
+                      <a href={paymentLink} target="_blank">{paymentLink}</a>
+                      <MDBBtn size={"sm"} className={"px-2 ml-3"} onClick={() => this.copyPaymentLink(paymentLink)}>
+                        <MDBIcon icon={"copy"} className={"mx-2 rounded"}/>
+                        {this.state.copied ? "COPIED" : "COPY"}
+                      </MDBBtn>
+                    </p>
+                  </MDBContainer>
+                </MDBContainer>
+              </MDBCol>
+              <MDBCol size={"12"} md={"6"}>
+                <MDBContainer className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
+                  <h2>Edit Course</h2>
+                  <MDBContainer className={"text-center"}>
+                    <Link href={`/courses/[courseId]/edit`} as={`/courses/${id}/edit`}>
+                      <a>
+                        <MDBBtn size={"lg"} className={"ml-3"} style={{borderRadius: "1rem"}}>
+                          <MDBIcon icon={"edit"} className={"mr-2 rounded"}/>
+                          EDIT
+                        </MDBBtn>
+                      </a>
+                    </Link>
+                  </MDBContainer>
+                </MDBContainer>
+              </MDBCol>
+            </MDBRow>
           </MDBCol>
           <MDBCol size={"12"} className={"px-3 mt-2"}>
             <MDBContainer className={"my-2 pt-3 pb-5 z-depth-1 "} style={{borderRadius: "1rem"}}>
-              <h2 className={"text-underline"}>Students</h2>
-              <CourseStudentsSection/>
+              <h2 className={"text-underline"}>Subscribers</h2>
+              <CourseStudentsSection subscription={subscription}/>
             </MDBContainer>
           </MDBCol>
         </MDBRow>

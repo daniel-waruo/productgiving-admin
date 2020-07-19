@@ -2,23 +2,28 @@ import gql from 'graphql-tag';
 
 
 export const COURSE_QUERY = gql`
-  query Course($courseId:ID!) {
+  query Course($courseId:ID) {
     course(courseId:$courseId){
       id
       name
-      descriptionHeading
-      students{
-        userId
-        name
-        email
-      }
+      description
       subscription{
         id
-        courseId
         price
-        user{
+        subscriberCount
+        totalPaid
+        transactionsCount
+        activeSubscribers{
           id
+          name
           email
+          balance
+        }
+        inActiveSubscribers{
+          id
+          name
+          email
+          balance
         }
       }
     }
