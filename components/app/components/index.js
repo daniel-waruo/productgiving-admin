@@ -1,13 +1,16 @@
 import React from 'react';
 import Router from 'next/router'
 import cookie from 'js-cookie'
+import Loader from "../../Loader";
 
-export const redirectNoUser = () => {
+export const redirect = (href = '/', noAuth = false) => {
   if (typeof window !== "undefined") {
-    // remove the token
-    cookie.remove("token");
+    if (noAuth) {
+      // remove the token
+      cookie.remove("token");
+    }
     // redirect to login
-    Router.push("/login");
+    Router.push(href);
   }
-  return <h3 className={"text-center"}>User not Authenticated Redirecting to Login</h3>;
+  return <Loader fullScreen={true}/>
 };

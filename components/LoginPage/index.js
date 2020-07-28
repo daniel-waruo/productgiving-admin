@@ -1,23 +1,30 @@
 import React, {PureComponent} from "react";
 import {NextSeo} from "next-seo"
 import LoginForm from "./components/LoginForm";
-import Jumbotron from "../Jumbotron";
+import {withRouter} from "next/router";
 
 class LoginPage extends PureComponent {
 
   render() {
+    const {router: {pathname}} = this.props
+    console.log(this.props)
+    let redirectUrl;
+    if (pathname.split("/").find(value => value === "member"))
+      redirectUrl = "/member"
+    if (pathname.split("/").find(value => value === "subscriber"))
+      redirectUrl = "/subscriber"
     return (
-      <Jumbotron>
+      <>
         <NextSeo
           title={"Login"}
           description={
-            "Login to our Class Pay Website to monetize your google classroom classes"
+            "Login to your account"
           }
         />
-        <LoginForm/>
-      </Jumbotron>
+        <LoginForm redirectUrl={redirectUrl}/>
+      </>
     )
   }
 }
 
-export default LoginPage
+export default withRouter(LoginPage)

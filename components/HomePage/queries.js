@@ -9,3 +9,4 @@ export const COURSES_QUERY = gql`
       description
     }
   }`;
+

@@ -1,8 +1,8 @@
 import {withApollo} from "../apollo";
 import HomePage from "../components/HomePage";
-import {withApp} from "../components/app";
+import {withDefaultLayout} from "../components/app";
 
 
 export default withApollo({ssr: false})(
-  withApp(HomePage, {secure: false})
+  withDefaultLayout(HomePage, {secure: false})
 );

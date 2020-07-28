@@ -12,7 +12,7 @@ export default class LoaderOverlay extends React.Component {
       <div className={"view"}>
         {loader}
         {this.props.children}
-        <div className={`mask flex-center rgba-stylish-light ${loading ? "" : "d-none"}`}>
+        <div className={`mask flex-center rgba-white-strong ${loading ? "" : "d-none"}`}>
         </div>
       </div>
     )

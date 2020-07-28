@@ -24,9 +24,9 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 300px) {
   .sidenav-open {
-    width: 100%;
+    width: 90%;
   }
 }
 

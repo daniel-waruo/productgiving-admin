@@ -18,14 +18,21 @@ class LoginForm extends React.PureComponent {
     loading: false
   }
 
-  responseGoogle = response => {
+  onFail = (data) => {
+    const errors = [
+      'User did not Login.Please try again'
+    ]
+    this.setState({errors})
+  }
+  responseGoogle = ({accessToken,profileObj:{imageUrl}}) => {
     this.setState({loading: true});
     this.props.loginWithGoogle({
       refetchQueries: [
         {query: APP_QUERY},
       ],
       variables: {
-        code: response.code
+        accessToken,
+        imageUrl
       }
     }).then(
       ({data: {loginWithGoogle}}) => {
@@ -45,18 +52,23 @@ class LoginForm extends React.PureComponent {
     const nonFieldErrors = this.state.errors ?
       this.state.errors.map(
         (error, key) => {
-          if (error.field === 'non_field_errors') {
-            return error.errors.map(
-              (error, key) => (
-                <MDBAnimation type={"fadeInDown"}>
-                  <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
-                </MDBAnimation>
-              )
+
+          if (error.field === undefined) return (
+            <MDBAnimation type={"fadeInDown"}>
+              <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
+            </MDBAnimation>
+          )
+          return error.errors.map(
+            (error, key) => (
+              <MDBAnimation type={"fadeInDown"}>
+                <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>
+                  {error}
+                </MDBAlert>
+              </MDBAnimation>
             )
-          }
+          )
         }
       ) : null;
-
     const {loading} = this.state;
     let {scope} = this.props;
 
@@ -78,10 +90,8 @@ class LoginForm extends React.PureComponent {
                   scope={scope}
                   render={renderProps => <GoogleButton {...renderProps} loading={loading}/>}
                   buttonText="Login"
-                  accessType="offline"
-                  responseType={"code"}
                   onSuccess={this.responseGoogle}
-                  onFailure={this.responseGoogle}
+                  onFailure={this.onFail}
                 />
               </div>
             </div>

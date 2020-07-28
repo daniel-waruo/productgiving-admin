@@ -1,5 +1,3 @@
-// IMPORT MD-BOOTSTRAP CSS
-//import '../assets/css/dist/all.min.css';
 import '../assets/css/dist/style.css';
 import "../assets/css/home.css"
 
@@ -17,13 +15,13 @@ function App({Component, pageProps}) {
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css"
               integrity="sha512-xA6Hp6oezhjd6LiLZynuukm80f8BoZ3OpcEYaqKoCV3HKQDrYjDE1Gu8ocxgxoXmwmSzM4iqPvCsOkQNiu41GA=="
               crossOrigin="anonymous"/>
-        <title>Class Pay</title>
       </Head>
       <DefaultSeo
-        title={""}
-        titleTemplate={" %s | Class Pay"}
+        title={"M-Subscribe"}
+        titleTemplate={" %s | M-Subscribe"}
         description={
-          "Class Pay"
+          "M-Subscribe is an application that connect buyers and sellers by providing to them " +
+          "a medium where sellers can access services at micro installments"
         }
       />
       <Component {...pageProps} />

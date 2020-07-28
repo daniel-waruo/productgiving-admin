@@ -8,6 +8,10 @@ export const APP_QUERY = gql`
       firstName
       lastName
       email
+      imageUrl
+    }
+    paymentInfo{
+      id
     }
   }
     `;

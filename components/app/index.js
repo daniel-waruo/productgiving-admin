@@ -1,8 +1,9 @@
 import React from 'react';
-import MainLayout from "./components/MainLayout";
-import PaymentLayout from "./components/PaymentLayout";
+import MainLayout from "./components/MemberLayout";
+import PaymentLayout from "./components/SubscriberLayout";
+import DefaultLayout from "./components/DefaultLayout";
 
-export const withApp =
+export const withMemberLayout =
   (PageComponent, config = {secure: true}) => {
     const {secure} = config;
 
@@ -16,7 +17,7 @@ export const withApp =
     };
   };
 
-export const withStudentApp =
+export const withSubscriberLayout =
   (PageComponent, config = {secure: true}) => {
     const {secure} = config;
 
@@ -26,6 +27,21 @@ export const withStudentApp =
         <PaymentLayout secure={secure} title={title}>
           <PageComponent {...props} />
         </PaymentLayout>
+      )
+    };
+  };
+
+
+export const withDefaultLayout =
+  (PageComponent, config = {secure: true}) => {
+    const {secure} = config;
+
+    return props => {
+      const {title} = props;
+      return (
+        <DefaultLayout secure={secure} title={title}>
+          <PageComponent {...props} />
+        </DefaultLayout>
       )
     };
   };
