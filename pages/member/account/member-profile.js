@@ -1,7 +1,7 @@
 import {withApollo} from "../../../apollo";
-import PaymentInfoPage from "../../../components/PaymentInfoPage";
 import {withMemberLayout} from "../../../components/app";
+import MemberProfilePage from "../../../components/MemberProfilePage";
 
 export default withApollo({ssr: false})(
-  withMemberLayout(PaymentInfoPage, {secure: true})
+  withMemberLayout(MemberProfilePage,{secure:true})
 )

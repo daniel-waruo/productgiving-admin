@@ -8,6 +8,15 @@ export const redirect = (href = '/', noAuth = false) => {
     if (noAuth) {
       // remove the token
       cookie.remove("token");
+      // redirect to login
+      Router.push({
+          pathname: href,
+          query: {
+            next: Router.asPath
+          }
+        }
+      )
+      return <Loader fullScreen={true}/>
     }
     // redirect to login
     Router.push(href);

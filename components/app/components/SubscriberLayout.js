@@ -29,7 +29,7 @@ class SubscriberLayout extends React.Component {
 
     if (error) return <h1 className={"text-center"}>{error.message}</h1>;
 
-    if (!user && secure) return redirect("/",true);
+    if (!user && secure) return redirect("/subscriber/login",true);
 
     return (
       <>

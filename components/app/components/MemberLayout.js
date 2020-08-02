@@ -24,20 +24,25 @@ class MemberLayout extends React.Component {
   };
 
   render() {
-    const {title, secure, data: {user, paymentInfo, loading, error}} = this.props;
+    const {title, secure, data: {user,memberProfile, paymentInfo, loading, error}} = this.props;
 
     if (loading) return <Loader fullScreen={true}/>;
 
     if (error) return <h1 className={"text-center"}>{error.message}</h1>;
 
-    if (!user && secure) return redirect("/", true);
+    if (!user && secure) return redirect("/member/login", true);
 
-    const accountPaymentLink = '/member/account/payment';
+    const {router: {pathname}} = this.props;
 
-    const {router:{pathname}} = this.props;
-
-    if (!paymentInfo && (pathname === accountPaymentLink)) {
-      return redirect(accountPaymentLink)
+    // check if the user has a member profile and if not
+    // redirect the user to set it
+    if (!memberProfile && (pathname !== '/member/account/member-profile')) {
+      return redirect('/member/account/member-profile')
+    }
+    // check if payment info is set if not
+    // redirect to page where the account payment will be set
+    if (!paymentInfo && (pathname !== '/member/account/payment')) {
+      return redirect('/member/account/payment')
     }
 
     return (
@@ -68,5 +73,5 @@ MemberLayout.propTypes = {
 };
 
 export default graphql(
-    APP_QUERY
-  )(withRouter(MemberLayout))
+  APP_QUERY
+)(withRouter(MemberLayout))

@@ -43,13 +43,13 @@ export const SUBSCRIPTION_QUERY = gql`
         id
         name
         email
-        balance
+        expiryDate
       }
       inActiveSubscribers{
         id
         name
         email
-        balance
+        expiryDate
       }
       isOwner
     }

@@ -31,14 +31,15 @@ export const COURSE_QUERY = gql`
 
 export const USER_SUBSCRIPTION_QUERY = gql`
   query UserSubscription($subscriptionId:ID) {
+    subscription(subscriptionId:$subscriptionId){
+      id
+      name
+      description
+      price
+    }
     userSubscription(subscriptionId:$subscriptionId){
       id
       balance
-      subscription{
-        id
-        name
-        description
-        price  
-      }
+      expiryDate
     }
   }`;

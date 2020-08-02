@@ -24,11 +24,12 @@ class PaymentForm extends React.PureComponent {
     event.preventDefault();
     this.setState({loading: true})
     if (this.state.errors.length) return
-    const {subscription: {id}, amount} = this.props;
+    const {subscription: {id}, amount, interval} = this.props;
     this.props.paySubscription({
         variables: {
           phone: this.state.phone,
           amount,
+          interval,
           subscriptionId: id
         }
       }
@@ -125,7 +126,9 @@ class PaymentForm extends React.PureComponent {
 PaymentForm.propTypes = {
   subscription: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  amount: PropTypes.string.isRequired
+  amount: PropTypes.string.isRequired,
+  interval: PropTypes.string.isRequired,
+  frequency:PropTypes.string.isRequired,
 }
 
 export default compose(

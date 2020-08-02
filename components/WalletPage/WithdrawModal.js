@@ -14,8 +14,8 @@ class WithdrawModal extends React.PureComponent {
         <MDBModalHeader toggle={toggle}>Withdraw</MDBModalHeader>
         <MDBModalBody>
           <p>The money will be transferred to your saved paybill information</p>
-          <p className={"text-bold"}> PAYBILL NUMBER : {paybillNumber}</p>
-          <p className={"text-bold"}> PAYBILL NUMBER : {paybillAccount}</p>
+          <p className={"text-bold"}> BUSINESS NUMBER : {paybillNumber}</p>
+          <p className={"text-bold"}> ACCOUNT  : {paybillAccount}</p>
           <WithdrawForm balance={balance} mutation={WITHDRAW_MUTATION} />
         </MDBModalBody>
       </MDBModal>

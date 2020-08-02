@@ -7,6 +7,7 @@ export const USER_SUBSCRIPTIONS_QUERY = gql`
       userSubscriptions{
         id
         balance
+        expiryDate
         subscription{
           id
           name

@@ -22,20 +22,34 @@ export default class SubscribersTable extends React.PureComponent {
           width: 100
         },
         {
-          label: 'Subscription Balance',
-          field:'balance',
+          label: 'Subscription Expiry Date',
+          field: 'expiryDate',
           sort: 'asc',
           width: 100
         }
       ],
-      rows: students
+      rows: students.map(
+        ({expiryDate, ...attrs}) => {
+          expiryDate = new Date(expiryDate);
+          attrs.expiryDate = new Intl.DateTimeFormat("en-US", {
+            weekday:"short",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour12: true,
+            hour: "numeric",
+            minute: "numeric"
+          }).format(expiryDate)
+          return attrs
+        }
+      )
     };
     return (
       <MDBContainer fluid className={"py-3"}>
-        <h3>{title}</h3>
+        <h3 className={"mt-3"}>{title}</h3>
         <MDBDataTable
-          striped
-          bordered
+          paging={false}
+          borderless
           responsiveMd
           hover
           noBottomColumns

@@ -6,6 +6,9 @@ export const SUBSCRIPTIONS_QUERY = gql`
       id
       name 
       description
-      price
+      dailyPrice
+      weeklyPrice
+      monthlyPrice
+      yearlyPrice
     }
   }`;

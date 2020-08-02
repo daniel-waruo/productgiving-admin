@@ -10,16 +10,16 @@ class UserSubscriptionListSection extends React.PureComponent {
     const {userSubscriptions} = this.props;
     //list of the courses
     const subscriptionsList = userSubscriptions ? userSubscriptions.map(
-      ({balance, subscription: {id, name, description}}, key) => (
+      ({expiryDate, subscription: {id, name, description}}, key) => (
         <MDBCol key={key} size={"12"} md={"4"} className={"my-2"}>
           <SubscriptionCard title={name}>
             {description}...
             <br/>
-            <span className={"font-weight-bold"}> balance - Ksh.{balance}</span>
+            <span className={"font-weight-bold"}> valid until {new Date(expiryDate).toLocaleString()}</span>
             <div className={"w-100 text-center"}>
               <Link href={'/subscriber/subscriptions/[subscriptionId]'}
                     as={`/subscriber/subscriptions/${id}`}>
-                <a className={"btn btn-default rounded-pill mt-3 mb-1"}>MANAGE SUBSCRIPTION</a>
+                <a className={"btn btn-default rounded-pill mt-3 mb-1"}>VIEW</a>
               </Link>
             </div>
           </SubscriptionCard>

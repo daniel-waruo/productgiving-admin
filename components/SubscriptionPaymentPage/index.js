@@ -14,6 +14,8 @@ class SubscriptionPaymentPage extends React.PureComponent {
   state = {
     collapseID: "login",
     finished: [],
+    interval: "",
+    frequency: 1,
     amount: "",
     phone: "",
     success: false
@@ -97,6 +99,8 @@ class SubscriptionPaymentPage extends React.PureComponent {
                         icon={className => (<MDBIcon icon={"user"} className={className}/>)}>
                 <PaymentForm subscription={subscription}
                              amount={this.state.amount}
+                             frequency={this.state.frequency}
+                             interval={this.state.interval}
                              onChange={this.changeHandler}
                              nextStep={this.nextStep('finish')}/>
               </StepItem>

@@ -1,6 +1,6 @@
 import React from "react";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact';
-import {MutationForm} from "../Form";
+import {FormAlerts, MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {withRouter} from "next/router";
 import compose from "lodash.flowright";
@@ -16,7 +16,11 @@ class SubscriptionEditPage extends React.PureComponent {
     name: "",
     description: "",
     price: "",
-    errors: [],
+    dailyPrice: "",
+    weeklyPrice: "",
+    monthlyPrice: "",
+    yearlyPrice: "",
+    errors: {},
     submitted: false
   }
 
@@ -41,15 +45,18 @@ class SubscriptionEditPage extends React.PureComponent {
   };
 
   getFormData = () => {
-    const {name, price, description} = this.state;
+    const {name, dailyPrice, weeklyPrice, monthlyPrice, yearlyPrice, description} = this.state;
     let {data: {subscription}} = this.props;
     subscription = subscription ? subscription : {}
     const {subscriptionId} = this.props.router.query;
     return {
       id: subscriptionId ? subscriptionId : undefined,
       name: name ? name : subscription.name,
-      price: price ? price : subscription.price,
-      description: description ? description : subscription.description
+      description: description ? description : subscription.description,
+      dailyPrice: dailyPrice ? dailyPrice : subscription.dailyPrice,
+      weeklyPrice: weeklyPrice ? weeklyPrice : subscription.weeklyPrice,
+      monthlyPrice: monthlyPrice ? monthlyPrice : subscription.monthlyPrice,
+      yearlyPrice: yearlyPrice ? yearlyPrice : subscription.yearlyPrice,
     }
   };
 
@@ -58,18 +65,17 @@ class SubscriptionEditPage extends React.PureComponent {
   };
 
   render() {
-
     const {data: {error, loading, subscription}} = this.props;
 
-    if (error)
-      return <h1>{error.message}</h1>
+    if (error) return <h1>{error.message}</h1>
 
     if (loading)
       return <Loader/>
+
     const {submitted, errors} = this.state;
     return (
       <>
-        <NextSeo title={subscription ?  `Edit ${subscription.name}` : "Add Subscription"}/>
+        <NextSeo title={subscription ? `Edit ${subscription.name}` : "Add Subscription"}/>
         <MDBContainer className={"pr-5"}>
           <MDBRow center>
             <MDBCol size={"11"} md={"10"}>
@@ -78,24 +84,20 @@ class SubscriptionEditPage extends React.PureComponent {
                             onCompleted={this.completeHandler}
                             mutation={EDIT_SUBSCRIPTION_MUTATION}
                             mutationOptions={this.mutationOptions}>
+                <FormAlerts errors={errors.non_field_errors}/>
                 <MDBRow center>
-                  <MDBCol size={"12"}>
+                  <MDBCol size={"12"} md={"6"}>
                     <Field
                       submitted={submitted}
                       label={"Subscription Name"}
                       initial={subscription ? subscription.name : ""}
                       required
                       fieldErrors={errors.name}
-                      onChange={
-                        e => this.changeHandler(
-                          {name: e.target.value}
-                        )
-                      }
+                      onChange={e => this.changeHandler({name: e.target.value})}
                     />
                   </MDBCol>
                   <MDBCol size={"12"} md={"6"}>
                     <Field
-                      rows={"4"}
                       type={"textarea"}
                       submitted={submitted}
                       label={"Subscription Description"}
@@ -109,24 +111,63 @@ class SubscriptionEditPage extends React.PureComponent {
                       }
                     />
                   </MDBCol>
-                  <MDBCol size={"12"} md={"6"}>
-                    <p className={"mb-0"} style={{fontSize: "1rem"}}>
-                      Set the price you will be charging per week (Sun - Sat) ..eg 100.
-                      The value should not be less than 10 shillings
+                  <MDBCol size={"12"}>
+                    <p>
+                      Choose the amount you will be charging for the respective billing intervals.
+                      The charges will be billed in kenyan shillings.The lowest amount being 10 shillings.
+                      <br/>
+                      <i>
+                        Make smaller intervals relatively more expensive to sway consumers into choosing larger
+                        intervals hence locking in customers for longer periods.
+                      </i>
+                      <br/>
+                      <b className={"mt-2"}>Filling a particular category will enable customer to subscribe to it</b>
                     </p>
+                  </MDBCol>
+                  <MDBCol size={"12"} md={"6"}>
                     <Field
                       min={"10"}
                       type={"number"}
                       submitted={submitted}
-                      label={"Weekly Charge in KSH"}
-                      initial={subscription ? subscription.price : ""}
+                      label={"Daily (24hrs) Charge"}
+                      initial={subscription ? subscription.dailyPrice : ""}
+                      fieldErrors={errors.dailyPrice}
+                      onChange={e => this.changeHandler({dailyPrice: e.target.value})}
+                    />
+                  </MDBCol>
+                  <MDBCol size={"12"} md={"6"}>
+                    <Field
+                      min={"10"}
+                      type={"number"}
+                      submitted={submitted}
+                      label={"Weekly (7days) Charge"}
+                      initial={subscription ? subscription.weeklyPrice : ""}
+                      fieldErrors={errors.weeklyPrice}
+                      onChange={e => this.changeHandler({weeklyPrice: e.target.value})}
+                    />
+                  </MDBCol>
+                  <MDBCol size={"12"} md={"6"}>
+                    <Field
+                      min={"10"}
+                      type={"number"}
+                      submitted={submitted}
+                      label={"Monthly (30 days) Charge"}
+                      initial={subscription ? subscription.monthlyPrice : ""}
                       required
-                      fieldErrors={errors.price}
-                      onChange={
-                        e => this.changeHandler(
-                          {price: e.target.value}
-                        )
-                      }
+                      fieldErrors={errors.monthlyPrice}
+                      onChange={e => this.changeHandler({monthlyPrice: e.target.value})}
+                    />
+                  </MDBCol>
+                  <MDBCol size={"12"} md={"6"}>
+                    <Field
+                      min={"10"}
+                      type={"number"}
+                      submitted={submitted}
+                      label={"Yearly (12 months) Charge"}
+                      initial={subscription ? subscription.yearlyPrice : ""}
+                      required
+                      fieldErrors={errors.yearlyPrice}
+                      onChange={e => this.changeHandler({yearlyPrice: e.target.value})}
                     />
                   </MDBCol>
                   <MDBCol size={"12"}/>

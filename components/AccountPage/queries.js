@@ -1,7 +1,7 @@
 import gql from 'graphql-tag';
 
 export const USER_QUERY = gql`
-  query {
+  query AccountQuery {
     user{
       id
       email
@@ -13,9 +13,9 @@ export const USER_QUERY = gql`
       paybillNumber
       paybillAccount
     }
-    messages @client {
-      type
-      text
+    memberProfile{
+      id
+      organisationName
     }
   }
 `;

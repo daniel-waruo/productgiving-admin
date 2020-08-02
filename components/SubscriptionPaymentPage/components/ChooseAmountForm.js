@@ -1,42 +1,113 @@
 import React from "react";
-import {MDBBtn, MDBCol, MDBContainer, MDBListGroup, MDBListGroupItem, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBListGroup, MDBListGroupItem, MDBRow} from "mdbreact";
 import PropTypes from "prop-types";
 
-class ChooseAmountForm extends React.PureComponent {
+const ChooseAmountItem = props => {
+  const {title, number, onChange, interval, maxNumber, onSelect, price} = props
 
-  clickHandler = no => {
-    const {subscription: {price}} = this.props;
+  const amount = number * price
+  return (
+    <MDBListGroupItem className={"rounded border-0 my-2 z-depth-1"}>
+      <MDBRow center>
+        <MDBCol size={"12"}>
+          <h3>{title} <small>@ Ksh.{price} {interval}</small></h3>
+        </MDBCol>
+        <MDBCol size={"12"} md={"6"}>
+          <MDBInput
+            valueDefault={"1"}
+            min="1"
+            max={maxNumber}
+            type={"number"}
+            label={"Number"}
+            value={number.toString()}
+            onChange={onChange(interval)}/>
+        </MDBCol>
+        <MDBCol size={"12"} md={"4"}>
+          <MDBBtn
+            onClick={onSelect(interval, (price * number).toString())}
+            className={"rounded-pill float-left w-100"}>
+            <MDBIcon icon={"money-bill"} className={"mx-2"}/>
+            <span style={{fontSize: "0.80rem"}}>Pay: Ksh.{amount}</span>
+          </MDBBtn>
+        </MDBCol>
+      </MDBRow>
+    </MDBListGroupItem>
+  )
+}
+
+class ChooseAmountForm extends React.PureComponent {
+  state = {
+    daily: 1,
+    weekly: 1,
+    monthly: 1,
+    yearly: 1,
+  }
+  changeHandler = (interval) => {
+    const newState = {}
+    return e => {
+      newState[interval] = e.target.value
+      this.setState(newState)
+    }
+  }
+  selectHandler = (interval, amount) => {
+
     return () => {
-      this.props.onChange({amount: (no * price).toString()})
+      this.props.onChange({
+        amount: amount.toString(),
+        interval,
+        frequency: this.state[interval]
+      })
       this.props.nextStep('finish')
     }
   }
 
   render() {
-    const {subscription: {price}} = this.props;
-    const weeks = [1, 2, 3, 4];
-    const weekList = weeks.map(
-      (no, key) => {
-        return (
-          <MDBListGroupItem key={key} className={"rounded border-0 my-2 z-depth-1"}>
-            <span className={"mt-2"}>
-              Ksh {price * no} for {no} week{no > 1 ? "s" : ""}
-            </span>
-            <MDBBtn
-              onClick={this.clickHandler(no)}
-              className={"rounded-pill float-right"}>
-              SELECT
-            </MDBBtn>
-          </MDBListGroupItem>
-        )
-      }
-    )
+    const {subscription: {dailyPrice, weeklyPrice, monthlyPrice, yearlyPrice}} = this.props;
     return (
       <MDBRow center>
         <MDBCol size={"12"} md={"10"}>
           <MDBContainer>
             <MDBListGroup>
-              {weekList}
+              {dailyPrice ?
+                <ChooseAmountItem title={"Daily Subscription"}
+                                  number={this.state.daily}
+                                  onChange={this.changeHandler}
+                                  interval={"daily"}
+                                  maxNumber={"4"}
+                                  onSelect={this.selectHandler}
+                                  price={dailyPrice}/>
+                : null
+              }
+              {weeklyPrice ?
+                <ChooseAmountItem title={"Weekly Subscription"}
+                                  number={this.state.weekly}
+                                  onChange={this.changeHandler}
+                                  interval={"weekly"}
+                                  maxNumber={"4"}
+                                  onSelect={this.selectHandler}
+                                  price={weeklyPrice}/>
+                : null
+              }
+              {monthlyPrice ?
+                <ChooseAmountItem title={"Monthly Subscription"}
+                                  number={this.state.monthly}
+                                  onChange={this.changeHandler}
+                                  interval={"monthly"}
+                                  maxNumber={"4"}
+                                  onSelect={this.selectHandler}
+                                  price={monthlyPrice}/>
+                : null
+              }
+              {yearlyPrice ?
+                <ChooseAmountItem title={"Yearly Subscription"}
+                                  number={this.state.yearly}
+                                  onChange={this.changeHandler}
+                                  interval={"yearly"}
+                                  maxNumber={"4"}
+                                  onSelect={this.selectHandler}
+                                  price={yearlyPrice}/>
+                : null
+              }
             </MDBListGroup>
           </MDBContainer>
         </MDBCol>

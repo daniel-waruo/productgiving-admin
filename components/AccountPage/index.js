@@ -30,7 +30,7 @@ export function AccountCard(props) {
 class AccountPage extends React.Component {
 
   render() {
-    const {data: {loading, error, user, paymentInfo}} = this.props;
+    const {data: {loading, error, user, paymentInfo,memberProfile}} = this.props;
 
     if (loading) return <Loader/>;
     // if error  return null
@@ -58,7 +58,13 @@ class AccountPage extends React.Component {
               <AccountCard href={"/member/account/payment"} title={"Payment Profile"}
                            className={"z-depth-half m-2 h-100"}>
                 <p className={"px-2"}>BUSINESS NO. :{paybillNumber}</p>
-                <p className={"px-2"}>ACCOUNT NAME :{paybillAccount}</p>
+                <p className={"px-2"}>ACCOUNT :{paybillAccount}</p>
+              </AccountCard>
+            </MDBCol>
+            <MDBCol size={"12"} md={"6"} className={"my-3"}>
+              <AccountCard href={"/member/account/member-profile"} title={"Member Profile"}
+                           className={"z-depth-half m-2 h-100"}>
+                <p className={"px-2text-capitalize"}>ORGANISATION :{memberProfile.organisationName}</p>
               </AccountCard>
             </MDBCol>
           </MDBRow>

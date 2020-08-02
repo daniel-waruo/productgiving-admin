@@ -38,18 +38,18 @@ class SubscriptionPage extends React.PureComponent {
     return (
       <>
         <NextSeo title={name}/>
-        <MDBContainer className={"py-3 px-4 mx-0"}>
-          <h1>{name}</h1>
-          <MDBRow>
+        <MDBContainer fluid className={"py-3 px-4"}>
+          <h1 className={"pl-3"}>{name}</h1>
+          <MDBRow center>
             <MDBCol size={"12"}>
-              <MDBRow>
-                <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
+              <MDBRow center>
+                <MDBCol size={"12"} sm={"6"} lg={"4"} className={"my-2"}>
                   <AdminCard
                     title={"Subscribers"}
                     iconClass={"fa-user"}
                     value={subscription ? subscription.subscriberCount : "0"}/>
                 </MDBCol>
-                <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
+                <MDBCol size={"12"} sm={"6"} lg={"4"} className={"my-2"}>
                   <AdminCard
                     title={"Total Earnings"}
                     iconClass={"fa-money-bill"}
@@ -66,7 +66,7 @@ class SubscriptionPage extends React.PureComponent {
             <MDBCol size={"12"} className={"px-3"}>
               <MDBRow>
                 <MDBCol size={"12"} md={"6"} className={"h-100 my-4"}>
-                  <MDBContainer className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
+                  <MDBContainer fluid className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
                     <h2>Payment Link</h2>
                     <MDBContainer>
                       <p>
@@ -80,7 +80,7 @@ class SubscriptionPage extends React.PureComponent {
                   </MDBContainer>
                 </MDBCol>
                 <MDBCol size={"12"} md={"6"} className={"mt-4 mb-2"}>
-                  <MDBContainer className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
+                  <MDBContainer fluid className={"my-2 py-3 z-depth-1 "} style={{borderRadius: "1rem"}}>
                     <h2>Edit Subscription</h2>
                     <MDBContainer className={"text-center"}>
                       <Link href={`/member/subscriptions/[subscriptionId]/edit`}
@@ -98,7 +98,7 @@ class SubscriptionPage extends React.PureComponent {
               </MDBRow>
             </MDBCol>
             <MDBCol size={"12"} className={"px-3 mt-2"}>
-              <MDBContainer className={"my-2 pt-3 pb-5 z-depth-1 px-0"} style={{borderRadius: "1rem"}}>
+              <MDBContainer fluid className={"my-2 pt-3 pb-5 z-depth-1 px-0"} style={{borderRadius: "1rem"}}>
                 <h2 className={"text-underline ml-3"}>Subscribers</h2>
                 <SubscribersSection subscription={subscription}/>
               </MDBContainer>

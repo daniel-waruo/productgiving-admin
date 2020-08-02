@@ -13,5 +13,8 @@ export const APP_QUERY = gql`
     paymentInfo{
       id
     }
+    memberProfile{
+      id
+    }
   }
     `;

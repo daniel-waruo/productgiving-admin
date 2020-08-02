@@ -7,7 +7,7 @@ import {WITHDRAW_SUBSCRIPTION} from "./queries";
 
 class WithdrawQueued extends React.PureComponent {
   render() {
-    const {data: {error, loading, transaction}} = this.props
+    const {data: {error, loading, withdrawTransaction}} = this.props
     if (error) {
       return <h1>{error.message}</h1>
     }
@@ -19,7 +19,7 @@ class WithdrawQueued extends React.PureComponent {
         </MDBContainer>
       )
     }
-    const {successStatus, reasonFailed, amount} = transaction;
+    const {successStatus, reasonFailed, amount} = withdrawTransaction;
 
     if (!successStatus)
       return (
