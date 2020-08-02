@@ -23,7 +23,7 @@ class SubscriberLayout extends React.Component {
   };
 
   render() {
-    const {title, secure, data: {user, loading, error}} = this.props;
+    const {title, secure=true, data: {user, loading, error}} = this.props;
 
     if (loading) return <Loader fullScreen={true}/>;
 
