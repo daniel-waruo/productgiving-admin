@@ -11,7 +11,7 @@ export const API_URL = dev ? make_url('127.0.0.1:8000') :
 export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 
 export const API_WS_URL = dev ? make_url('127.0.0.1:8000','ws') :
-  make_url('m-subscribe-api.herokuapp.com', 'http', true);
+  make_url('m-subscribe-api.herokuapp.com', 'ws', true);
 
 export const GRAPHQL_WS_ENDPOINT = `${API_WS_URL}/ws/graph_ql`
 
