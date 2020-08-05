@@ -8,17 +8,14 @@ import {NextSeo} from "next-seo";
 
 class HomePage extends PureComponent {
   render() {
-    const {
-      data: {
-        loading,
-        error,
-        user
-      }
-    } = this.props
+    const {data: {loading, error, user}} = this.props
+
     if (loading)
       return <Loader/>
+
     if (error)
       return <h1>{error.message}</h1>
+
     if (user)
       return (
         <>

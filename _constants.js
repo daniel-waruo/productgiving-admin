@@ -1,10 +1,11 @@
 // TOD0:switch API_URL between development and production
-const dev = process.env.NODE_ENV !== 'production';
+let dev = process.env.NODE_ENV !== 'production';
 export const make_url = (domain, protocol = 'http', secure = false) => {
   let reqProtocol = protocol;
   if (secure) reqProtocol = reqProtocol + 's'
   return `${reqProtocol}://${domain}`
 }
+
 export const API_URL = dev ? make_url('127.0.0.1:8000') :
   make_url('m-subscribe-api.herokuapp.com', 'http', true);
 
