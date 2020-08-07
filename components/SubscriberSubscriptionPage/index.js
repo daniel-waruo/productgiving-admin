@@ -47,7 +47,7 @@ class SubscriptionPage extends React.PureComponent {
       hour12: true,
       hour: "numeric",
       minute: "numeric"
-    }).format(expiryDate)
+    }).format(date)
     return (
       <MDBContainer className={"py-3 px-3"}>
         <h1>{name}</h1>
@@ -57,13 +57,10 @@ class SubscriptionPage extends React.PureComponent {
               <MDBRow>
                 <MDBCol size={"12"}>
                   <MDBCardTitle className={"pl-2 pb-2 border-bottom mb-3"}>
-                    Valid Until
+                    <MDBIcon icon={"clock"} className={"mx-2"}/> Valid Until
                   </MDBCardTitle>
                 </MDBCol>
                 <MDBCol size={"12"}>
-                  <MDBBtn className={"z-depth-none"} color={"success"} outline style={{borderRadius: "1rem"}}>
-                    <MDBIcon icon={"clock"}/>
-                  </MDBBtn>
                   <MDBCardText tag={"span"} className={"float-right mt-3"} style={{fontSize: "1.5rem"}}>
                     {expiryDate}
                   </MDBCardText>

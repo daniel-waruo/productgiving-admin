@@ -6,6 +6,7 @@ import {PAYMENT_INFO_MUTATION, PAYMENT_INFO_QUERY} from "./queries";
 import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {NextSeo} from "next-seo";
+import {redirect} from "../app/components";
 
 class PaymentInfoPage extends React.PureComponent {
   state = {
@@ -25,11 +26,11 @@ class PaymentInfoPage extends React.PureComponent {
   }
   completeHandler = ({data: {editPaymentInfo: {paymentInfo, errors}}}) => {
     if (paymentInfo) {
-      alert("operation success")
-      return;
+      return redirect('/member/account');
     }
     this.setState({errors: errors})
   }
+
   changeHandler = (object) => {
     this.setState(object)
   }
@@ -63,7 +64,7 @@ class PaymentInfoPage extends React.PureComponent {
             <h1>Subscription Payment Information</h1>
             <MDBRow center>
               {createAlert}
-              <MDBCol size={"11"} md={"6"}>
+              <MDBCol size={"11"} md={"5"}>
                 <Field
                   submitted={submitted}
                   initial={paymentInfo ? paymentInfo.paybillNumber : ""}
@@ -73,18 +74,14 @@ class PaymentInfoPage extends React.PureComponent {
                   onChange={e => this.changeHandler({paybillNumber: e.target.value})}
                 />
               </MDBCol>
-              <MDBCol size={"11"} md={"6"}>
+              <MDBCol size={"11"} md={"5"}>
                 <Field
                   submitted={submitted}
                   initial={paymentInfo ? paymentInfo.paybillAccount : ""}
                   label={"Business Account Number"}
                   required
                   fieldErrors={errors.paybillAccount}
-                  onChange={
-                    e => this.changeHandler(
-                      {paybillAccount: e.target.value}
-                    )
-                  }
+                  onChange={e => this.changeHandler({paybillAccount: e.target.value})}
                 />
               </MDBCol>
               <MDBCol size={"12"}/>

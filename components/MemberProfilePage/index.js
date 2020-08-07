@@ -6,6 +6,7 @@ import {MEMBER_PROFILE_MUTATION, MEMBER_PROFILE_QUERY} from "./queries";
 import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {NextSeo} from "next-seo";
+import {redirect} from "../app/components";
 
 class MemberProfilePage extends React.PureComponent {
   state = {
@@ -25,7 +26,7 @@ class MemberProfilePage extends React.PureComponent {
   }
   completeHandler = ({data: {editMemberProfile: {memberProfile, errors}}}) => {
     if (memberProfile) {
-      return;
+      return redirect('/member/account');
     }
     this.setState({errors: errors})
   }
