@@ -11,7 +11,7 @@ export const API_URL = dev ? make_url('127.0.0.1:8000') :
 
 export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
 
-export const API_WS_URL = dev ? make_url('127.0.0.1:8000','ws') :
+export const API_WS_URL = dev ? make_url('127.0.0.1:8000', 'ws') :
   make_url('m-subscribe-api.herokuapp.com', 'ws', true);
 
 export const GRAPHQL_WS_ENDPOINT = `${API_WS_URL}/ws/graph_ql`
@@ -30,12 +30,10 @@ export const REGISTER_URL = `${API_URL}/accounts/registration/`;
  ******************************/
 
 export const GOOGLE_CONFIG = {
-  client_id: '934662047815-n7tknpd3tq3g7uc6fmqmmqssj8rudmm3.apps.googleusercontent.com',
+  client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
   scope: 'openid ' +
-    'https://www.googleapis.com/auth/userinfo.profile ' +
-    'https://www.googleapis.com/auth/userinfo.email ' +
-    'https://www.googleapis.com/auth/classroom.courses.readonly ' +
-    'https://www.googleapis.com/auth/classroom.rosters '
+         'https://www.googleapis.com/auth/userinfo.profile ' +
+         'https://www.googleapis.com/auth/userinfo.email '
 };
 
 export const GOOGLE_LOGIN_URL = `${API_URL}/accounts/social/google/`;
