@@ -39,15 +39,17 @@ class SubscriptionPage extends React.PureComponent {
     const {id, name} = subscription;
     const paymentUrl = `/subscriber/subscriptions/${id}/pay`
     const date = new Date(expiryDate);
-    expiryDate = new Intl.DateTimeFormat("en-US", {
-      weekday: "short",
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-      hour12: true,
-      hour: "numeric",
-      minute: "numeric"
-    }).format(date)
+    let expiryDateStr = 'N/A';
+    if (expiryDate)
+      expiryDateStr = new Intl.DateTimeFormat("en-US", {
+        weekday: "short",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+        hour12: true,
+        hour: "numeric",
+        minute: "numeric"
+      }).format(date)
     return (
       <MDBContainer className={"py-3 px-3"}>
         <h1>{name}</h1>
@@ -61,8 +63,8 @@ class SubscriptionPage extends React.PureComponent {
                   </MDBCardTitle>
                 </MDBCol>
                 <MDBCol size={"12"}>
-                  <MDBCardText tag={"span"} className={"float-right mt-3"} style={{fontSize: "1.5rem"}}>
-                    {expiryDate}
+                  <MDBCardText tag={"span"} className={"mt-3"} style={{fontSize: "1.5rem"}}>
+                    {expiryDateStr}
                   </MDBCardText>
                 </MDBCol>
               </MDBRow>

@@ -6,7 +6,7 @@ import PropTypes from "prop-types"
 import {WALLET_QUERY} from "./queries";
 import WithdrawQueued from "./WithdrawQueued";
 
-export class WithdrawForm extends PureComponent {
+export class MobileWithdrawForm extends PureComponent {
   state = {
     amount: "",
     errors: {},
@@ -90,7 +90,7 @@ export class WithdrawForm extends PureComponent {
   }
 }
 
-WithdrawForm.propTypes = {
+MobileWithdrawForm.propTypes = {
   mutation: PropTypes.any.isRequired,
   initial: PropTypes.object,
   balance: PropTypes.number.isRequired,

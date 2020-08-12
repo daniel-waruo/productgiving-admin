@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react'
 
-import {MDBCardTitle, MDBCol, MDBIcon} from "mdbreact";
+import {MDBBtn, MDBCardTitle, MDBCol, MDBIcon} from "mdbreact";
 import Link from "next/link";
 import Jumbotron from "../../Jumbotron";
 
@@ -19,9 +19,11 @@ class HomeLanding extends PureComponent {
             This will allow you t increase customer retention by over 100%.
           </p>
           <Link href={"/member/login"} as={"/member/login"}>
-            <a className="btn btn-default mb-5 rounded-pill">
-              <MDBIcon icon="dollar" className="mr-2"/>
-              Join US Today
+            <a>
+              <MDBBtn color={"white"} className={"rounded-pill mb-5"}>
+                <MDBIcon icon="dollar" className="mr-2"/>
+                Join US Today
+              </MDBBtn>
             </a>
           </Link>
         </MDBCol>

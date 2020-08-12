@@ -1,6 +1,5 @@
 import React from "react";
 import {graphql} from "react-apollo"
-import gql from "graphql-tag"
 import {MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import Loader from "../Loader";
 import AdminCard from "../AdminCard";
@@ -18,11 +17,11 @@ class WalletPage extends React.PureComponent {
   }
 
   render() {
-    const {data: {loading, error, wallet,paymentInfo}} = this.props
+    const {data: {loading, error, wallet, paymentProfile}} = this.props
     if (loading) return <Loader/>
     if (error) return <h1>{error.message}</h1>
 
-    const {paybillNumber,paybillAccount} = paymentInfo;
+    const {paybillNumber, paybillAccount,phone} = paymentProfile;
     return (
       <MDBContainer className={"px-4"}>
         <h1>Wallet</h1>
@@ -44,7 +43,8 @@ class WalletPage extends React.PureComponent {
                       <MDBIcon icon={"cash-register"} className={"mx-4"} size={"1x"}/>
                       WITHDRAW
                     </MDBBtn>
-                    <WithdrawModal paybillAccount={paybillAccount} paybillNumber={paybillNumber} balance={wallet.balance} toggle={this.toggle} isOpen={this.state.isOpen}/>
+                    <WithdrawModal paymentProfile={paymentProfile}
+                                   balance={wallet.balance} toggle={this.toggle} isOpen={this.state.isOpen}/>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>

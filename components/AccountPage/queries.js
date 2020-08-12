@@ -8,8 +8,9 @@ export const USER_QUERY = gql`
       firstName
       lastName
     }
-    paymentInfo{
+    paymentProfile{
       id
+      phone
       paybillNumber
       paybillAccount
     }

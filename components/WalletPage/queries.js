@@ -6,8 +6,9 @@ export const WALLET_QUERY = gql`
       id
       balance
     },
-    paymentInfo{
+    paymentProfile{
       id
+      phone
       paybillNumber
       paybillAccount
     }
@@ -15,8 +16,8 @@ export const WALLET_QUERY = gql`
 `;
 
 export const WITHDRAW_MUTATION = gql`
-  mutation WithdrawMutation($amount:Float!) {
-    withdraw(amount:$amount){
+  mutation WithdrawPaybillMutation($amount:Float!) {
+    withdrawPaybill(amount:$amount){
       transaction{
         id
         state
@@ -29,6 +30,23 @@ export const WITHDRAW_MUTATION = gql`
     }
   }
 `
+export const WITHDRAW_PHONE_MUTATION = gql`
+  mutation WithdrawPhoneMutation($amount:Float!) {
+    withdrawPhone(amount:$amount){
+      transaction{
+        id
+        state
+      }
+      errors{
+        field
+        errors
+      }
+      withdrawQueued
+    }
+  }
+`
+
+
 export const WITHDRAW_SUBSCRIPTION = gql`
   subscription WithdrawSubscription($transactionId:ID!){
     withdrawTransaction(transactionId:$transactionId){

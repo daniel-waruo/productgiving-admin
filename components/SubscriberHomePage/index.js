@@ -11,8 +11,7 @@ class HomePage extends PureComponent {
       data: {
         loading,
         error,
-        user,
-        messages
+        user
       }
     } = this.props
     if (loading)
