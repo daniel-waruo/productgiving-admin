@@ -24,7 +24,7 @@ class MemberLayout extends React.Component {
   };
 
   render() {
-    const {title, secure, data: {user, memberProfile, paymentInfo, loading, error}} = this.props;
+    const {title, secure, data: {user, memberProfile, paymentProfile, loading, error}} = this.props;
 
     if (loading) return <Loader fullScreen={true}/>;
 
@@ -42,10 +42,10 @@ class MemberLayout extends React.Component {
       return redirect('/member/account/member-profile')
     }
 
-    // check if payment info and member profile is set if not
+    // check if payment profile and member profile is set if not
     // redirect to page where the account payment will be set
 
-    if (!paymentInfo && (pathname !== '/member/account/payment') && user && memberProfile ) {
+    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile ) {
       return redirect('/member/account/payment')
     }
 

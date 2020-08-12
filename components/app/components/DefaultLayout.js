@@ -24,7 +24,7 @@ class DefaultLayout extends PureComponent {
     console.log(asPath)
     return (
       <>
-        <MDBNavbar dark fixed={"top"} color={"rgba-black-strong"} expand="md">
+        <MDBNavbar dark fixed={"top"} color={"rgba-teal-strong"} expand="md">
           <MDBNavbarBrand>
             <strong className="white-text">M-Subscribe</strong>
           </MDBNavbarBrand>

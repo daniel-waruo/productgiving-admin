@@ -10,7 +10,7 @@ export const APP_QUERY = gql`
       email
       imageUrl
     }
-    paymentInfo{
+    paymentProfile{
       id
     }
     memberProfile{

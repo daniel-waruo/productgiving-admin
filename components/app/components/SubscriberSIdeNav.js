@@ -6,9 +6,8 @@ import {SideNavItem, SidenavLogout, UserImage} from "./MemberSideNav";
 
 const SideNavChildren = props => {
   const {className, user} = props;
-  const {pathname, query: {courseId}} = useRouter();
+  const {pathname} = useRouter();
 
-  let logoutItem = null;
   if (user)
     return (
       <>
@@ -20,7 +19,7 @@ const SideNavChildren = props => {
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/subscriptions"}>
           <MDBIcon icon={"graduation-cap"} className={"mr-2"}/>
-          Subscriptions
+          My Subscriptions
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/account"}>
           <MDBIcon far icon={"user"} className={"mr-2"}/>

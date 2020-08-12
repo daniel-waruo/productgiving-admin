@@ -30,7 +30,7 @@ export function AccountCard(props) {
 class AccountPage extends React.Component {
 
   render() {
-    const {data: {loading, error, user, paymentInfo,memberProfile}} = this.props;
+    const {data: {loading, error, user, paymentProfile, memberProfile}} = this.props;
 
     if (loading) return <Loader/>;
     // if error  return null
@@ -40,7 +40,7 @@ class AccountPage extends React.Component {
     const {email, firstName, lastName} = user;
 
     const fullName = `${firstName} ${lastName}`;
-    const {paybillNumber, paybillAccount} = paymentInfo;
+    const {paybillNumber, paybillAccount, phone} = paymentProfile;
 
     return (
       <>
@@ -55,16 +55,20 @@ class AccountPage extends React.Component {
               </AccountCard>
             </MDBCol>
             <MDBCol size={"12"} md={"6"} className={"my-3"}>
-              <AccountCard href={"/member/account/payment"} title={"Payment Profile"}
+              <AccountCard href={"/member/account/payment"}
+                           title={"Payment Profile"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2"}>BUSINESS NO. :{paybillNumber}</p>
-                <p className={"px-2"}>ACCOUNT :{paybillAccount}</p>
+                <p className={"px-2"}>PAYMENT PHONE. : {phone}</p>
+                <br/>
+                <p className={"px-2"}>BUSINESS NO. : {paybillNumber ? paybillNumber : 'N/A'}</p>
+                <p className={"px-2"}>ACCOUNT : {paybillAccount ? paybillAccount : 'N/A'}</p>
               </AccountCard>
             </MDBCol>
             <MDBCol size={"12"} md={"6"} className={"my-3"}>
-              <AccountCard href={"/member/account/member-profile"} title={"Member Profile"}
+              <AccountCard href={"/member/account/member-profile"}
+                           title={"Member Profile"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2text-capitalize"}>ORGANISATION :{memberProfile.organisationName}</p>
+                <p className={"px-2text-capitalize"}>ORGANISATION : {memberProfile.organisationName}</p>
               </AccountCard>
             </MDBCol>
           </MDBRow>
