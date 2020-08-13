@@ -3,7 +3,10 @@ import {MDBInput} from "mdbreact";
 
 export const FieldErrors = props => {
   // get data from props
-  const {errors} = props;
+  let {errors, raw = false} = props;
+
+  if (raw)
+    errors = errors.errors
   // create a list of error message components
   const errorList = errors ? errors.map(
     (error, key) => {

@@ -59,9 +59,8 @@ class AccountPage extends React.Component {
                            title={"Payment Profile"}
                            className={"z-depth-half m-2 h-100"}>
                 <p className={"px-2"}>PAYMENT PHONE. : {phone}</p>
-                <br/>
-                <p className={"px-2"}>BUSINESS NO. : {paybillNumber ? paybillNumber : 'N/A'}</p>
-                <p className={"px-2"}>ACCOUNT : {paybillAccount ? paybillAccount : 'N/A'}</p>
+                <p className={"px-2 mb-1"}>BUSINESS NO. : {paybillNumber ? paybillNumber : 'N/A'}</p>
+                <p className={"px-2 py-0"}>ACCOUNT : {paybillAccount ? paybillAccount : 'N/A'}</p>
               </AccountCard>
             </MDBCol>
             <MDBCol size={"12"} md={"6"} className={"my-3"}>
@@ -69,6 +68,13 @@ class AccountPage extends React.Component {
                            title={"Member Profile"}
                            className={"z-depth-half m-2 h-100"}>
                 <p className={"px-2text-capitalize"}>ORGANISATION : {memberProfile.organisationName}</p>
+              </AccountCard>
+            </MDBCol>
+            <MDBCol size={"12"} md={"6"} className={"my-3"}>
+              <AccountCard href={"/member/account/member-plan"}
+                           title={"Membership Plan"}
+                           className={"z-depth-half m-2 h-100"}>
+                <p className={"px-2 text-capitalize"}>PLAN : <span className={"text-bold"}>BASIC</span></p>
               </AccountCard>
             </MDBCol>
           </MDBRow>

@@ -3,7 +3,7 @@ import {MDBCol, MDBModal, MDBModalBody, MDBModalHeader, MDBRow} from "mdbreact";
 import PropTypes from "prop-types";
 import {PaybillWithdrawForm} from "./PaybillWithdrawForm";
 import {MobileWithdrawForm} from "./MobileWithdrawForm";
-import {WITHDRAW_MUTATION} from "./queries";
+import {WITHDRAW_MUTATION,WITHDRAW_PHONE_MUTATION} from "./queries";
 
 class WithdrawModal extends React.PureComponent {
 
@@ -26,7 +26,7 @@ class WithdrawModal extends React.PureComponent {
             }
             <MDBCol>
               <p>Transfer your money to your mobile phone</p>
-              <MobileWithdrawForm balance={balance} mutation={WITHDRAW_MUTATION}/>
+              <MobileWithdrawForm balance={balance} mutation={WITHDRAW_PHONE_MUTATION}/>
             </MDBCol>
           </MDBRow>
         </MDBModalBody>
