@@ -9,3 +9,23 @@ export const COURSES_QUERY = gql`
       description
     }
   }`;
+
+export const REVENUE_DATA_QUERY = gql`
+  query RevenueDataQuery {
+    revenueTransactions {
+      time
+      amount
+    }
+  }
+`
+
+export const MEMBER_HOME_QUERY = gql`
+  query MemberHomeQuery{
+    wallet{
+      id
+      balance
+    }
+    totalEarnings
+    totalSubscribers
+  }
+`

@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
 import {MDBBtn, MDBCol, MDBRow} from 'mdbreact';
-import {Field} from "../FIeld";
+import {Field, FieldErrors} from "../FIeld";
 import {MutationForm} from "../Form";
 import PropTypes from "prop-types"
 import {WALLET_QUERY} from "./queries";
@@ -9,12 +9,12 @@ import WithdrawQueued from "./WithdrawQueued";
 export class MobileWithdrawForm extends PureComponent {
   state = {
     amount: "",
-    errors: {},
+    errors: [],
     submitted: false,
     queued: false,
     transactionId: null
   }
-  completeHandler = ({withdraw: {transaction, errors}}) => {
+  completeHandler = ({withdrawPhone: {transaction, errors}}) => {
     if (transaction) {
       this.setState({
         queued: true,
@@ -23,8 +23,6 @@ export class MobileWithdrawForm extends PureComponent {
       return
     }
     this.setState({errors})
-    console.log(transaction)
-    console.log(errors)
   }
   onChange = object => {
     this.setState(object)
@@ -54,6 +52,7 @@ export class MobileWithdrawForm extends PureComponent {
         <div>
           <MDBRow className={"h-100"}>
             <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
+              <FieldErrors errors={errors.non_field_errors}/>
               <MutationForm data={this.getFormData()}
                             onCompleted={this.completeHandler}
                             mutation={mutation}
