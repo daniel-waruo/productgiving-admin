@@ -1,30 +1,51 @@
 import React from 'react'
-import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
+import {MDBBtn, MDBCol, MDBCollapse, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
 import SubscriptionCard from "./SubscriptionCard";
 import PropTypes from 'prop-types'
 import Link from "next/link";
 
 const PriceListItem = ({price, interval}) => {
   return (
-    <MDBCol size={"6"} className={"bold-text px-1 text-center py-1"}>
-      <p className={"bold-text p-1 rounded z-depth-1 bg-success text-white"}>@Ksh.{price} {interval}</p>
+    <MDBCol size={"12"} className={"bold-text px-1 text-center"}>
+      <p className={"bold-text p-1 rounded-pill z-depth-1 bg-teal"}>@Ksh.{price} {interval}</p>
     </MDBCol>
   )
 }
 
-const PriceList = props => {
-  const {subscription: {dailyPrice, weeklyPrice, monthlyPrice, yearlyPrice}} = props
-  return (
-    <div className={"mt-2"}>
-      <h5>Price</h5>
-      <MDBRow className={"mx-1"}>
-        {dailyPrice ? <PriceListItem price={dailyPrice} interval={"daily"}/> : null}
-        {weeklyPrice ? <PriceListItem price={weeklyPrice} interval={"weekly"}/> : null}
-        {monthlyPrice ? <PriceListItem price={monthlyPrice} interval={"monthly"}/> : null}
-        {yearlyPrice ? <PriceListItem price={yearlyPrice} interval={"yearly"}/> : null}
-      </MDBRow>
-    </div>
-  )
+class PriceList extends React.PureComponent {
+  state = {
+    collapseID: ""
+  }
+  toggle = () => {
+    const {collapseID} = this.state;
+    const {subscription: {id}} = this.props
+    this.setState({collapseID: collapseID ? "" : `${id}-price-list`});
+  }
+
+  render() {
+    const {subscription: {id, dailyPrice, weeklyPrice, monthlyPrice, yearlyPrice}} = this.props;
+    const isOpen = this.state.collapseID === `${id}-price-list`;
+
+    return (
+      <div className={"mt-2"}>
+        <h5 className={"text-center"}>
+          Price
+          <MDBBtn className={"p-0 rounded-circle ml-4"} outline onClick={this.toggle}
+                  style={{height: "2rem", width: "2rem"}}>
+            <MDBIcon className={"p-0"} icon={isOpen ? "minus" : "plus"}/>
+          </MDBBtn>
+        </h5>
+        <MDBCollapse id={`${id}-price-list`} isOpen={isOpen}>
+          <MDBRow className={"mx-1"}>
+            {dailyPrice ? <PriceListItem price={dailyPrice} interval={"daily"}/> : null}
+            {weeklyPrice ? <PriceListItem price={weeklyPrice} interval={"weekly"}/> : null}
+            {monthlyPrice ? <PriceListItem price={monthlyPrice} interval={"monthly"}/> : null}
+            {yearlyPrice ? <PriceListItem price={yearlyPrice} interval={"yearly"}/> : null}
+          </MDBRow>
+        </MDBCollapse>
+      </div>
+    )
+  }
 }
 
 class SubscriptionListSection extends React.PureComponent {

@@ -12,6 +12,7 @@ export const APP_QUERY = gql`
     }
     paymentProfile{
       id
+      phoneVerified
     }
     memberProfile{
       id

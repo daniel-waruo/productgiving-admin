@@ -25,30 +25,25 @@ class MemberLayout extends React.Component {
 
   render() {
     const {title, secure, data: {user, memberProfile, paymentProfile, loading, error}} = this.props;
-
     if (loading) return <Loader fullScreen={true}/>;
-
     if (error) return <h1 className={"text-center"}>{error.message}</h1>;
-
     if (!user && secure) return redirect("/member/login", true);
-
-    console.log(!user, secure)
     const {router: {pathname}} = this.props;
-
     // check if the user has a member profile and if not
     // redirect the user to set it
-
     if (!memberProfile && (pathname !== '/member/account/member-profile') && user) {
       return redirect('/member/account/member-profile')
     }
-
     // check if payment profile and member profile is set if not
     // redirect to page where the account payment will be set
-
-    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile ) {
+    if (!paymentProfile && (pathname !== '/member/account/payment') && user && memberProfile) {
       return redirect('/member/account/payment')
     }
-
+    // make sure payment phone is verified
+    if (paymentProfile && (pathname !== '/member/account/payment/verify-phone') && user && memberProfile) {
+      if (!paymentProfile.phoneVerified)
+        return redirect('/member/account/payment/verify-phone')
+    }
     return (
       <>
         <NextSeo title={title}/>

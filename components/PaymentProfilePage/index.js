@@ -1,85 +1,94 @@
 import React from "react";
-import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
-import {MutationForm} from "../Form";
-import {Field} from "../FIeld";
-import {PAYMENT_PROFILE_MUTATION, PAYMENT_PROFILE_QUERY} from "./queries";
+import {MDBBtn, MDBCard, MDBCardBody, MDBCardTitle, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
+import {PAYMENT_PROFILE_QUERY} from "./queries";
 import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {NextSeo} from "next-seo";
+import PaymentPhoneForm from "./PaymentPhoneForm";
+import ChangePaymentPhoneModal from "./ChangePaymentPhoneModal";
+import Link from "next/link";
 
 class PaymentProfilePage extends React.PureComponent {
   state = {
-    phone: "",
-    errors: [],
-    submitted: false
-  }
-  getData = () => {
-    const {phone} = this.state;
-    let {data: {paymentProfile = {}}} = this.props;
-    if (!paymentProfile) paymentProfile = {};
-    return {
-      phone: paymentProfile ? phone : paymentProfile.phone
+    changePhone: {
+      isOpen: false
     }
   }
-  completeHandler = ({data: {editPaymentProfile: {paymentProfile, errors}}}) => {
-    if (paymentProfile) {
-      alert("successfully created payment profile await for phone verification")
-
-    }
-    this.setState({errors: errors})
-  }
-
-  changeHandler = (object) => {
-    this.setState(object)
+  changePhoneToggle = () => {
+    this.setState({
+      changePhone: {
+        isOpen: !this.state.changePhone.isOpen
+      }
+    })
   }
 
   render() {
-    const {data: {loading, error, paymentProfile = {}}} = this.props
+    const {data: {loading, error, paymentProfile}} = this.props
     if (loading) return <Loader/>
 
     if (error) return <h1>{error.message}</h1>
 
-    const {submitted, errors} = this.state
-    let createAlert = null;
-    if (!paymentProfile)
-      createAlert = (
+    if (!paymentProfile) {
+      return (
         <>
-          <MDBCol size={"10"} md={"6"}>
-            <MDBAnimation type={"bounceIn"}>
-              <MDBAlert color={"danger"} className={"z-depth-1"}>
-                Add Payment Details
-              </MDBAlert>
-            </MDBAnimation>
-          </MDBCol>
-          <MDBCol size={"12"}/>
+          <NextSeo title={"Add Payment Profile"}/>
+          <PaymentPhoneForm paymentProfile={paymentProfile}/>
         </>
       )
+    }
+
+    const {changePhone} = this.state;
     return (
       <>
         <NextSeo title={"Payment Profile"}/>
         <MDBContainer>
-          <MutationForm mutation={PAYMENT_PROFILE_MUTATION} data={this.getData()} onCompleted={this.completeHandler}>
-            <h1>Payment Profile</h1>
-            <MDBRow center>
-              {createAlert}
-              <MDBCol size={"11"} md={"5"}>
-                <Field
-                  submitted={submitted}
-                  initial={paymentProfile ? paymentProfile.phone : ""}
-                  label={"Phone Number"}
-                  required
-                  fieldErrors={errors.phone}
-                  onChange={e => this.changeHandler({phone: e.target.value})}
-                />
-              </MDBCol>
-              <MDBCol size={"12"}/>
-              <MDBCol size={"6"} className={"text-center"}>
-                <MDBBtn type={"submit"} size={"lg"} className={"rounded-pill"}>
-                  SUBMIT
-                </MDBBtn>
-              </MDBCol>
-            </MDBRow>
-          </MutationForm>
+          <h1 className={"mb-5"}>Payment Profile</h1>
+          <MDBRow>
+            <MDBCol size={"12"} md={"6"} className={"mt-3"}>
+              <ChangePaymentPhoneModal toggle={this.changePhoneToggle} isOpen={changePhone.isOpen}
+                                       paymentProfile={paymentProfile}/>
+              <MDBCard style={{borderRadius: "1rem"}} className={"h-100"}>
+                <MDBCardTitle className={"text-dark p-3 border-bottom"}>
+                  Payment Phone
+                </MDBCardTitle>
+                <MDBCardBody className={"text-center"}>
+                  <p>
+                    CURRENT PHONE NUMBER : {paymentProfile.phone}
+                    {
+                      paymentProfile.phoneVerified ?
+                        <MDBBtn size={"sm"} className={"rounded-pill"} color={"success"}>verified</MDBBtn> :
+                        <MDBBtn size={"sm"} className={"rounded-pill"} color={"danger"}>unverified</MDBBtn>
+                    }
+                  </p>
+                  {paymentProfile.phoneVerified ?
+                    null :
+                    <Link href={'/member/account/payment/verify-phone'}>
+                      <a>
+                        <MDBBtn className={"rounded-pill mt-4"}>
+                          Verify Phone Number
+                        </MDBBtn>
+                      </a>
+                    </Link>
+                  }
+                  <MDBBtn className={"rounded-pill mt-4"} onClick={this.changePhoneToggle}>
+                    Change Phone Number
+                  </MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+            <MDBCol size={"12"} md={"6"} className={"mt-3"}>
+              <MDBCard style={{borderRadius: "1rem"}} className={"h-100"}>
+                <MDBCardTitle className={"text-dark p-3 border-bottom"}>Paybill Information</MDBCardTitle>
+                <MDBCardBody className={"text-center"}>
+                  <p>CURRENT PAYBILL NUMBER :N/A</p>
+                  <p>CURRENT PAYBILL ACCOUNT :N/A</p>
+                  <MDBBtn className={"rounded-pill mt-4"}>
+                    SET PAYBILL
+                  </MDBBtn>
+                </MDBCardBody>
+              </MDBCard>
+            </MDBCol>
+          </MDBRow>
         </MDBContainer>
       </>
     )

@@ -103,7 +103,7 @@ export const NavSmall = ({toggleFunction}) => {
 
   return (
     <>
-      <MDBNavbar dark sticky={"top"} className={"mb-2 d-md-block d-lg-none z-depth-0 bg-default"}>
+      <MDBNavbar dark sticky={"top"} className={"d-md-block d-lg-none z-depth-0 bg-default"}>
         <MDBNavbarNav left>
           <MDBNavItem>
             <MDBNavbarToggler onClick={toggleFunction}/>

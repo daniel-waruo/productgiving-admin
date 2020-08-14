@@ -3,17 +3,18 @@ import {USER_EDIT_PROFILE_MUTATION} from "./queries";
 import {graphql} from "react-apollo";
 import Loader from "../Loader";
 import compose from 'lodash.flowright'
-import {MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCol, MDBRow} from "mdbreact";
 import {USER_QUERY} from "../AccountPage/queries";
 import {MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {NextSeo} from "next-seo";
+import {format_errors} from "../../_helpers";
 
 class ProfilePage extends React.PureComponent {
   state = {
     firstName: "",
     lastName: "",
-    errors: [],
+    errors: {},
     submitted: false
   }
   completeHandler = ({editUserProfile: {user, errors}}) => {
@@ -24,7 +25,7 @@ class ProfilePage extends React.PureComponent {
     }
     this.setState({
       submitted: true,
-      errors: errors
+      errors: format_errors(errors)
     })
   }
   getData = () => {
@@ -37,6 +38,9 @@ class ProfilePage extends React.PureComponent {
   }
   changeHandler = object => {
     this.setState(object)
+  };
+  mutationOptions = {
+    refetchQueries: [{query: USER_QUERY}]
   };
 
   render() {
@@ -54,7 +58,9 @@ class ProfilePage extends React.PureComponent {
         <h1 className={"mx-4"}>Your Profile</h1>
         <MDBRow center>
           <MDBCol size={"12"} md={"10"}>
-            <MutationForm mutation={USER_EDIT_PROFILE_MUTATION} data={this.getData()}
+            <MutationForm mutation={USER_EDIT_PROFILE_MUTATION}
+                          data={this.getData()}
+                          mutationOptions={this.mutationOptions}
                           onCompleted={this.completeHandler}>
               <MDBRow center>
                 <MDBCol size={"12"} md={"6"}>

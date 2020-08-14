@@ -3,13 +3,12 @@ import {Line} from "react-chartjs-2";
 import {MDBContainer} from "mdbreact";
 import {REVENUE_DATA_QUERY} from "../queries";
 import {graphql} from "react-apollo";
-import Loader from "../../Loader";
 import compose from "lodash.flowright";
 
 class RevenueChart extends React.Component {
   render() {
     const {data: {loading, error, revenueTransactions}} = this.props;
-    if (loading) return <Loader fullScreen/>
+    if (loading) return null;
 
     if (error) return <h3 className={"my-4 text-danger text-center"}>{error.message}</h3>
 
@@ -41,8 +40,8 @@ class RevenueChart extends React.Component {
       ]
     }
     return (
-      <MDBContainer>
-        <h3 className="mt-5">Income</h3>
+      <MDBContainer fluid className={"pb-4"}>
+        <h2 className={"ml-4 mt-4"}>Income</h2>
         <Line data={dataLine}
               options={{
                 responsive: true,
