@@ -7,12 +7,13 @@ import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {NextSeo} from "next-seo";
 import {redirect} from "../app/components";
+import {format_errors} from "../../_helpers";
 
 class MemberProfilePage extends React.PureComponent {
   state = {
     organisationName: "",
     accountPassword: "",
-    errors: [],
+    errors: {},
     submitted: false
   }
   getData = () => {
@@ -24,15 +25,19 @@ class MemberProfilePage extends React.PureComponent {
       accountPassword: accountPassword ? accountPassword : memberProfile.accountPassword
     }
   }
-  completeHandler = ({data: {editMemberProfile: {memberProfile, errors}}}) => {
+  completeHandler = ({editMemberProfile: {memberProfile, errors}}) => {
     if (memberProfile) {
       return redirect('/member/account');
     }
-    this.setState({errors: errors})
+    this.setState({errors: format_errors(errors), submitted: true})
+    console.log(this.state)
   }
   changeHandler = (object) => {
     this.setState(object)
   }
+  mutationOptions = {
+    refetchQueries: [{query: MEMBER_PROFILE_QUERY}]
+  };
 
   render() {
     const {data: {loading, error, memberProfile = {}}} = this.props
@@ -65,7 +70,10 @@ class MemberProfilePage extends React.PureComponent {
       <>
         <NextSeo title={"Membership Profile"}/>
         <MDBContainer>
-          <MutationForm mutation={MEMBER_PROFILE_MUTATION} data={this.getData()} onCompleted={this.completeHandler}>
+          <MutationForm mutation={MEMBER_PROFILE_MUTATION}
+                        data={this.getData()}
+                        mutationOptions={this.mutationOptions}
+                        onCompleted={this.completeHandler}>
             <h1>Member Profile</h1>
             <MDBRow center>
               {createAlert}
@@ -82,15 +90,16 @@ class MemberProfilePage extends React.PureComponent {
               <MDBCol size={"12"}/>
               {newProfile ?
                 <MDBCol size={"11"} md={"6"}>
-                  <small className={"mb-0 text-info italic-text"}>This is the password you will use to withdraw from your account</small>
+                  <small className={"mb-0 text-info italic-text"}>This is the password you will use to withdraw from
+                    your account</small>
                   <Field
                     type={"password"}
                     submitted={submitted}
                     initial={memberProfile ? memberProfile.accountPassword : ""}
                     label={"Account Password"}
-                    clssaNamw={"mt-0"}
+                    className={"mt-0"}
                     required
-                    fieldErrors={errors.accountPassword}
+                    fieldErrors={errors.account_password}
                     onChange={e => this.changeHandler({accountPassword: e.target.value})}
                   />
                 </MDBCol> : null

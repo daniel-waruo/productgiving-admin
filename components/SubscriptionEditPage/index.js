@@ -9,6 +9,7 @@ import {EDIT_SUBSCRIPTION_MUTATION, SUBSCRIPTION_QUERY} from "./queries";
 import Loader from "../Loader";
 import {SUBSCRIPTIONS_QUERY} from "../SubscriptionsPage/queries";
 import {NextSeo} from "next-seo";
+import {format_errors} from "../../_helpers";
 
 class SubscriptionEditPage extends React.PureComponent {
 
@@ -35,7 +36,7 @@ class SubscriptionEditPage extends React.PureComponent {
       this.setState({
         loading: false,
         submitted: true,
-        errors: errors
+        errors: format_errors(errors)
       })
     }
   };
@@ -127,6 +128,7 @@ class SubscriptionEditPage extends React.PureComponent {
                   <MDBCol size={"12"} md={"6"}>
                     <Field
                       min={"10"}
+                      required={false}
                       type={"number"}
                       submitted={submitted}
                       label={"Daily (24hrs) Charge"}
@@ -138,6 +140,7 @@ class SubscriptionEditPage extends React.PureComponent {
                   <MDBCol size={"12"} md={"6"}>
                     <Field
                       min={"10"}
+                      required={false}
                       type={"number"}
                       submitted={submitted}
                       label={"Weekly (7days) Charge"}
@@ -149,11 +152,11 @@ class SubscriptionEditPage extends React.PureComponent {
                   <MDBCol size={"12"} md={"6"}>
                     <Field
                       min={"10"}
+                      required={false}
                       type={"number"}
                       submitted={submitted}
                       label={"Monthly (30 days) Charge"}
                       initial={subscription ? subscription.monthlyPrice : ""}
-                      required
                       fieldErrors={errors.monthlyPrice}
                       onChange={e => this.changeHandler({monthlyPrice: e.target.value})}
                     />
@@ -161,11 +164,11 @@ class SubscriptionEditPage extends React.PureComponent {
                   <MDBCol size={"12"} md={"6"}>
                     <Field
                       min={"10"}
+                      required={false}
                       type={"number"}
                       submitted={submitted}
                       label={"Yearly (12 months) Charge"}
                       initial={subscription ? subscription.yearlyPrice : ""}
-                      required
                       fieldErrors={errors.yearlyPrice}
                       onChange={e => this.changeHandler({yearlyPrice: e.target.value})}
                     />

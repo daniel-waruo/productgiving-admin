@@ -8,6 +8,7 @@ export const PAYMENT_PROFILE_MUTATION = gql`
         paybillNumber
         paybillAccount
         phone
+        phoneVerified
       }
       errors{
         field
@@ -21,9 +22,10 @@ export const PAYMENT_PROFILE_QUERY = gql`
   query PaymentProfileQuery {
     paymentProfile {
       id
-      phone
       paybillNumber
       paybillAccount
+      phone
+      phoneVerified
     }
   }
 `

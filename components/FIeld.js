@@ -25,12 +25,14 @@ export const FieldErrors = props => {
 export class Field extends React.PureComponent {
   render() {
     /** Component to handle Field Validation **/
-    const {initial, errors, className, submitted, fieldErrors, ...otherProps} = this.props;
+    const {initial, errors, className, submitted, fieldErrors,showSuccess, ...otherProps} = this.props;
 
     let validationClass = "";
 
     if (submitted) {
-      validationClass = (!errors && !fieldErrors) ? "is-valid" : "is-invalid";
+      validationClass = (!errors && !fieldErrors) ? "" : "is-invalid";
+      if (validationClass === "" && showSuccess)
+        validationClass = "is-valid"
     }
 
     return (

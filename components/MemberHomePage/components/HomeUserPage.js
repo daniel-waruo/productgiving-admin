@@ -1,5 +1,5 @@
 import React from 'react'
-import {MDBCol, MDBContainer, MDBRow} from 'mdbreact'
+import {MDBCard, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import Loader from "../../Loader";
 import {APP_QUERY} from "../../app/queries";
@@ -22,16 +22,16 @@ class HomeUserPage extends React.Component {
 
     return (
       <>
-        <MDBContainer className={"py-3 px-3"}>
+        <MDBContainer className={"py-3 px-3"} fluid>
           <MDBContainer fluid>
             <MDBRow center>
-              <MDBCol size={"12"} sm={"6"} lg={"4"} className={"my-2"}>
+              <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
                 <AdminCard
                   title={"Total Subscribers"}
                   iconClass={"fa-user"}
                   value={totalSubscribers}/>
               </MDBCol>
-              <MDBCol size={"12"} sm={"6"} lg={"4"} className={"my-2"}>
+              <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
                 <AdminCard
                   title={"Total Earnings (Ksh)"}
                   iconClass={"fa-money-bill"}
@@ -40,11 +40,15 @@ class HomeUserPage extends React.Component {
               <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
                 <AdminCard
                   title={"Wallet Balance (Ksh)"}
-                  iconClass={"fas fa-money-bag"}
+                  icon={"wallet"}
                   value={wallet.balance.toString()}/>
               </MDBCol>
+              <MDBCol size={"12"}>
+                <MDBCard className={"mb-2 mt-4"} style={{borderRadius:"1rem"}}>
+                  <RevenueChart/>
+                </MDBCard>
+              </MDBCol>
             </MDBRow>
-            <RevenueChart/>
           </MDBContainer>
         </MDBContainer>
       </>

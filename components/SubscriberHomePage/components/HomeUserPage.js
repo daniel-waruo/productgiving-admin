@@ -1,5 +1,5 @@
 import React from 'react'
-import {MDBBtn, MDBCard, MDBCardBody, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
+import {MDBBtn, MDBCard, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow} from 'mdbreact'
 import {graphql} from 'react-apollo';
 import Loader from "../../Loader";
 import {APP_QUERY} from "../../app/queries";
@@ -28,50 +28,56 @@ class HomeUserPage extends React.Component {
       <>
         <MDBContainer className={"py-3 px-3"}>
           <MDBContainer>
-            <h1>Subscriber Home Page</h1>
             <MDBRow className={"mt-5"}>
               <MDBCol size={"12"} md={"4"}>
-                <MDBCard style={{borderRadius: "1rem"}}>
-                  <MDBCardImage zoom src={'/subscriptions.jpg'} waves
-                                style={{
-                                  borderTopRightRadius: "1rem",
-                                  borderTopLeftRadius: "1rem",
-                                  height: "14rem",
-                                  width: "100%"
-                                }} overlay={"teal-light"}/>
-                  <MDBCardBody className={"text-center"}>
-
+                <div className={"view"} style={{borderRadius: "1rem"}}>
+                  <MDBCard style={{borderRadius: "1rem"}}>
+                    <MDBCardImage zoom src={'/subscriptions.jpg'}
+                                  waves
+                                  overlay={"black-light"}
+                                  style={{
+                                    borderTopRightRadius: "1rem",
+                                    borderTopLeftRadius: "1rem",
+                                    height: "14rem",
+                                    width: "100%"
+                                  }}/>
+                  </MDBCard>
+                  <div className={`mask flex-center rgba-teal-light`}>
                     <Link href={'/subscriber/subscriptions'}>
                       <a>
-                        <MDBBtn tag={"span"} className={"rounded-pill"} outline>My Subscriptions</MDBBtn>
+                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"} >
+                          <MDBIcon icon={"file-contract"} className={"mx-1"}/>
+                          My Subscriptions
+                        </MDBBtn>
                       </a>
                     </Link>
-                  </MDBCardBody>
-                </MDBCard>
+                  </div>
+                </div>
               </MDBCol>
               <MDBCol size={"12"} md={"4"}>
-                <MDBCard style={{borderRadius: "1rem"}}>
-                  <MDBCardImage zoom src={'/my-account.jpg'} waves
-                                overlay={"teal-light"}
-                                style={{
-                                  borderTopRightRadius: "1rem",
-                                  borderTopLeftRadius: "1rem",
-                                  height: "14rem",
-                                  width: "100%"
-                                }
-                                }/>
-                  <MDBCardBody className={"text-center"}>
-
+                <div className={"view"} style={{borderRadius: "1rem"}}>
+                  <MDBCard style={{borderRadius: "1rem"}}>
+                    <MDBCardImage zoom src={'/my-account.jpg'}
+                                  waves
+                                  overlay={"black-light"}
+                                  style={{
+                                    borderTopRightRadius: "1rem",
+                                    borderTopLeftRadius: "1rem",
+                                    height: "14rem",
+                                    width: "100%"
+                                  }}/>
+                  </MDBCard>
+                  <div className={`mask flex-center rgba-teal-light`}>
                     <Link href={'/subscriber/account'}>
                       <a>
-                        <MDBBtn tag={"span"} className={"rounded-pill"} outline>
+                        <MDBBtn tag={"span"} color={"white"} className={"rounded-pill"} >
                           <MDBIcon far icon={"user"} className={"mx-1"}/>
                           My Account
                         </MDBBtn>
                       </a>
                     </Link>
-                  </MDBCardBody>
-                </MDBCard>
+                  </div>
+                </div>
               </MDBCol>
             </MDBRow>
           </MDBContainer>

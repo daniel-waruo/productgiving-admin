@@ -37,7 +37,7 @@ class TransactionsPage extends React.PureComponent {
     if (error) return <h1>{error.message}</h1>
 
     const subscriptionList = subscriptionTransactions.map(
-      ({mpesaCode, amount, phone, state, userSubscription: {subscription, email, name}}) => {
+      ({mpesaCode, amount, phone, state, userSubscription: {subscription, email, name}}, key) => {
         let stateButton;
         if (state === "SUCCESS")
           stateButton = <MDBBtn size={"sm"} color={"success"}>Success</MDBBtn>
@@ -46,7 +46,7 @@ class TransactionsPage extends React.PureComponent {
         if (state === "PENDING")
           stateButton = <MDBBtn size={"sm"} color={"warning"}>Pending</MDBBtn>
         return (
-          <tr>
+          <tr key={key}>
             <td>{subscription.name}</td>
             <td>{name}</td>
             <td>{email}</td>

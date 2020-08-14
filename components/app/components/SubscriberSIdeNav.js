@@ -18,8 +18,18 @@ const SideNavChildren = props => {
           Home
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/subscriptions"}>
-          <MDBIcon icon={"graduation-cap"} className={"mr-2"}/>
+          <MDBIcon icon={"file-contract"} className={"mr-2"}/>
           My Subscriptions
+        </SideNavItem>
+        <SideNavItem pathname={pathname} className={className} href={"/subscriber/subscriptions/add"}>
+          <MDBIcon icon={"plus"} className={"mr-2"}/>
+          Add Subscription
+        </SideNavItem>
+        <SideNavItem pathname={pathname}
+                     className={className}
+                     href={`/subscriber/payment-guide`}>
+          <MDBIcon icon={"book-open"} className={"mr-2"}/>
+          Payment Guide
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/subscriber/account"}>
           <MDBIcon far icon={"user"} className={"mr-2"}/>

@@ -2,31 +2,33 @@ import React, {PureComponent} from "react";
 import {NextSeo} from "next-seo"
 import LoginForm from "./components/LoginForm";
 import {withRouter} from "next/router";
+import {MDBContainer} from "mdbreact";
 
 class LoginPage extends PureComponent {
 
   render() {
     const {router: {pathname, query: {next}}} = this.props
     console.log(this.props)
-    let redirectUrl;
+    let redirectUrl, heading;
     if (next) {
       redirectUrl = next
     } else {
-      if (pathname.split("/").find(value => value === "member"))
+      if (pathname.split("/").find(value => value === "member")) {
         redirectUrl = "/member"
-      if (pathname.split("/").find(value => value === "subscriber"))
+        heading = "Member"
+      } else if (pathname.split("/").find(value => value === "subscriber")) {
         redirectUrl = "/subscriber"
+        heading = "Subscriber"
+      }
     }
     return (
-      <>
+      <MDBContainer>
         <NextSeo
-          title={"Login"}
-          description={
-            "Login to your account"
-          }
+          title={`${heading} Login`}
+          description={"Login to your m subscriber account no in one click all you need is a google account"}
         />
         <LoginForm redirectUrl={redirectUrl}/>
-      </>
+      </MDBContainer>
     )
   }
 }
