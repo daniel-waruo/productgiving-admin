@@ -17,3 +17,10 @@ export const PHONE_VERIFICATION_MUTATION = gql`
     } 
   }
 `;
+export const RESEND_VERIFICATION_CODE_MUTATION = gql`
+  mutation {
+   resendPhoneVerification{
+     successStatus
+   } 
+  }
+`;
