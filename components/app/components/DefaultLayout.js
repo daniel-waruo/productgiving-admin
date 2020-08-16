@@ -1,13 +1,31 @@
 import React, {PureComponent} from 'react'
 import {MDBCollapse, MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavbarToggler, MDBNavItem} from "mdbreact";
 import NavLink from "../../NavLink";
-import Jumbotron from "../../Jumbotron";
 import {withRouter} from "next/router";
 
 class DefaultLayout extends PureComponent {
-  state = {
-    isOpen: false
-  };
+  constructor(props) {
+    super(props);
+    const {router: {asPath}} = props;
+    let active;
+    if ('/' === asPath)
+      active = 'home'
+    else if ('/#features' === asPath)
+      active = 'features'
+    else if ('/#pricing' === asPath)
+      active = 'pricing'
+    else if ('/#pricing' === asPath)
+      active = 'pricing'
+    else if ('/#our-team' === asPath)
+      active = 'team'
+    else if ('/#contact-us' === asPath)
+      active = 'contact'
+    this.state = {
+      active: active,
+      isOpen: false
+    }
+  }
+
 
   toggleCollapse = () => {
     this.setState({isOpen: !this.state.isOpen});
@@ -19,9 +37,7 @@ class DefaultLayout extends PureComponent {
   }
 
   render() {
-
-    const {router: {asPath}} = this.props;
-    console.log(asPath)
+    const {active} = this.state
     return (
       <>
         <MDBNavbar dark fixed={"top"} color={"rgba-teal-strong"} expand="md">
@@ -31,32 +47,23 @@ class DefaultLayout extends PureComponent {
           <MDBNavbarToggler onClick={this.toggleCollapse}/>
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
-              <MDBNavItem active={'/' === asPath}>
+              <MDBNavItem active={'home' === active} onClick={() => this.setState({active: 'home'})}>
                 <NavLink href={'/'}>Home</NavLink>
               </MDBNavItem>
-              <MDBNavItem active={"/#features" === asPath}>
+              <MDBNavItem active={"features" === active} onClick={() => this.setState({active: 'features'})}>
                 <NavLink href={"/#features"}>Features</NavLink>
               </MDBNavItem>
-              <MDBNavItem active={"/#features" === asPath}>
-                <NavLink href={"/#features"}>Pricing</NavLink>
+              <MDBNavItem active={"pricing" === active} onClick={() => this.setState({active: 'pricing'})}>
+                <NavLink href={"/#pricing"}>Pricing</NavLink>
               </MDBNavItem>
-              <MDBNavItem active={"/#about-us" === asPath}>
-                <NavLink href="/#about-us">About Us</NavLink>
-              </MDBNavItem>
-              <MDBNavItem active={"/#our-team" === asPath}>
-                <NavLink href="/#our-team">Our Team</NavLink>
-              </MDBNavItem>
-              <MDBNavItem active={"/#contact-team" === asPath}>
-                <NavLink href="/#contact-team">Contact Us</NavLink>
+              <MDBNavItem active={"contact" === active} onClick={() => this.setState({active: 'contact'})}>
+                <NavLink href="/#contact-us">Contact Us</NavLink>
               </MDBNavItem>
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
         <div onClick={this.closeCollapse}>
-          <Jumbotron>
-            <div style={{height:"67px"}}/>
-            {this.props.children}
-          </Jumbotron>
+          {this.props.children}
         </div>
       </>
     )
