@@ -1,5 +1,5 @@
 import React from "react";
-import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import Loader from "../Loader";
 import {NextSeo} from "next-seo";
 import {redirect} from "../app/components";
@@ -8,9 +8,12 @@ import VerifyPaymentPhoneForm from "./VerifyPaymentPhoneForm";
 import Link from "next/link";
 import {PAYMENT_PROFILE_QUERY} from "../PaymentProfilePage/queries";
 import ChangePaymentPhoneModal from "../PaymentProfilePage/ChangePaymentPhoneModal";
+import compose from 'lodash.flowright';
+import {RESEND_VERIFICATION_CODE_MUTATION} from "./queries";
 
 class PaymentPhoneVerificationPage extends React.PureComponent {
   state = {
+    alerts: [],
     changePhone: {
       isOpen: false
     }
@@ -21,6 +24,17 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
         isOpen: !this.state.changePhone.isOpen
       }
     })
+  }
+  resendVerificationCode = () => {
+    this.props.resendPhoneVerification().then(
+      ({data: {resendPhoneVerification: {successStatus}}}) => {
+        if (successStatus) {
+          this.setState({
+            alerts: ["Verification code sent check your phone"]
+          })
+        }
+      }
+    )
   }
 
   render() {
@@ -63,10 +77,24 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
                   and enter the code below
                 </MDBAlert>
               </MDBAnimation>
+              {this.state.alerts.map(
+                (message, key) => (
+                  <MDBAnimation type={"bounceIn"}>
+                    <MDBAlert key={key} color={"success"} className={"z-depth-1"}>
+                      {message}
+                    </MDBAlert>
+                  </MDBAnimation>
+                )
+              )}
             </MDBCol>
             <MDBCol size={"12"}/>
             <MDBCol size={"12"} md={"7"} lg={"5"} className={"text-center"}>
               <VerifyPaymentPhoneForm paymentProfile={paymentProfile}/>
+              <MDBBtn outline className={"rounded-pill mt-4"} onClick={this.resendVerificationCode}>
+                Resend Code
+                <MDBIcon icon={"redo-alt"} className={"mx-2"}/>
+              </MDBBtn>
+              <MDBCol size={"12"}/>
               <MDBBtn className={"rounded-pill mt-4"} onClick={this.changePhoneToggle}>
                 Change Phone Number
               </MDBBtn>
@@ -78,4 +106,7 @@ class PaymentPhoneVerificationPage extends React.PureComponent {
   }
 }
 
-export default graphql(PAYMENT_PROFILE_QUERY)(PaymentPhoneVerificationPage);
+export default compose(
+  graphql(PAYMENT_PROFILE_QUERY),
+  graphql(RESEND_VERIFICATION_CODE_MUTATION, {name: 'resendPhoneVerification'})
+)(PaymentPhoneVerificationPage);
