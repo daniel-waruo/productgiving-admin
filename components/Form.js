@@ -79,7 +79,7 @@ export class FormAlerts extends React.PureComponent {
     return this.props.errors ? this.props.errors.map(
       (error, key) => (
         <MDBAnimation type={"fadeInDown"} key={key} className={"mt-2 mx-2"}>
-          <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4 rounded-pill"}>{error}</MDBAlert>
+          <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
         </MDBAnimation>
       )
     ) : null;

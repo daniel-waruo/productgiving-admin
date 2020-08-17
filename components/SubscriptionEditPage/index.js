@@ -32,6 +32,7 @@ class SubscriptionEditPage extends React.PureComponent {
         `/member/subscriptions/[subscriptionId]`,
         `/member/subscriptions/${subscription.id}`)
     } else {
+      window.scrollTo(0,0)
       // set loading state to false
       this.setState({
         loading: false,
@@ -85,7 +86,7 @@ class SubscriptionEditPage extends React.PureComponent {
                             onCompleted={this.completeHandler}
                             mutation={EDIT_SUBSCRIPTION_MUTATION}
                             mutationOptions={this.mutationOptions}>
-                <FormAlerts errors={errors.non_field_errors}/>
+                <FormAlerts errors={errors.nonFieldErrors}/>
                 <MDBRow center>
                   <MDBCol size={"12"} md={"6"}>
                     <Field

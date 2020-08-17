@@ -63,7 +63,7 @@ const SideNavChildren = props => {
           Home
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/member/subscriptions"}>
-          <MDBIcon icon={"graduation-cap"} className={"mr-2"}/>
+          <MDBIcon icon={"file-contract"} className={"mr-2"}/>
           Subscriptions
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/member/wallet"}>
