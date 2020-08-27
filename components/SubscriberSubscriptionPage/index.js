@@ -19,7 +19,7 @@ const CountDownBox = ({value, label}) => {
     </MDBCol>
   )
 }
-const ExpiryCountDown = ({date}) => {
+export const ExpiryCountDown = ({date}) => {
   if (!date) return <h3>N/A</h3>
   const renderer = ({days, hours, minutes, seconds, completed}) => {
     if (completed) {

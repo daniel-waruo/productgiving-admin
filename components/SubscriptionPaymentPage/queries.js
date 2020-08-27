@@ -4,6 +4,7 @@ export const SUBSCRIPTION_QUERY = gql`
   query PaymentSubscription($subscriptionId:ID!) {
     subscription(subscriptionId:$subscriptionId){
       id
+      name
       user{
         id
         email
@@ -39,10 +40,19 @@ export const SUBSCRIPTION_PAYMENT_MUTATION = gql`
 
 export const PAYMENT_STATUS_SUBSCRIPTION = gql`
   subscription PaymentSubscription($transactionId:ID!){
-    transaction(transactionId:$transactionId){
+    subscriptionTransaction(transactionId:$transactionId){
       id
       successStatus
       reasonFailed
+      amount
+      userSubscription{
+        id
+        expiryDate
+        subscription{
+          id
+          name
+        }
+      }
     }
   }
 `

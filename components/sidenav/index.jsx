@@ -14,7 +14,7 @@ class SideNav extends React.Component {
     return (
       <>
         <div className={`sidenav  ${classes}  ${className}`}>
-        <span className="closebtn px-4 z-depth-1 cyan darken-4 text-white rounded-circle"
+        <span className="closebtn px-4 z-depth-1 white text-dark rounded-circle"
               style={{cursor: 'pointer'}}
               onClick={this.props.toggleFunction}>&times;</span>
           {this.props.children}

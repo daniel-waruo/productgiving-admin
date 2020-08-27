@@ -69,6 +69,7 @@ class SubscriptionPaymentPage extends React.PureComponent {
 
     return (
       <MDBContainer fluid>
+        <h1 className="text-center text-capitalize">Pay for {subscription.name}</h1>
         <MDBRow>
           <MDBCol size={"12"}>
             <StepContainer>

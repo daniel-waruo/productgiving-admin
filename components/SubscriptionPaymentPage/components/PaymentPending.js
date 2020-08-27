@@ -4,11 +4,12 @@ import Loader from "../../Loader";
 import PropTypes from "prop-types";
 import {graphql} from 'react-apollo'
 import {PAYMENT_STATUS_SUBSCRIPTION} from "../queries";
+import Link from "next/link";
 
 class PaymentPending extends React.PureComponent {
 
   render() {
-    const {data: {error, loading, transaction}} = this.props
+    const {data: {error, loading, subscriptionTransaction}} = this.props
     if (error) {
       return <h1>{error.message}</h1>
     }
@@ -20,7 +21,7 @@ class PaymentPending extends React.PureComponent {
         </MDBContainer>
       )
     }
-    const {successStatus, reasonFailed} = transaction;
+    const {successStatus, reasonFailed} = subscriptionTransaction;
 
     if (!successStatus)
       return (
@@ -38,14 +39,26 @@ class PaymentPending extends React.PureComponent {
           </MDBCol>
         </MDBRow>
       )
+    const {userSubscription: {subscription}} = subscriptionTransaction
     return (
       <MDBRow center>
         <MDBCol size={"10"} md={"6"}>
-          <MDBAnimation type={"bounce"}>
-            <MDBAlert color={"success"} className={"z-depth-1 rounded"}>
-              Subscription paid successfully
+          <MDBAnimation type={"bounceIn"}>
+            <MDBAlert color={"success"} className={"z-depth-1 rounded text-center"}>
+              Received Payment of
+              <span className={"font-weight-bold"}> Ksh.{subscriptionTransaction.amount} </span> for
+              <span className="font-weight-bold text-uppercase"> {subscription.name}</span> subscription
             </MDBAlert>
           </MDBAnimation>
+        </MDBCol>
+        <MDBCol size={"12"}/>
+        <MDBCol size={"10"} md={"6"} className={"text-center"}>
+          <Link href={"/subscriber/subscriptions/[subscriptionId]"}
+                as={`/subscriber/subscriptions/${subscription.id}`}>
+            <a>
+              <MDBBtn className={"rounded-pill"}>View Subscription</MDBBtn>
+            </a>
+          </Link>
         </MDBCol>
       </MDBRow>
     )

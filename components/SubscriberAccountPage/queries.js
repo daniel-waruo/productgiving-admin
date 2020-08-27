@@ -8,14 +8,5 @@ export const USER_QUERY = gql`
       firstName
       lastName
     }
-    paymentInfo{
-      id
-      paybillNumber
-      paybillAccount
-    }
-    messages @client {
-      type
-      text
-    }
   }
 `;

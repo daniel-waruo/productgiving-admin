@@ -18,10 +18,11 @@ class WalletPage extends React.PureComponent {
 
   render() {
     const {data: {loading, error, wallet, paymentProfile}} = this.props
+    console.log(this.props)
     if (loading) return <Loader/>
     if (error) return <h1>{error.message}</h1>
 
-    const {paybillNumber, paybillAccount,phone} = paymentProfile;
+    const {paybillNumber, paybillAccount, phone} = paymentProfile;
     return (
       <MDBContainer className={"px-4"}>
         <h1>Wallet</h1>

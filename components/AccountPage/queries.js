@@ -18,5 +18,10 @@ export const USER_QUERY = gql`
       id
       organisationName
     }
+    plan{
+      name
+      monthlyPrice
+      commission
+    }
   }
 `;

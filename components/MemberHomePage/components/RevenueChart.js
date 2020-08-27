@@ -19,7 +19,7 @@ class RevenueChart extends React.Component {
         {
           label: "Income Generated",
           fill: true,
-          lineTension: 0.3,
+          //lineTension: 0.5,
           backgroundColor: "rgba(0,150,136,0.3)",
           borderColor: "rgba(0,150,136,1)",
           borderCapStyle: "butt",
@@ -49,11 +49,9 @@ class RevenueChart extends React.Component {
                   xAxes: [{
                     type: 'time',
                     time: {
-                      displayFormats: {
-                        minute: 'h:mm a',
-                        day: 'MMM D'
-                      }
-                    }
+                      unit:'day'
+                    },
+                    distribution:"series"
                   }]
                 }
               }}/>

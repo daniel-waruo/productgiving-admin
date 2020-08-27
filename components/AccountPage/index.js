@@ -30,7 +30,7 @@ export function AccountCard(props) {
 class AccountPage extends React.Component {
 
   render() {
-    const {data: {loading, error, user, paymentProfile, memberProfile}} = this.props;
+    const {data: {loading, error, user, paymentProfile, memberProfile, plan}} = this.props;
 
     if (loading) return <Loader/>;
     // if error  return null
@@ -40,8 +40,10 @@ class AccountPage extends React.Component {
     const {email, firstName, lastName} = user;
 
     const fullName = `${firstName} ${lastName}`;
+
     const {paybillNumber, paybillAccount, phone} = paymentProfile;
 
+    const {name, monthlyPrice, commission} = plan;
     return (
       <>
         <NextSeo title={"Account"}/>
@@ -74,7 +76,8 @@ class AccountPage extends React.Component {
               <AccountCard href={"/member/account/member-plan"}
                            title={"Membership Plan"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2 text-capitalize"}>PLAN : <span className={"text-bold"}>BASIC</span></p>
+                <p className={"px-2 text-capitalize"}>PLAN : <span className="text-bold text-uppercase">{name}</span>
+                </p>
               </AccountCard>
             </MDBCol>
           </MDBRow>

@@ -54,6 +54,10 @@ export const WITHDRAW_SUBSCRIPTION = gql`
       successStatus
       reasonFailed
       amount
+      wallet{
+        id
+        balance
+      }
     }
   }
 `
