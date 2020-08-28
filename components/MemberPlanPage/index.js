@@ -1,10 +1,11 @@
 import React from "react";
-import {MDBCard, MDBCardHeader, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBBtn, MDBCard, MDBCardHeader, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import {graphql} from "react-apollo";
 import {MEMBER_PLAN_QUERY} from "./queries";
 import Loader from "../Loader";
 import {MemberPlanPricing} from "./components";
 import {ExpiryCountDown} from "../SubscriberSubscriptionPage";
+import Link from "next/link";
 
 class MemberPlanPage extends React.Component {
   render() {
@@ -25,13 +26,29 @@ class MemberPlanPage extends React.Component {
                 <ExpiryCountDown date={plan.expiryDate}/>
               </MDBContainer>
             </div>
-            <div className={"py-3"}>
-              <h4> Ksh.{plan.monthlyPrice}/mo</h4>
-              <p>{Math.round(plan.commission * 100)}% commission</p>
-            </div>
+            <MDBRow center className={"my-3"}>
+              <MDBCol size={"8"} md={"4"}>
+                <div className={"mt-3"}>
+                  <h4> Ksh.{plan.monthlyPrice}/mo</h4>
+                  <p>{Math.round(plan.commission * 100)}% commission</p>
+                </div>
+              </MDBCol>
+              <MDBCol size={"12"} md={"8"} className={"text-center"}>
+                {plan.name !== "free" ?
+
+                  <Link href={"/member/account/member-plan/[plan]"} as={`/member/account/member-plan/${plan.name}`}>
+                    <a>
+                      <MDBBtn className={"rounded-pill mt-3"} size={"lg"} outline>
+                        <MDBIcon icon={"money-bill"} className={"mr-3"}/>
+                        PAY FOR PLAN
+                      </MDBBtn>
+                    </a>
+                  </Link> : null}
+              </MDBCol>
+            </MDBRow>
           </MDBCard>
         </MDBContainer>
-        <h1 className="my-5 mx-2">Switch Plan To</h1>
+        <h1 className="my-5 mx-2">Other Plans</h1>
         <MDBContainer>
           <MDBRow className="text-center">
             {plan.name === "free" ? null :
@@ -56,4 +73,8 @@ class MemberPlanPage extends React.Component {
   }
 }
 
-export default graphql(MEMBER_PLAN_QUERY)(MemberPlanPage)
+export default graphql(MEMBER_PLAN_QUERY,{
+  options:{
+    fetchPolicy:"network-only"
+  }
+})(MemberPlanPage)

@@ -4,11 +4,9 @@ import Link from "next/link";
 
 export const MemberPlanPricingItem = ({children}) => (
   <>
-    <hr/>
-    <li>
+    <li className={"border-0"}>
       {children}
     </li>
-    <hr/>
   </>
 )
 
@@ -16,7 +14,7 @@ export const MemberPlanPricing = ({plan, price, commission, children}) => {
   return (
     <MDBCard style={{borderRadius: "1rem"}} className={"h-100"}>
       <MDBCardHeader color={"white lighten-4"} style={{borderTopLeftRadius: "1rem", borderTopRightRadius: "1rem",}}>
-        <h3 className="text-capitalize text-dark font-weight-normal">{plan}</h3>
+        <h3 className="text-capitalize text-dark">{plan}</h3>
       </MDBCardHeader>
       <MDBCardBody>
         <h3 className="card-title pricing-card-title mb-4">
@@ -24,10 +22,10 @@ export const MemberPlanPricing = ({plan, price, commission, children}) => {
         </h3>
         <ol className="list-unstyled mb-4">
           <MemberPlanPricingItem>
-            {Math.round(commission * 100)}% commission
-            <MDBIcon icon={"check"} className="green-text ml-1"/>
+            <h6>{Math.round(commission * 100)}% commission
+              <MDBIcon icon={"check"} className="green-text ml-1"/>
+            </h6>
           </MemberPlanPricingItem>
-          {children}
         </ol>
         <Link href={"/member/account/member-plan/[plan]"} as={`/member/account/member-plan/${plan}`}>
           <a>

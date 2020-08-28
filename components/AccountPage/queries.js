@@ -7,6 +7,13 @@ export const USER_QUERY = gql`
       email
       firstName
       lastName
+      plan {
+        name
+        monthlyPrice
+        commission
+        expiryDate
+        isActive
+      }
     }
     paymentProfile{
       id

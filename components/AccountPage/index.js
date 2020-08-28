@@ -30,14 +30,14 @@ export function AccountCard(props) {
 class AccountPage extends React.Component {
 
   render() {
-    const {data: {loading, error, user, paymentProfile, memberProfile, plan}} = this.props;
+    const {data: {loading, error, user, paymentProfile, memberProfile}} = this.props;
 
     if (loading) return <Loader/>;
     // if error  return null
     //TODO:create an error page
     if (error) return <h1>{error.message}</h1>;
 
-    const {email, firstName, lastName} = user;
+    const {email, firstName, lastName, plan} = user;
 
     const fullName = `${firstName} ${lastName}`;
 

@@ -2,9 +2,10 @@ import React from "react";
 import {MDBBtn, MDBCol, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import compose from 'lodash.flowright'
 import {graphql} from "react-apollo";
-import PaymentPending from "../SubscriptionPaymentPage/components/PaymentPending";
-import Loader from "../Loader";
-import {PLAN_PAYMENT_MUTATION} from "./queries";
+import PaymentPending from "./PaymentPending";
+import Loader from "../../Loader";
+import {PLAN_PAYMENT_MUTATION} from "../queries";
+import {MEMBER_PLAN_QUERY} from "../../MemberPlanPage/queries";
 
 class PlanPaymentForm extends React.PureComponent {
   constructor(props) {
@@ -29,8 +30,11 @@ class PlanPaymentForm extends React.PureComponent {
         variables: {
           phone: this.state.phone,
           monthsNo: this.state.monthsNo,
-          plan:plan
-        }
+          plan: plan
+        },
+        refetchQueries: [
+          {query: MEMBER_PLAN_QUERY}
+        ]
       }
     ).then(
       ({data: {payMemberPlan: {errors, transaction, paymentPending}}}) => {
@@ -54,7 +58,7 @@ class PlanPaymentForm extends React.PureComponent {
     if (pattern.test(value)) {
       const finishedPhone = "+254" + value.slice(1);
       this.setState({phone: finishedPhone, errors: []});
-      return ;
+      return;
     }
     this.setState({phone: value, errors: ['Invalid Phone Number']});
   }

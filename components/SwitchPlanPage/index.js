@@ -1,13 +1,13 @@
 import React from "react";
 import {withRouter} from "next/router";
-import SwitchToFree from "./SwitchToFree";
+import SwitchToFree from "./components/SwitchToFree";
 import compose from "lodash.flowright"
 import {graphql} from "react-apollo";
 import {MEMBER_PLAN_QUERY} from "../MemberPlanPage/queries";
 import Loader from "../Loader";
 import {redirect} from "../app/components";
-import PayForSubscription from "./PayForSubscription";
-import SwitchBetweenPlan from "./SwitchBetweenPlan";
+import PayForSubscription from "./components/PayForSubscription";
+import SwitchBetweenPlan from "./components/SwitchBetweenPlan";
 
 
 const plans = ["free", "basic", "premium"];
@@ -39,7 +39,7 @@ const SwitchPlanPage = props => {
   if (user.plan.name === "free") return <PayForSubscription plan={plan} price={pricing[plan].monthlyPrice}/>;
 
   // if the plan is being switched between the basic and premium package
-  return <SwitchBetweenPlan/>;
+  return <SwitchBetweenPlan plan={plan} user={user} pricing={pricing}/>;
 }
 export default withRouter(
   compose(
