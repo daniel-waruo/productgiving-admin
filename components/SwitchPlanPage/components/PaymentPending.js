@@ -3,13 +3,13 @@ import {MDBAlert, MDBAnimation, MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow} f
 import Loader from "../../Loader";
 import PropTypes from "prop-types";
 import {graphql} from 'react-apollo'
-import {PAYMENT_STATUS_SUBSCRIPTION} from "../queries";
+import {PLAN_PAYMENT_STATUS_SUBSCRIPTION} from "../queries";
 import Link from "next/link";
 
 class PaymentPending extends React.PureComponent {
 
   render() {
-    const {data: {error, loading, subscriptionTransaction}} = this.props
+    const {data: {error, loading, memberPlanTransaction}} = this.props
     if (error) {
       return <h1>{error.message}</h1>
     }
@@ -21,7 +21,7 @@ class PaymentPending extends React.PureComponent {
         </MDBContainer>
       )
     }
-    const {successStatus, reasonFailed} = subscriptionTransaction;
+    const {successStatus, reasonFailed} = memberPlanTransaction;
 
     if (!successStatus)
       return (
@@ -39,24 +39,22 @@ class PaymentPending extends React.PureComponent {
           </MDBCol>
         </MDBRow>
       )
-    const {userSubscription: {subscription}} = subscriptionTransaction
     return (
       <MDBRow center>
         <MDBCol size={"10"} md={"6"}>
           <MDBAnimation type={"bounceIn"}>
             <MDBAlert color={"success"} className={"z-depth-1 rounded text-center"}>
               Received Payment of
-              <span className={"font-weight-bold"}> Ksh.{subscriptionTransaction.amount} </span> for
-              <span className="font-weight-bold text-uppercase"> {subscription.name}</span> subscription
+              <span className={"font-weight-bold"}> Ksh.{memberPlanTransaction.amount} </span> for
+              <span className="font-weight-bold text-uppercase"> {memberPlanTransaction.plan}</span> plan
             </MDBAlert>
           </MDBAnimation>
         </MDBCol>
         <MDBCol size={"12"}/>
         <MDBCol size={"10"} md={"6"} className={"text-center"}>
-          <Link href={"/subscriber/subscriptions/[subscriptionId]"}
-                as={`/subscriber/subscriptions/${subscription.id}`}>
+          <Link href={"/member/account/member-plan"}>
             <a>
-              <MDBBtn className={"rounded-pill"}>View Subscription</MDBBtn>
+              <MDBBtn className={"rounded-pill"}>View Plan</MDBBtn>
             </a>
           </Link>
         </MDBCol>
@@ -71,7 +69,7 @@ PaymentPending.propTypes = {
   nextStep: PropTypes.func
 }
 export default graphql(
-  PAYMENT_STATUS_SUBSCRIPTION, {
+  PLAN_PAYMENT_STATUS_SUBSCRIPTION, {
     options: (props) => {
       const {transactionId} = props;
       return {

@@ -63,7 +63,7 @@ const SideNavChildren = props => {
           Home
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/member/subscriptions"}>
-          <MDBIcon icon={"graduation-cap"} className={"mr-2"}/>
+          <MDBIcon icon={"file-contract"} className={"mr-2"}/>
           Subscriptions
         </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/member/wallet"}>
@@ -103,7 +103,7 @@ export const NavSmall = ({toggleFunction}) => {
 
   return (
     <>
-      <MDBNavbar dark sticky={"top"} className={"d-md-block d-lg-none z-depth-0 bg-default"}>
+      <MDBNavbar light sticky={"top"} className={"d-md-block d-lg-none z-depth-1 bg-white"}>
         <MDBNavbarNav left>
           <MDBNavItem>
             <MDBNavbarToggler onClick={toggleFunction}/>

@@ -37,11 +37,13 @@ class AccountPage extends React.Component {
     //TODO:create an error page
     if (error) return <h1>{error.message}</h1>;
 
-    const {email, firstName, lastName} = user;
+    const {email, firstName, lastName, plan} = user;
 
     const fullName = `${firstName} ${lastName}`;
+
     const {paybillNumber, paybillAccount, phone} = paymentProfile;
 
+    const {name, monthlyPrice, commission} = plan;
     return (
       <>
         <NextSeo title={"Account"}/>
@@ -74,7 +76,8 @@ class AccountPage extends React.Component {
               <AccountCard href={"/member/account/member-plan"}
                            title={"Membership Plan"}
                            className={"z-depth-half m-2 h-100"}>
-                <p className={"px-2 text-capitalize"}>PLAN : <span className={"text-bold"}>BASIC</span></p>
+                <p className={"px-2 text-capitalize"}>PLAN : <span className="text-bold text-uppercase">{name}</span>
+                </p>
               </AccountCard>
             </MDBCol>
           </MDBRow>

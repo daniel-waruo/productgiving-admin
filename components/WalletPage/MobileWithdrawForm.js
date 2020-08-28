@@ -9,7 +9,7 @@ import WithdrawQueued from "./WithdrawQueued";
 export class MobileWithdrawForm extends PureComponent {
   state = {
     amount: "",
-    errors: [],
+    errors: {},
     submitted: false,
     queued: false,
     transactionId: null
@@ -52,7 +52,7 @@ export class MobileWithdrawForm extends PureComponent {
         <div>
           <MDBRow className={"h-100"}>
             <MDBCol size={"12"} md="9" className={"rounded m-auto"}>
-              <FieldErrors errors={errors.non_field_errors}/>
+              <FieldErrors errors={errors.nonFieldErrors}/>
               <MutationForm data={this.getFormData()}
                             onCompleted={this.completeHandler}
                             mutation={mutation}
@@ -92,5 +92,6 @@ export class MobileWithdrawForm extends PureComponent {
 MobileWithdrawForm.propTypes = {
   mutation: PropTypes.any.isRequired,
   initial: PropTypes.object,
+  paymentProfile: PropTypes.object.isRequired,
   balance: PropTypes.number.isRequired,
 };

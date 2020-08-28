@@ -4,8 +4,18 @@ import Loader from "../Loader";
 import PropTypes from "prop-types";
 import {graphql} from 'react-apollo'
 import {WITHDRAW_SUBSCRIPTION} from "./queries";
+import compose from "lodash.flowright";
 
 class WithdrawQueued extends React.PureComponent {
+  /*
+  componentDidMount() {
+    const {transactionId} = this.props;
+    this.props.data.subscribeToMore({
+      document: WITHDRAW_SUBSCRIPTION,
+      variables: {transactionId}
+    })
+  }*/
+
   render() {
     const {data: {error, loading, withdrawTransaction}} = this.props
     if (error) {
@@ -39,7 +49,7 @@ class WithdrawQueued extends React.PureComponent {
         <MDBCol size={"10"} md={"6"}>
           <MDBAnimation type={"bounce"}>
             <MDBAlert color={"success"} className={"z-depth-1 rounded"}>
-              You have successfully withdrawn {amount} shilling to your account
+              You have successfully withdrawn {amount} shillings
             </MDBAlert>
           </MDBAnimation>
         </MDBCol>
@@ -52,13 +62,15 @@ class WithdrawQueued extends React.PureComponent {
 WithdrawQueued.propTypes = {
   transactionId: PropTypes.string.isRequired,
 }
-export default graphql(
-  WITHDRAW_SUBSCRIPTION, {
-    options: (props) => {
-      const {transactionId} = props;
-      return {
-        variables: {transactionId}
+export default compose(
+  graphql(
+    WITHDRAW_SUBSCRIPTION, {
+      options: (props) => {
+        const {transactionId} = props;
+        return {
+          variables: {transactionId}
+        }
       }
-    }
-  }
+    }),
+  //graphql(WALLET_QUERY)
 )(WithdrawQueued);
