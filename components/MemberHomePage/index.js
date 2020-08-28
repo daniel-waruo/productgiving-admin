@@ -5,6 +5,7 @@ import {APP_QUERY} from "../app/queries";
 import Loader from '../Loader'
 import HomeUserPage from "./components/HomeUserPage";
 import {NextSeo} from "next-seo";
+import compose from "lodash.flowright";
 
 class HomePage extends PureComponent {
   render() {
@@ -32,6 +33,6 @@ class HomePage extends PureComponent {
   }
 }
 
-export default graphql(
-  APP_QUERY
+export default compose(
+  graphql(APP_QUERY),
 )(HomePage);

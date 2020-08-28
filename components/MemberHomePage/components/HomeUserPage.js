@@ -1,18 +1,21 @@
 import React from 'react'
-import {MDBCard, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
-import {graphql} from 'react-apollo';
+import {MDBAnimation, MDBCard, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import Loader from "../../Loader";
-import {APP_QUERY} from "../../app/queries";
 import AdminCard from "../../AdminCard";
 import RevenueChart from "./RevenueChart";
 import compose from "lodash.flowright";
+import {graphql} from "react-apollo";
+import {APP_QUERY} from "../../app/queries";
 import {MEMBER_HOME_QUERY} from "../queries";
 
 class HomeUserPage extends React.Component {
 
   render() {
     const {
-      data: {loading, error, wallet, totalEarnings, totalSubscribers}
+      data: {
+        loading, error, wallet, totalEarnings,
+        totalSubscribers, revenueTransactions
+      }
     } = this.props;
     if (loading) return <Loader/>;
 
@@ -21,42 +24,49 @@ class HomeUserPage extends React.Component {
     if (error) return null;
 
     return (
-      <>
+      <MDBAnimation type={"fadeIn"}>
         <MDBContainer className={"py-3 px-3"} fluid>
           <MDBContainer fluid>
             <MDBRow center>
               <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
-                <AdminCard
-                  title={"Total Subscribers"}
-                  iconClass={"fa-user"}
-                  value={totalSubscribers}/>
+                <MDBAnimation type={"fadeInDown"} delay={"2"} className={"h-100"}>
+                  <AdminCard
+                    title={"Total Subscribers"}
+                    iconClass={"fa-user"}
+                    value={totalSubscribers}/>
+                </MDBAnimation>
               </MDBCol>
               <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
-                <AdminCard
-                  title={"Total Earnings (Ksh)"}
-                  iconClass={"fa-money-bill"}
-                  value={totalEarnings.toString()}/>
+                <MDBAnimation type={"fadeInUp"} className={"h-100"}>
+                  <AdminCard
+                    title={"Total Earnings (Ksh)"}
+                    iconClass={"fa-money-bill"}
+                    value={totalEarnings.toString()}/>
+                </MDBAnimation>
               </MDBCol>
               <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
-                <AdminCard
-                  title={"Wallet Balance (Ksh)"}
-                  icon={"wallet"}
-                  value={wallet.balance.toString()}/>
+                <MDBAnimation type={"fadeInRight"} className={"h-100"}>
+                  <AdminCard
+                    title={"Wallet Balance (Ksh)"}
+                    icon={"wallet"}
+                    value={wallet.balance.toString()}/>
+                </MDBAnimation>
               </MDBCol>
               <MDBCol size={"12"}>
-                <MDBCard className={"mb-2 mt-4"} style={{borderRadius:"1rem"}}>
-                  <RevenueChart/>
+                <MDBCard className={"mb-2 mt-4"} style={{borderRadius: "1rem"}}>
+                  <RevenueChart transactions={revenueTransactions}/>
                 </MDBCard>
               </MDBCol>
             </MDBRow>
           </MDBContainer>
         </MDBContainer>
-      </>
+      </MDBAnimation>
     )
   };
 }
 
 export default compose(
+  //graphql(REVENUE_DATA_QUERY),
   graphql(APP_QUERY),
-  graphql(MEMBER_HOME_QUERY)
+  graphql(MEMBER_HOME_QUERY),
 )(HomeUserPage);

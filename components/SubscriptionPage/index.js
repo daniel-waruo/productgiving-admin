@@ -70,7 +70,9 @@ class SubscriptionPage extends React.PureComponent {
                     <h2>Payment Link</h2>
                     <MDBContainer>
                       <p>
-                        <a href={paymentLink} target="_blank">{paymentLink}</a>
+                        <a href={paymentLink} target="_blank" style={{wordBreak: "break-word"}}>
+                          {paymentLink}
+                        </a>
                         <MDBBtn size={"sm"} className={"px-2 ml-3"} onClick={() => this.copyPaymentLink(paymentLink)}>
                           <MDBIcon icon={"copy"} className={"mx-2 rounded"}/>
                           {this.state.copied ? "COPIED" : "COPY"}

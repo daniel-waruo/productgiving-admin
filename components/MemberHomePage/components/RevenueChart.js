@@ -1,20 +1,19 @@
 import React from "react";
 import {Line} from "react-chartjs-2";
-import {MDBContainer} from "mdbreact";
-import {REVENUE_DATA_QUERY} from "../queries";
-import {graphql} from "react-apollo";
-import compose from "lodash.flowright";
+import {MDBAnimation, MDBContainer} from "mdbreact";
 
 class RevenueChart extends React.Component {
+  isMobileDevice = () => {
+    return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
+  }
+
   render() {
-    const {data: {loading, error, revenueTransactions}} = this.props;
-    if (loading) return null;
+    const {transactions} = this.props;
 
-    if (error) return <h3 className={"my-4 text-danger text-center"}>{error.message}</h3>
+    if (!transactions) return null
 
-    if (!revenueTransactions) return null
     const dataLine = {
-      labels: revenueTransactions.map(({time}) => new Date(time)),
+      labels: transactions.map(({time}) => new Date(time)),
       datasets: [
         {
           label: "Income Generated",
@@ -35,31 +34,32 @@ class RevenueChart extends React.Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: revenueTransactions.map(({time, amount}) => ({x: new Date(time), y: amount})),
+          data: transactions.map(({time, amount}) => ({x: new Date(time), y: amount})),
         }
       ]
     }
     return (
-      <MDBContainer fluid className={"pb-4"}>
-        <h2 className={"ml-4 mt-4"}>Income</h2>
-        <Line data={dataLine}
-              options={{
-                responsive: true,
-                scales: {
-                  xAxes: [{
-                    type: 'time',
-                    time: {
-                      unit:'day'
-                    },
-                    distribution:"series"
-                  }]
-                }
-              }}/>
-      </MDBContainer>
+      <MDBAnimation type={"fadeIn"}>
+        <MDBContainer fluid className={"pb-4"}>
+          <h2 className={"ml-4 mt-4"}>Income</h2>
+          <Line data={dataLine}
+                options={{
+                  responsive: true,
+                  scales: {
+                    xAxes: [{
+                      type: 'time',
+                      time: {
+                        unit: 'day'
+                      },
+                      distribution: "series",
+                      display: !this.isMobileDevice()
+                    }]
+                  }
+                }}/>
+        </MDBContainer>
+      </MDBAnimation>
     );
   }
 }
 
-export default compose(
-  graphql(REVENUE_DATA_QUERY)
-)(RevenueChart);
+export default RevenueChart
