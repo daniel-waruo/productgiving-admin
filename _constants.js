@@ -9,11 +9,11 @@ const API_DOMAIN = process.env.NEXT_PUBLIC_API_DOMAIN
 
 export const API_URL = dev ? make_url('127.0.0.1:8000') : make_url(API_DOMAIN, 'http', true);
 
-export const GRAPHQL_ENDPOINT = `${API_URL}/graph_ql`;
+export const GRAPHQL_ENDPOINT = `${API_URL}/graph-ql`;
 
 export const API_WS_URL = dev ? make_url('127.0.0.1:8000', 'ws') : make_url(API_DOMAIN, 'ws', true);
 
-export const GRAPHQL_WS_ENDPOINT = `${API_WS_URL}/ws/graph_ql`
+export const GRAPHQL_WS_ENDPOINT = `${API_WS_URL}/ws/graph-ql`
 
 /******************************
  * SOCIAL LOGIN CLIENT IDS

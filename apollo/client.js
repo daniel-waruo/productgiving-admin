@@ -62,7 +62,7 @@ export default function createApolloClient(initialState, ctx) {
     batchHttpLink = errorLink.concat(timeoutLink.concat(batchHttpLink));
     console.info("batch link sent to the server");
   }
-
+  /*
   const wsLink = process.browser ? new WebSocketLink(
     { // if you instantiate in the server, the error will be thrown
       uri: GRAPHQL_WS_ENDPOINT,
@@ -77,9 +77,11 @@ export default function createApolloClient(initialState, ctx) {
       const {kind, operation} = getMainDefinition(query);
       return kind === 'OperationDefinition' && operation === 'subscription';
     },
-    wsLink,
+    // wsLink,
     batchHttpLink,
   ) : batchHttpLink;
+  */
+
   //const wsLink = new WebSocketLink(client);
 
   //batchHttpLink = batchHttpLink.concat(wsLink)

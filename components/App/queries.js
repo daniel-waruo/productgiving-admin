@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
-export const USER_QUERY = gql`
-  query AccountQuery {
+
+export const APP_QUERY = gql`
+  query App {
     user{
       id
-      email
       firstName
       lastName
+      email
     }
   }
 `;

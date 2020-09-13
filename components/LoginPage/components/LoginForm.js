@@ -1,100 +1,95 @@
 import React from 'react';
-import {MDBAlert, MDBAnimation, MDBCol, MDBRow} from 'mdbreact';
-import {GoogleLogin} from "react-google-login";
-import {GOOGLE_CONFIG} from "../../../_constants";
-import {APP_QUERY} from "../../app/queries";
+import {MDBBtn, MDBCol, MDBIcon, MDBRow} from 'mdbreact';
+import {APP_QUERY} from "../../App/queries";
+import {FormAlerts, MutationForm} from "../../Form";
+import {Field} from "../../FIeld";
+import Link from "next/link";
+import {LOGIN_MUTATION} from "../queries";
 import {login} from "../../../apollo/resolvers/auth";
-import compose from "lodash.flowright";
-import {graphql} from "react-apollo";
-import {loginWithGoogle} from "../queries";
-import GoogleButton from "./GoogleButton";
-
-const {client_id} = GOOGLE_CONFIG;
+import {format_errors} from "../../../_helpers";
 
 
 class LoginForm extends React.PureComponent {
   state = {
-    errors: [],
-    loading: false
-  }
-
-  onFail = (data) => {
-    const errors = [
-      'User did not Login.Please try again'
+    email: '',
+    password: '',
+    errors: {}
+  };
+  mutationOptions = {
+    refetchQueries: [
+      {query: APP_QUERY}
     ]
-    this.setState({errors})
-  }
-  responseGoogle = ({accessToken,profileObj:{imageUrl}}) => {
-    this.setState({loading: true});
-    this.props.loginWithGoogle({
-      refetchQueries: [
-        {query: APP_QUERY},
-      ],
-      variables: {
-        accessToken,
-        imageUrl
-      }
-    }).then(
-      ({data: {loginWithGoogle}}) => {
-        // check if the token is in the data
-        // call the login function
-        if (loginWithGoogle.token) {
-          // operation successful
-          login(loginWithGoogle.token, this.props.redirectUrl)
-        } else {
-          this.setState({errors: loginWithGoogle.errors, loading: false})
-        }
-      }
-    );
+  };
+
+  onChange = object => {
+    this.setState(object)
+  };
+
+  getFormData = () => {
+    /**
+     * Function get form data from state
+     */
+    const {errors, ...formData} = this.state;
+    return formData;
+  };
+
+  completeHandler = ({login: {token, errors}}) => {
+    if (!token) {
+      this.setState({errors: format_errors(errors)});
+      console.log(format_errors(errors))
+    } else
+      login(token, this.props.redirectUrl)
   };
 
   render() {
-    const nonFieldErrors = this.state.errors ?
-      this.state.errors.map(
-        (error, key) => {
-
-          if (error.field === undefined) return (
-            <MDBAnimation type={"fadeInDown"}>
-              <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>{error}</MDBAlert>
-            </MDBAnimation>
-          )
-          return error.errors.map(
-            (error, key) => (
-              <MDBAnimation type={"fadeInDown"}>
-                <MDBAlert key={key} color={"danger"} className={"text-center z-depth-1 mb-4"}>
-                  {error}
-                </MDBAlert>
-              </MDBAnimation>
-            )
-          )
-        }
-      ) : null;
-    const {loading} = this.state;
-    let {scope} = this.props;
-
-    if (!scope) {
-      scope = GOOGLE_CONFIG.scope
-    }
+    const {nonFieldErrors} = this.state.errors;
     return (
       <>
-        <MDBRow className={"h-100"} center>
-          <MDBCol size={"11"}
-                  md="6" lg={"5"} className={"m-auto z-depth-1 bg-white"}
-                  style={{borderRadius: "1rem"}}>
-            {nonFieldErrors}
-            <div className={"p-3"}>
-              <h2 className={"text-center text-dark"}>Sign In With Google</h2>
-              <div className={"d-flex justify-content-right mt-4 mb-5 ml-3"}>
-                <GoogleLogin
-                  clientId={client_id}
-                  scope={scope}
-                  render={renderProps => <GoogleButton {...renderProps} loading={loading}/>}
-                  buttonText="Login"
-                  onSuccess={this.responseGoogle}
-                  onFailure={this.onFail}
+        <MDBRow center>
+          <MDBCol size={"11"} md={"9"} lg={"6"} className={"rounded p-2"}>
+            <MutationForm data={this.getFormData()}
+                          onCompleted={this.completeHandler}
+                          mutation={LOGIN_MUTATION}
+                          mutationOptions={this.mutationOptions}>
+
+              <FormAlerts errors={nonFieldErrors}/>
+              <div className={"p-3"}>
+                <h1 className="text-center mb-4">Login</h1>
+                <Field
+                  label="Type your email"
+                  icon="envelope"
+                  type={"email"}
+                  onChange={e => {
+                    this.onChange({email: e.target.value})
+                  }}
                 />
+                <Field
+                  label="Type your password"
+                  icon="lock"
+                  type="password"
+                  onChange={e => {
+                    this.onChange({password: e.target.value})
+                  }}
+                />
+
+                <p>Forgotten your password ?
+                  <Link href={"/password/reset"}>
+                    <a href={"/"} className={"green-text py-2"}> click
+                      here</a>
+                  </Link>
+                </p>
+                <div className="text-center">
+                  <MDBBtn
+                    color={"light-green"}
+                    type="submit"
+                    style={{fontSize: "1rem"}}
+                    className={"rounded-pill w-100"}>
+                    Login
+                    <MDBIcon className={"mx-4"} icon="sign-in-alt"/>
+                  </MDBBtn>
+                </div>
               </div>
-            </div>
+            </MutationForm>
           </MDBCol>
         </MDBRow>
       </>
@@ -102,6 +97,4 @@ class LoginForm extends React.PureComponent {
   }
 }
 
-export default compose(
-  graphql(loginWithGoogle, {name: 'loginWithGoogle'})
-)(LoginForm)
+export default LoginForm

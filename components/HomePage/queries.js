@@ -1,12 +1,17 @@
 import gql from 'graphql-tag';
 
 
-export const COURSES_QUERY = gql`
-  query Courses {
-    courses{
+export const MEMBER_HOME_QUERY = gql`
+  query MemberHomeQuery{
+    wallet{
       id
-      name
-      description
+      balance
     }
-  }`;
-
+    totalEarnings
+    totalSubscribers
+    revenueTransactions {
+      time
+      amount
+    }
+  }
+`

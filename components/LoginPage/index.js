@@ -7,25 +7,13 @@ import {MDBContainer} from "mdbreact";
 class LoginPage extends PureComponent {
 
   render() {
-    const {router: {pathname, query: {next}}} = this.props
-    console.log(this.props)
-    let redirectUrl, heading;
-    if (next) {
-      redirectUrl = next
-    } else {
-      if (pathname.split("/").find(value => value === "member")) {
-        redirectUrl = "/member"
-        heading = "Member"
-      } else if (pathname.split("/").find(value => value === "subscriber")) {
-        redirectUrl = "/subscriber"
-        heading = "Subscriber"
-      }
-    }
+    const {router: {query: {next}}} = this.props
+    let redirectUrl = "/";
+    if (next) redirectUrl = next;
     return (
       <MDBContainer>
         <NextSeo
-          title={`${heading} Login`}
-          description={"Login to your m subscriber account no in one click all you need is a google account"}
+          title={`Login`}
         />
         <LoginForm redirectUrl={redirectUrl}/>
       </MDBContainer>
