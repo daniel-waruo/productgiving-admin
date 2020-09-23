@@ -1,5 +1,10 @@
 // TOD0:switch API_URL between development and production
 let dev = process.env.NODE_ENV !== 'production';
+
+/******************************
+ * API ENDPOINT CONFIGURATIONS
+ ******************************/
+
 export const make_url = (domain, protocol = 'http', secure = false) => {
   let reqProtocol = protocol;
   if (secure) reqProtocol = reqProtocol + 's'
@@ -25,3 +30,9 @@ export const GOOGLE_CONFIG = {
     'https://www.googleapis.com/auth/userinfo.profile ' +
     'https://www.googleapis.com/auth/userinfo.email '
 };
+
+
+/******************************
+ * UPLOAD-CARE PUBLIC KEY
+ ******************************/
+export const UPLOAD_CARE_PUBLIC_KEY = '1146311d2102a543104f';
