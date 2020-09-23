@@ -22,10 +22,10 @@ class ProductAddPage extends React.Component {
     refetchQueries: [{query: PRODUCTS_QUERY}]
   };
 
-  completeHandler = ({createAdminUser: {user, errors}}) => {
-    if (user) {
+  completeHandler = ({createProduct: {product, errors}}) => {
+    if (product) {
       // redirect to subscription page
-      this.props.router.push(`/users`)
+      this.props.router.push(`/products`)
       return
     }
     this.setState({
