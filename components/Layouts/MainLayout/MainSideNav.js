@@ -83,13 +83,13 @@ const SideNavChildren = props => {
     );
   return (
     <>
-      <SideNavItem pathname={pathname} className={className} href={"/"}>
-        <MDBIcon icon={"home"} className={"mr-2"}/>
-        Home
-      </SideNavItem>
       <SideNavItem pathname={pathname} className={className} href={"/login"}>
         <MDBIcon fas icon={"sign-in-alt"} className={"mr-2"}/>
         Login
+      </SideNavItem>
+      <SideNavItem pathname={pathname} className={className} href={"/account/password/reset"}>
+        <MDBIcon fas icon={"lock-open"} className={"mr-2"}/>
+        Reset Password
       </SideNavItem>
     </>
   )

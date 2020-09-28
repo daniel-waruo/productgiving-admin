@@ -50,6 +50,12 @@ class AccountPage extends React.Component {
                 <p className={"px-2"}>{email}</p>
               </AccountCard>
             </MDBCol>
+            <MDBCol size={"12"} md={"6"} className={"my-3"}>
+              <AccountCard href={"/account/password/change"}
+                           title={"Change Password"}
+                           className={"z-depth-half m-2 h-100 "}>
+              </AccountCard>
+            </MDBCol>
           </MDBRow>
         </MDBContainer>
       </>

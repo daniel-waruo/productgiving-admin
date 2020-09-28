@@ -36,7 +36,6 @@ class LoginForm extends React.PureComponent {
   completeHandler = ({login: {token, errors}}) => {
     if (!token) {
       this.setState({errors: format_errors(errors)});
-      console.log(format_errors(errors))
     } else
       login(token, this.props.redirectUrl)
   };
@@ -73,9 +72,8 @@ class LoginForm extends React.PureComponent {
                 />
 
                 <p>Forgotten your password ?
-                  <Link href={"/password/reset"}>
-                    <a href={"/"} className={"green-text py-2"}> click
-                      here</a>
+                  <Link href={"/account/password/reset"}>
+                    <a className={"green-text py-2"}> click here</a>
                   </Link>
                 </p>
                 <div className="text-center">
