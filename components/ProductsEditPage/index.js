@@ -12,6 +12,7 @@ import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
 import Loader from "../Loader";
 import {withRouter} from "next/router";
+import {redirect} from "../App";
 
 class ProductEditPage extends React.Component {
   state = {
@@ -30,7 +31,7 @@ class ProductEditPage extends React.Component {
   completeHandler = ({editProduct: {product, errors}}) => {
     if (product) {
       // redirect to subscription page
-      this.props.router.push(`/products`)
+      redirect(`/products`)
       return
     }
     this.setState({

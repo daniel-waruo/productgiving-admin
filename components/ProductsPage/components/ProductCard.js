@@ -10,9 +10,9 @@ export default class ProductCard extends React.PureComponent {
       <div className={"view"} style={{borderRadius: "1rem"}}>
         <MDBCard style={{borderRadius: "1rem"}}>
           <MDBCardImage zoom
-                        src={product.images[0]}
+                        src={`${product.images[0]}-/resize/200x200/`}
                         waves
-                        overlay={"black-light"}
+                        overlay={"light-green-light"}
                         style={{
                           borderTopRightRadius: "1rem",
                           borderTopLeftRadius: "1rem",
@@ -20,7 +20,7 @@ export default class ProductCard extends React.PureComponent {
                           width: "100%"
                         }}/>
         </MDBCard>
-        <div className={`mask rgba-green-light`}>
+        <div className={`mask`}>
           <h4 className={"text-white text-center pt-3"}>{product.name}</h4>
           <div className={"flex-center"}>
             <Link href={'/products/[id]'} as={`/products/${product.id}`}>

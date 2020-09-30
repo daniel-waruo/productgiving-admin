@@ -7,6 +7,7 @@ import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
 import {PRODUCTS_QUERY} from "../ProductsPage/queries";
 import {ImagesSection} from "./components";
+import {redirect} from "../App";
 
 class ProductAddPage extends React.Component {
   state = {
@@ -25,7 +26,7 @@ class ProductAddPage extends React.Component {
   completeHandler = ({createProduct: {product, errors}}) => {
     if (product) {
       // redirect to subscription page
-      this.props.router.push(`/products`)
+      redirect(`/products`)
       return
     }
     this.setState({

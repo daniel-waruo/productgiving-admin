@@ -1,5 +1,5 @@
 {
-  "name": "voting-frontend",
+  "name": "edonation-dashboard",
   "version": "1.0.0",
   "scripts": {
     "dev": "next",

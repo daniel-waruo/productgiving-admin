@@ -35,4 +35,4 @@ export const GOOGLE_CONFIG = {
 /******************************
  * UPLOAD-CARE PUBLIC KEY
  ******************************/
-export const UPLOAD_CARE_PUBLIC_KEY = '1146311d2102a543104f';
+export const UPLOAD_CARE_PUBLIC_KEY = '19f17eaad8120699f64f';
