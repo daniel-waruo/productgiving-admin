@@ -5,21 +5,21 @@ import {MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
-import {PRODUCTS_QUERY} from "../ProductsPage/queries";
-import {ImagesSection} from "./components";
+import {PRODUCTS_QUERY} from "../ProductListPage/queries";
 import {PRODUCT_QUERY} from "../ProductDetailPage/queries";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
 import Loader from "../Loader";
 import {withRouter} from "next/router";
 import {redirect} from "../App";
+import UploadPhotoField from "../UploadPhotoField";
 
 class ProductEditPage extends React.Component {
   state = {
     name: "",
     description: "",
     price: "",
-    images: [],
+    image: "",
     errors: {},
     submitted: false
   }
@@ -41,28 +41,20 @@ class ProductEditPage extends React.Component {
   }
 
   getData = () => {
-    const {name, description, price, images} = this.state
+    const {name, description, price, image} = this.state
     const {data: {product}} = this.props;
     return {
       id: product.id,
       name: name ? name : product.name,
       description: description ? description : product.description,
       price: price ? price : product.price,
-      images: images ? images : product.images
+      image: image ? image : product.image
     }
   }
 
   changeHandler = object => {
     this.setState(object);
   };
-
-  setImages = url => {
-    let {images} = this.state;
-    if (!images.find(imageUrl => url === imageUrl)) {
-      images.push(url);
-      this.setState({images: images});
-    }
-  }
 
   render() {
     const {data: {loading, error, product}} = this.props;
@@ -121,9 +113,10 @@ class ProductEditPage extends React.Component {
                     }
                   />
                 </MDBCol>
-                <MDBCol size={"12"}>
-                  <h4>Images</h4>
-                  <ImagesSection setImage={this.setImages} images={product.images}/>
+                <MDBCol size={"12"} md={"6"}>
+                  <UploadPhotoField label={"Product Image"} hide={false}
+                                    initial={product.image}
+                                    onChange={image => this.setState({image: image})}/>
                 </MDBCol>
                 <MDBCol size={"12"} className={"text-center my-4"}>
                   <MDBBtn color={"light-green"} type={"submit"} className={"rounded-pill"}>SUBMIT</MDBBtn>

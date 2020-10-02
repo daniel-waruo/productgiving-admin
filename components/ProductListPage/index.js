@@ -2,12 +2,12 @@ import React from 'react'
 import {graphql} from 'react-apollo';
 import Loader from "../Loader";
 import {PRODUCTS_QUERY} from "./queries";
-import ProductListSection from "./components/ProductListSection";
 import compose from "lodash.flowright"
 import {NextSeo} from "next-seo";
 import {withRouter} from "next/router";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import Link from "next/link";
+import ProductTableSection from "./components/ProductTableSection";
 
 class ProductsPage extends React.PureComponent {
 
@@ -40,7 +40,7 @@ class ProductsPage extends React.PureComponent {
     if (error) return <h1>{error.message}</h1>;
 
     return (
-      <MDBContainer className={"pt-4"}>
+      <MDBContainer className={"pt-4 mt-4"}>
         <NextSeo title={"Products"}/>
         <h1>Search Products</h1>
         <MDBContainer>
@@ -68,7 +68,7 @@ class ProductsPage extends React.PureComponent {
             </MDBRow>
           </form>
         </MDBContainer>
-        <ProductListSection products={products}/>
+        <ProductTableSection products={products}/>
       </MDBContainer>
     )
   };

@@ -10,7 +10,7 @@ export default class ProductCard extends React.PureComponent {
       <div className={"view"} style={{borderRadius: "1rem"}}>
         <MDBCard style={{borderRadius: "1rem"}}>
           <MDBCardImage zoom
-                        src={`${product.images[0]}-/resize/200x200/`}
+                        src={`${product.image}-/resize/200x200/`}
                         waves
                         overlay={"light-green-light"}
                         style={{
@@ -26,8 +26,8 @@ export default class ProductCard extends React.PureComponent {
             <Link href={'/products/[id]'} as={`/products/${product.id}`}>
               <a>
                 <MDBBtn tag={"span"} color={"light-green"} className={"rounded-pill"}>
-                  <MDBIcon icon={"eye"} className={"mx-1"}/>
-                  View
+                  <MDBIcon icon={"edit"} className={"mx-1"}/>
+                  Edit
                 </MDBBtn>
               </a>
             </Link>

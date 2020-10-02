@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  MDBBtn,
   MDBCardImage,
   MDBCol,
   MDBIcon,
@@ -115,6 +116,25 @@ export const NavSmall = ({toggleFunction}) => {
   )
 };
 
+
+export const NavCrumbs = ({toggleFunction}) => {
+  const router = useRouter()
+  return (
+    <>
+      <MDBNavbar light sticky={"top"} className={"d-none d-md-block border z-depth-0 bg-white"}>
+        <MDBNavbarNav left>
+          <MDBNavItem>
+            <MDBBtn className={"border-0 z-depth-0"}
+                    onClick={() => router.back()}
+                    color={"white"}>
+              <MDBIcon icon={"arrow-left"} size={"2x"} className={"hover-fade "}/>
+            </MDBBtn>
+          </MDBNavItem>
+        </MDBNavbarNav>
+      </MDBNavbar>
+    </>
+  )
+};
 export const NavLogo = props => {
   return (
     <>

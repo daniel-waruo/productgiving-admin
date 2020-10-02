@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {MDBAnimation, MDBCol, MDBRow} from "mdbreact";
 import {NextSeo} from "next-seo"
-import SideNav, {NavSmall} from "./MainSideNav";
+import SideNav, {NavCrumbs, NavSmall} from "./MainSideNav";
 import Loader from "../../Loader";
 import {graphql} from "react-apollo";
 import {withRouter} from "next/router";
@@ -17,6 +17,7 @@ class MainLayout extends React.Component {
       isOpen: props.isOpen || false
     }
   }
+
   toggleFunction = () => {
     const {isOpen} = this.state;
     return this.setState({isOpen: !isOpen})
@@ -38,8 +39,13 @@ class MainLayout extends React.Component {
                        isOpen={this.state.isOpen}
                        user={user}
                        className={"z-depth-1 px-0"}/>
-              <MDBCol size={"12"} lg={"9"} className={"my-auto px-0"}>
-                {this.props.children}
+              <MDBCol size={"12"} lg={"9"} className={"my-0 px-0"}>
+                <NavCrumbs toggleFunction={this.toggleFunction}/>
+                <MDBRow className={"f-100-no-mobile"} center>
+                  <MDBCol size={"12"}  className={"my-auto px-0"}>
+                    {this.props.children}
+                  </MDBCol>
+                </MDBRow>
               </MDBCol>
             </MDBRow>
           </div>

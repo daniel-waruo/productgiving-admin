@@ -5,16 +5,16 @@ import {MutationForm} from "../Form";
 import {Field} from "../FIeld";
 import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
-import {PRODUCTS_QUERY} from "../ProductsPage/queries";
-import {ImagesSection} from "./components";
+import {PRODUCTS_QUERY} from "../ProductListPage/queries";
 import {redirect} from "../App";
+import UploadPhotoField from "../UploadPhotoField";
 
 class ProductAddPage extends React.Component {
   state = {
     name: "",
     description: "",
     price: "",
-    images: [],
+    image: "",
     errors: {},
     submitted: false
   }
@@ -36,13 +36,8 @@ class ProductAddPage extends React.Component {
   }
 
   getData = () => {
-    const {name, description, price, images} = this.state
-    return {
-      name: name,
-      description: description,
-      price: price,
-      images: images
-    }
+    const {name, description, price, image} = this.state
+    return {name, description, price, image}
   }
 
   changeHandler = object => {
@@ -107,9 +102,9 @@ class ProductAddPage extends React.Component {
                     }
                   />
                 </MDBCol>
-                <MDBCol size={"12"}>
-                  <h4>Images</h4>
-                  <ImagesSection setImage={this.setImages} images={this.state.images}/>
+                <MDBCol size={"12"} md={"8"}>
+                  <UploadPhotoField label={"Product Image"} hide={false}
+                                    onChange={image => this.setState({image: image})}/>
                 </MDBCol>
                 <MDBCol size={"12"} className={"text-center my-4"}>
                   <MDBBtn color={"light-green"} type={"submit"} className={"rounded-pill"}>SUBMIT</MDBBtn>

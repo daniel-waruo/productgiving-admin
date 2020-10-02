@@ -23,9 +23,9 @@ export default class UploadPhotoField extends React.PureComponent {
 
   render() {
     // get data from props
-    const {initial} = this.props;
+    const {initial,hide} = this.props;
     return (
-      <div className={"d-none"}>
+      <div className={hide ? "d-none" : ""}>
         <Widget
           value={initial}
           onChange={this.changeHandler}

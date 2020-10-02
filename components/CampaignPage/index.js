@@ -25,6 +25,7 @@ class CampaignPage extends React.PureComponent {
       }
     })
   }
+
   render() {
     const {data: {loading, error, campaign}} = this.props;
     if (loading) return <Loader/>;
@@ -41,31 +42,33 @@ class CampaignPage extends React.PureComponent {
               className={"img-fluid"}/>
           </MDBCol>
           <MDBCol size={"12"} md={"5"}>
-            <MDBContainer>
+            <MDBContainer >
               <h1 className={"text-capitalize"}>{campaign.name}</h1>
               <p className={"text-muted"}>
                 {campaign.description}
               </p>
               <h2>Owner Information</h2>
-              <p>NAME - {`${owner.firstName} ${owner.lastName}`}</p>
-              <p>EMAIL - {owner.email}</p>
-              <p>PHONE-NUMBER - {owner.phone ? owner.phone : "N/A"}</p>
-              {
-                campaign.isApproved ?
-                  <MDBBtn
-                    onClick={() => this.disapproveCampaign()}
-                    color={"danger"}
-                    className={"rounded-pill text-center"}>
-                    DIS-APPROVE CAMPAIGN
-                  </MDBBtn>
-                  :
-                  <MDBBtn
-                    onClick={() => this.approveCampaign()}
-                    color={"light-green"}
-                    className={"rounded-pill text-center"}>
-                    APPROVE CAMPAIGN
-                  </MDBBtn>
-              }
+              <p className={"pr-4"}>NAME - {`${owner.firstName} ${owner.lastName}`}</p>
+              <p className={"pr-4"}>EMAIL - {owner.email}</p>
+              <p className={"pr-4"}>PHONE-NUMBER - {owner.phone ? owner.phone : "N/A"}</p>
+              <div className={"text-center"}>
+                {
+                  campaign.isApproved ?
+                    <MDBBtn
+                      onClick={() => this.disapproveCampaign()}
+                      color={"danger"}
+                      className={"rounded-pill text-center"}>
+                      DIS-APPROVE CAMPAIGN
+                    </MDBBtn>
+                    :
+                    <MDBBtn
+                      onClick={() => this.approveCampaign()}
+                      color={"light-green"}
+                      className={"rounded-pill text-center"}>
+                      APPROVE CAMPAIGN
+                    </MDBBtn>
+                }
+              </div>
             </MDBContainer>
           </MDBCol>
         </MDBRow>
