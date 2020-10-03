@@ -102,7 +102,7 @@ class ProductAddPage extends React.Component {
                     }
                   />
                 </MDBCol>
-                <MDBCol size={"12"} md={"8"}>
+                <MDBCol size={"12"} md={"6"}>
                   <UploadPhotoField label={"Product Image"} hide={false}
                                     onChange={image => this.setState({image: image})}/>
                 </MDBCol>

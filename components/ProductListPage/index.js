@@ -48,14 +48,14 @@ class ProductsPage extends React.PureComponent {
             <a>
               <MDBBtn color={"light-green"} className={"rounded-pill"}>
                 ADD PRODUCT
-                <MDBIcon icon={"shopping-cart"} className={"mx-3"}/>
+                <MDBIcon icon={"plus"} className={"mx-3"}/>
               </MDBBtn>
             </a>
           </Link>
           <form onSubmit={this.submitHandler}>
             <MDBRow>
               <MDBCol size={"12"} md={"8"}>
-                <MDBInput label={"Search for a product"} group required
+                <MDBInput label={"Search for a product"} group
                           value={this.state.query}
                           onChange={this.changeHandler}/>
               </MDBCol>
@@ -68,7 +68,7 @@ class ProductsPage extends React.PureComponent {
             </MDBRow>
           </form>
         </MDBContainer>
-        <ProductTableSection products={products}/>
+        <ProductTableSection search={this.props.router.query.search} products={products}/>
       </MDBContainer>
     )
   };
@@ -76,6 +76,18 @@ class ProductsPage extends React.PureComponent {
 
 export default withRouter(
   compose(
-    graphql(PRODUCTS_QUERY)
+    graphql(
+      PRODUCTS_QUERY,
+      {
+        options: (props) => {
+          const {search} = props.router.query;
+          return {
+            variables: {
+              query: search
+            }
+          }
+        }
+      }
+    )
   )(ProductsPage)
 );

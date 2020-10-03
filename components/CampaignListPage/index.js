@@ -43,7 +43,7 @@ class CampaignListPage extends React.PureComponent {
         <form onSubmit={this.submitHandler}>
           <MDBRow>
             <MDBCol size={"12"} md={"8"}>
-              <MDBInput label={"Search"} group required
+              <MDBInput label={"Search"} group
                         value={this.state.query}
                         onChange={this.changeHandler}/>
             </MDBCol>
@@ -73,7 +73,7 @@ class CampaignListPage extends React.PureComponent {
                         <td>
                           <Link href={"/campaigns/[id]"} as={`/campaigns/${id}`}>
                             <a>
-                              <img alt={`image of ${name} campaign`}
+                              <img alt={`${name} campaign`}
                                    className={"rounded-circle"}
                                    src={`${image}-/resize/50x50/`}/>
                             </a>

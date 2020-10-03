@@ -58,7 +58,6 @@ class UsersPage extends React.PureComponent {
       <MDBContainer fluid className={"px-4"}>
         <h1>Users</h1>
         <MDBContainer>
-          <p>Add more users to the system</p>
           <Link href={'/users/add'}>
             <a>
               <MDBBtn color={"light-green"} className={"rounded-pill"}>

@@ -1,29 +1,29 @@
 import React from 'react'
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from 'mdbreact'
-import ProductCard from "./ProductCard";
 import PropTypes from 'prop-types'
 import Link from "next/link";
+import {graphql} from "react-apollo";
+import {DELETE_PRODUCT_MUTATION, PRODUCTS_QUERY} from "../queries";
 
-const PriceListItem = ({price, interval}) => {
-  return (
-    <MDBCol size={"12"} className={"bold-text px-1 text-center"}>
-      <p className={"bold-text p-1 rounded-pill z-depth-1 bg-teal"}>@Ksh.{price} {interval}</p>
-    </MDBCol>
-  )
-}
 
 class ProductTableSection extends React.PureComponent {
 
+  deleteProduct = (id) => {
+    const {search} = this.props;
+    this.props.deleteProduct({
+      refetchQueries: [{
+        query: PRODUCTS_QUERY,
+        variables: {
+          query: search
+        }
+      }],
+      variables: {id}
+    })
+  };
+
   render() {
     const {products} = this.props;
-    //list of the courses
-    const productsList = products.map(
-      (product, key) => (
-        <MDBCol key={key} size={"12"} md={"4"} className={"my-2"}>
-          <ProductCard product={product}/>
-        </MDBCol>
-      )
-    )
+
     return (
       <>
         <MDBContainer className={"py-3 px-3"}>
@@ -72,7 +72,11 @@ class ProductTableSection extends React.PureComponent {
                                 </Link>
                               </td>
                               <td>
-                                <MDBBtn size={"sm"} className={"rounded-pill"} color={"danger"} outline>
+                                <MDBBtn size={"sm"}
+                                        className={"rounded-pill"}
+                                        onClick={() => this.deleteProduct(id)}
+                                        color={"danger"}
+                                        outline>
                                   <MDBIcon icon={"trash"} className={"mx-2"}/>
                                   delete
                                 </MDBBtn>
@@ -94,6 +98,9 @@ class ProductTableSection extends React.PureComponent {
 }
 
 ProductTableSection.propTypes = {
-  products: PropTypes.array
+  products: PropTypes.array,
+  search: PropTypes.string
 }
-export default ProductTableSection
+export default graphql(
+  DELETE_PRODUCT_MUTATION, {name: "deleteProduct"})
+(ProductTableSection)

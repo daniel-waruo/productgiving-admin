@@ -4,6 +4,6 @@ import ProductsAddPage from "../../components/ProductsAddPage";
 import {withMainLayout} from "../../components/Layouts";
 
 
-export default withApollo()(
+export default withApollo({ssr:false})(
   withMainLayout(ProductsAddPage, {secure: true})
 );
