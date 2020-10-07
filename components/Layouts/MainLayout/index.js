@@ -42,7 +42,7 @@ class MainLayout extends React.Component {
               <MDBCol size={"12"} lg={"9"} className={"my-0 px-0"}>
                 <NavCrumbs toggleFunction={this.toggleFunction}/>
                 <MDBRow className={"f-100-no-mobile"} center>
-                  <MDBCol size={"12"}  className={"my-auto px-0"}>
+                  <MDBCol size={"12"}  className={"my-auto"}>
                     {this.props.children}
                   </MDBCol>
                 </MDBRow>

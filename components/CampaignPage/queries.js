@@ -16,7 +16,7 @@ export const CAMPAIGN_QUERY = gql`
           id
           name
           price
-          images
+          image
         }
       }
       owner{

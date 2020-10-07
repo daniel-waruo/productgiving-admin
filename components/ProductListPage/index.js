@@ -67,8 +67,8 @@ class ProductsPage extends React.PureComponent {
               </MDBCol>
             </MDBRow>
           </form>
+          <ProductTableSection search={this.props.router.query.search} products={products}/>
         </MDBContainer>
-        <ProductTableSection search={this.props.router.query.search} products={products}/>
       </MDBContainer>
     )
   };
