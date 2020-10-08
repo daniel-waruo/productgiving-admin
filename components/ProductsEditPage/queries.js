@@ -8,7 +8,7 @@ export const EDIT_PRODUCT_MUTATION = gql`
         name
         description
         price
-        images
+        image
       }
       errors{
         field

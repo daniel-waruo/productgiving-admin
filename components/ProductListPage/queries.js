@@ -19,7 +19,7 @@ export const PRODUCT_QUERY = gql`
       description
       slug
       price
-      images
+      image
     }
   }`
 
