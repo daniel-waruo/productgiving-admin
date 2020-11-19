@@ -68,6 +68,10 @@ const SideNavChildren = props => {
           <MDBIcon icon={"hands-helping"} className={"mr-2"}/>
           Campaigns
         </SideNavItem>
+        <SideNavItem pathname={pathname} className={className} href={"/deliveries"}>
+          <MDBIcon icon={"truck"} className={"mr-2"}/>
+          Deliveries
+        </SideNavItem>
         <SideNavItem pathname={pathname} className={className} href={"/users"}>
           <MDBIcon icon={"users"} className={"mr-2"}/>
           Users
