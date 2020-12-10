@@ -9,6 +9,7 @@ export const CAMPAIGN_QUERY = gql`
       slug
       image
       isApproved
+      isFeatured
       products {
         id
         target
@@ -36,8 +37,6 @@ export const APPROVE_CAMPAIGN_MUTATION = gql`
     approveCampaign(id:$id){
       campaign{
         id
-        name
-        description
         isApproved
       }
     }
@@ -50,9 +49,19 @@ export const DISAPPROVE_CAMPAIGN_MUTATION = gql`
     disapproveCampaign(id:$id){
       campaign{
         id
-        name
-        description
         isApproved
+      }
+    }
+  }
+`;
+
+
+export const SET_FEATURED_MUTATION = gql`
+  mutation SetFeaturedCampaign($id:Int!,$isFeatured:Boolean!){
+    setFeatured(id:$id,isFeatured:$isFeatured){
+      campaign{
+        id
+        isFeatured
       }
     }
   }

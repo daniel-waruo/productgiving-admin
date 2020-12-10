@@ -3,12 +3,12 @@ import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow, MDBTable, MDBTableBody, MDBTableHead} from "mdbreact";
 import {withRouter} from "next/router";
-import {CAMPAIGNS_QUERY} from "./queries";
+import {APPROVED_CAMPAIGNS_QUERY} from "./queries";
 import Link from "next/link";
 import BoolIcon from "../BoolIcon"
 
 
-class CampaignListPage extends React.PureComponent {
+class ApprovedCampaignListPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,7 +19,7 @@ class CampaignListPage extends React.PureComponent {
   submitHandler = e => {
     e.preventDefault()
     this.props.router.push({
-        pathname: '/campaigns/all',
+        pathname: '/campaigns/approved',
         query: {
           search: this.state.query
         }
@@ -34,14 +34,14 @@ class CampaignListPage extends React.PureComponent {
   }
 
   render() {
-    const {data: {error, loading, campaigns}} = this.props;
-    if (loading) return <Loader fullScreen/>
+    const {data: {error, loading, approvedCampaigns:campaigns}} = this.props;
+    if (loading) return <Loader/>
 
     if (error) return <h1>{error.message}</h1>
 
     return (
       <MDBContainer className={"px-4 pt-4"}>
-        <h1>All Campaigns</h1>
+        <h1>Approved Campaigns</h1>
         <form onSubmit={this.submitHandler}>
           <MDBRow>
             <MDBCol size={"12"} md={"8"}>
@@ -63,14 +63,13 @@ class CampaignListPage extends React.PureComponent {
               <tr>
                 <th colSpan={"2"}>Name</th>
                 <th>Is Approved</th>
-                <th>Is Featured</th>
                 <th/>
               </tr>
             </MDBTableHead>
             <MDBTableBody>
               {
                 campaigns.map(
-                  ({id, name, isApproved,isFeatured, image}, key) => {
+                  ({id, name, isApproved, image}, key) => {
                     return (
                       <tr key={key}>
                         <td>
@@ -88,7 +87,6 @@ class CampaignListPage extends React.PureComponent {
                           </Link>
                         </td>
                         <td><BoolIcon bool={isApproved}/></td>
-                        <td><BoolIcon bool={isFeatured}/></td>
                         <td>
                           <Link href={"/campaigns/[id]"} as={`/campaigns/${id}`}>
                             <a>
@@ -114,7 +112,7 @@ class CampaignListPage extends React.PureComponent {
 
 export default withRouter(
   graphql(
-    CAMPAIGNS_QUERY,
+    APPROVED_CAMPAIGNS_QUERY,
     {
       options: (props) => {
         const {search} = props.router.query;
@@ -124,4 +122,4 @@ export default withRouter(
           }
         }
       }
-    })(CampaignListPage))
+    })(ApprovedCampaignListPage))

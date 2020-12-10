@@ -1,7 +1,7 @@
 import {withApollo} from "../../apollo";
 import {withMainLayout} from "../../components/Layouts";
-import CampaignsPage from "../../components/CampaignsPage";
+import FeaturedCampaignListPage from "../../components/FeaturedCampaignListPage";
 
 export default withApollo({ssr: false})(
-  withMainLayout(CampaignsPage, {secure: true})
+  withMainLayout(FeaturedCampaignListPage, {secure: true})
 )

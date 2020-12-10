@@ -1,8 +1,8 @@
 import React from "react";
-import {MDBBtn, MDBCol, MDBContainer, MDBRow} from "mdbreact";
+import {MDBBtn,MDBIcon, MDBCol, MDBContainer, MDBRow,MDBCardImage} from "mdbreact";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
-import {APPROVE_CAMPAIGN_MUTATION, CAMPAIGN_QUERY, DISAPPROVE_CAMPAIGN_MUTATION} from "./queries";
+import {APPROVE_CAMPAIGN_MUTATION, CAMPAIGN_QUERY, DISAPPROVE_CAMPAIGN_MUTATION,SET_FEATURED_MUTATION} from "./queries";
 import {withRouter} from "next/router";
 import Loader from "../Loader";
 
@@ -25,7 +25,25 @@ class CampaignPage extends React.PureComponent {
       }
     })
   }
+  addFeatured = () => {
+    const {data: {campaign}} = this.props;
+    this.props.setFeatured({
+      variables: {
+        id: campaign.id,
+        isFeatured:true
+      }
+    })
+  }
 
+  removeFeatured = () => {
+    const {data: {campaign}} = this.props;
+    this.props.setFeatured({
+      variables: {
+        id: campaign.id,
+        isFeatured:false
+      }
+    })
+  }
   render() {
     const {data: {loading, error, campaign}} = this.props;
     if (loading) return <Loader/>;
@@ -36,10 +54,11 @@ class CampaignPage extends React.PureComponent {
       <MDBContainer>
         <MDBRow>
           <MDBCol size={"12"} md={"7"}>
-            <img
-              alt={"campaign image"}
-              src={`${campaign.image}-/resize/500x300/`}
-              className={"img-fluid"}/>
+            <MDBCardImage
+              src={campaign.image + "-/resize/400x200/"}
+              overlay={"green-light"}
+              className={"img-fluid w-100"}
+              style={{borderRadius: "1rem",}}/>
           </MDBCol>
           <MDBCol size={"12"} md={"5"}>
             <MDBContainer >
@@ -48,13 +67,24 @@ class CampaignPage extends React.PureComponent {
                 {campaign.description}
               </p>
               <h2>Owner Information</h2>
-              <p className={"pr-4"}>NAME - {`${owner.firstName} ${owner.lastName}`}</p>
-              <p className={"pr-4"}>EMAIL - {owner.email}</p>
-              <p className={"pr-4"}>PHONE-NUMBER - {owner.phone ? owner.phone : "N/A"}</p>
+              <div className="ml-3">
+                <p className={"pr-4"}>
+                  <MDBIcon icon="user" className="mr-2 text-muted"/>
+                  {`${owner.firstName} ${owner.lastName}`}
+                </p>
+                <p className={"pr-4"}>
+                  <MDBIcon icon="envelope" className="mr-2 text-muted"/>
+                  {owner.email}</p>
+                <p className={"pr-4"}>
+                  <MDBIcon icon="phone" className="mr-2 text-muted"/>
+                  {owner.phone ? owner.phone : "N/A"}
+                </p>
+              </div>
               <div className={"text-center"}>
                 {
                   campaign.isApproved ?
                     <MDBBtn
+                      outline
                       onClick={() => this.disapproveCampaign()}
                       color={"danger"}
                       className={"rounded-pill text-center"}>
@@ -69,6 +99,26 @@ class CampaignPage extends React.PureComponent {
                     </MDBBtn>
                 }
               </div>
+              <div className={"text-center"}>
+                {
+                  campaign.isFeatured ?
+                    <MDBBtn
+                      outline
+                      onClick={() => this.removeFeatured()}
+                      color={"danger"}
+                      className={"rounded-pill text-center"}>
+                      Remove Featured
+                    </MDBBtn>
+                    :
+                    <MDBBtn
+                      onClick={() => this.addFeatured()}
+                      color={"light-green"}
+                      className={"rounded-pill text-center"}>
+                      Add Featured
+                    </MDBBtn>
+                }
+              </div>
+
             </MDBContainer>
           </MDBCol>
         </MDBRow>
@@ -83,12 +133,11 @@ export default withRouter(
     graphql(CAMPAIGN_QUERY, {
       options: (props) => {
         const {id} = props.router.query;
-        return {
-          variables: {id}
-        }
+        return {variables: {id}}
       }
     }),
     graphql(APPROVE_CAMPAIGN_MUTATION, {name: "approveCampaign"}),
     graphql(DISAPPROVE_CAMPAIGN_MUTATION, {name: "disapproveCampaign"}),
+    graphql(SET_FEATURED_MUTATION, {name: "setFeatured"}),
   )(CampaignPage)
 )

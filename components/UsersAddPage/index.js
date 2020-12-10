@@ -6,6 +6,7 @@ import {Field} from "../FIeld";
 import {NextSeo} from "next-seo";
 import {format_errors} from "../../_helpers";
 import {USERS_QUERY} from "../UsersPage/queries";
+import {withRouter} from "next/router";
 
 class UserAddPage extends React.PureComponent {
   state = {
@@ -122,4 +123,4 @@ class UserAddPage extends React.PureComponent {
   }
 }
 
-export default UserAddPage;
+export default withRouter(UserAddPage);

@@ -7,6 +7,7 @@ export const CAMPAIGNS_QUERY = gql`
       name
       image
       isApproved
+      isFeatured
     }
   }
 `
