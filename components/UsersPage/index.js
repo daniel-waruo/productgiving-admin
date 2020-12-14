@@ -33,10 +33,9 @@ class UsersPage extends React.PureComponent {
 
   render() {
     const {data: {error, loading, users}} = this.props;
-    if (loading) return <Loader/>
-
-    if (error) return <h1>{error.message}</h1>
-
+    if (loading) return <Loader/>;
+    if (error) return <h1>{error.message}</h1>;
+    if (!users) return <h1>You dont have enough permissions to view this page.</h1>;
     const userList = users.map(
       ({firstName, lastName, email, phone}, key) => {
         return (
@@ -56,7 +55,7 @@ class UsersPage extends React.PureComponent {
     )
     return (
       <MDBContainer fluid className={"px-4"}>
-        <h1>Users</h1>
+        <h1 className="text-center pt-4">Users</h1>
         <MDBContainer>
           <Link href={'/users/add'}>
             <a>

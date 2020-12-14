@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {MDBAnimation, MDBCol, MDBRow} from "mdbreact";
 import {NextSeo} from "next-seo"
-import SideNav, {NavCrumbs, NavSmall} from "./MainSideNav";
+import SideNav, {NavSmall} from "./MainSideNav";
 import Loader from "../../Loader";
 import {graphql} from "react-apollo";
 import {withRouter} from "next/router";
@@ -40,7 +40,6 @@ class MainLayout extends React.Component {
                        user={user}
                        className={"z-depth-1 px-0"}/>
               <MDBCol size={"12"} lg={"9"} className={"my-0 px-0"}>
-                <NavCrumbs toggleFunction={this.toggleFunction}/>
                 <MDBRow className={"f-100-no-mobile"} center>
                   <MDBCol size={"12"}  className={"my-auto"}>
                     {this.props.children}

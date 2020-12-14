@@ -2,17 +2,17 @@ import React from "react";
 import {Line} from "react-chartjs-2";
 import {MDBAnimation, MDBContainer} from "mdbreact";
 
-class RevenueChart extends React.Component {
+class DonationsChart extends React.Component {
   isMobileDevice = () => {
     return (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent));
   }
 
   render() {
-    const {incomeByDate} = this.props;
+    const {donationsByDate} = this.props
     const dataLine = {
       datasets: [
         {
-          label: "Income Generated",
+          label: "Donations",
           fill: true,
           //lineTension: 0.5,
           backgroundColor: "rgba(139, 195, 74, 0.4)",
@@ -30,14 +30,15 @@ class RevenueChart extends React.Component {
           pointHoverBorderWidth: 2,
           pointRadius: 1,
           pointHitRadius: 10,
-          data: incomeByDate.map(({date: x, amount: y}) => ({x, y}))
+          data: donationsByDate.map(
+            ({date: x, number: y}) => ({x, y}))
         }
       ]
     }
     return (
       <MDBAnimation type={"fadeIn"}>
-        <MDBContainer fluid className={"pb-4"}>
-          <h2 className={"ml-4 mt-4"}>Income Generated</h2>
+        <MDBContainer fluid className={"p-4 z-depth-1"} style={{borderRadius: "1rem"}}>
+          <h2>Donations</h2>
           <Line data={dataLine}
                 options={{
                   responsive: true,
@@ -58,4 +59,4 @@ class RevenueChart extends React.Component {
   }
 }
 
-export default RevenueChart
+export default DonationsChart

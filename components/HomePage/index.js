@@ -3,19 +3,20 @@ import {MDBAnimation, MDBCard, MDBCol, MDBContainer, MDBRow} from 'mdbreact'
 import Loader from "../Loader";
 import AdminCard from "../AdminCard";
 import RevenueChart from "./components/RevenueChart";
+import DonationsChart from "./components/DonationsChart";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
-import {APP_QUERY} from "../App/queries";
-import VisitorChart from "./components/VisitorChart";
 import {NextSeo} from "next-seo"
+import {HOME_QUERY} from "./queries"
 
-class HomeUserPage extends React.Component {
+class HomePage extends React.Component {
 
   render() {
-    const {data: {loading, error}} = this.props;
-    if (loading) return <Loader/>;
-    // if error  return null
-    //TODO:create an error page
+    const {data: {
+      loading, error, donationsByDate, incomeByDate,
+      totalIncome,totalDonated,totalActiveCampaigns
+    }} = this.props;
+    if (loading) return <Loader fullScreen />;
     if (error) return <h1>{error.message}</h1>;
 
     return (
@@ -30,15 +31,15 @@ class HomeUserPage extends React.Component {
                     <AdminCard
                       title={"Total Donations"}
                       iconClass={"fa-user"}
-                      value={"90"}/>
+                      value={totalDonated}/>
                   </MDBAnimation>
                 </MDBCol>
                 <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
                   <MDBAnimation type={"fadeInUp"} className={"h-100"}>
                     <AdminCard
-                      title={"Total Visitors"}
+                      title={"Active Campaigns"}
                       iconClass={"fa-money-bill"}
-                      value={"82"}/>
+                      value={totalActiveCampaigns}/>
                   </MDBAnimation>
                 </MDBCol>
                 <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
@@ -46,17 +47,17 @@ class HomeUserPage extends React.Component {
                     <AdminCard
                       title={"Amount Donated"}
                       icon={"wallet"}
-                      value={"Ksh.100023"}/>
+                      value={`Ksh.${totalIncome}`}/>
                   </MDBAnimation>
                 </MDBCol>
                 <MDBCol size={"12"}>
                   <MDBCard className={"mb-2 mt-4"} style={{borderRadius: "1rem"}}>
-                    <RevenueChart />
+                    <DonationsChart donationsByDate={donationsByDate}/>
                   </MDBCard>
                 </MDBCol>
                 <MDBCol size={"12"}>
                   <MDBCard className={"mb-2 mt-4"} style={{borderRadius: "1rem"}}>
-                    <VisitorChart />
+                    <RevenueChart incomeByDate={incomeByDate} />
                   </MDBCard>
                 </MDBCol>
               </MDBRow>
@@ -69,7 +70,5 @@ class HomeUserPage extends React.Component {
 }
 
 export default compose(
-  //graphql(REVENUE_DATA_QUERY),
-  graphql(APP_QUERY),
-  //graphql(MEMBER_HOME_QUERY),
-)(HomeUserPage);
+  graphql(HOME_QUERY)
+)(HomePage);
