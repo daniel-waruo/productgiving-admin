@@ -32,6 +32,7 @@ class FeaturedCampaignListPage extends React.PureComponent {
       query: e.target.value
     })
   }
+  
   loadMore = (fromItem) =>{
     const {search} = this.props.router.query;
     this.props.data.fetchMore({
