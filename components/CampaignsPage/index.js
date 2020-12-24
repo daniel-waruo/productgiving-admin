@@ -28,6 +28,9 @@ class StateCard extends React.PureComponent {
           <MDBCardTitle className={"pl-2 pb-2 border-bottom border-grey mb-3"}>
             {title}
           </MDBCardTitle>
+          <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "2rem"}}>
+            {number}
+          </MDBCardText>
           <Link href={`/campaigns/${state}`}>
             <a>
               <MDBBtn color={"light-green"} className={"rounded-pill"}>
@@ -51,7 +54,7 @@ StateCard.propTypes = {
 
 class DeliveryStatePage extends React.PureComponent {
   render() {
-    const {data: {error, loading, deliveryCount}} = this.props;
+    const {data: {error, loading, campaignCount}} = this.props;
     if (loading) return <Loader/>;
     if (error) return <h1>{error.message}</h1>;
 
@@ -60,22 +63,38 @@ class DeliveryStatePage extends React.PureComponent {
         <MDBRow>
           <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
             <MDBAnimation type={"fadeInUp"} className={"h-100"}>
-              <StateCard state={"unapproved"} icon={"times"} title={"Un-approved"} />
+              <StateCard
+                state={"unapproved"}
+                icon={"times"}
+                number={campaignCount.unApproved}
+                title={"Un-approved"} />
             </MDBAnimation>
           </MDBCol>
           <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
             <MDBAnimation type={"fadeInRight"} className={"h-100"}>
-              <StateCard state={"approved"} icon={"check"} title={"Approved"} />
+              <StateCard
+                state={"approved"}
+                number={campaignCount.approved}
+                icon={"check"}
+                title={"Approved"} />
             </MDBAnimation>
           </MDBCol>
           <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
             <MDBAnimation type={"fadeInLeft"} className={"h-100"}>
-              <StateCard state={"featured"} icon={"star"} title={"Featured"} />
+              <StateCard
+                state={"featured"}
+                number={campaignCount.featured}
+                icon={"star"}
+                title={"Featured"} />
             </MDBAnimation>
           </MDBCol>
           <MDBCol size={"12"} md={"6"} lg={"4"} className={"my-2"}>
             <MDBAnimation type={"fadeInDown"} delay={"2"} className={"h-100"}>
-              <StateCard state={"all"} icon={"filter"} title={"All"} />
+              <StateCard
+                state={"all"}
+                number={campaignCount.all}
+                icon={"filter"}
+                title={"All"} />
             </MDBAnimation>
           </MDBCol>
         </MDBRow>
@@ -88,12 +107,11 @@ export default compose(
   graphql(
     gql`
       query {
-        deliveryCount{
+        campaignCount{
           all
-          pending
-          processing
-          ready
-          delivered
+          approved
+          unApproved
+          featured
         }
       }
     `

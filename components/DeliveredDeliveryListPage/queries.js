@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const DELIVERY_LIST_QUERY = gql`
-  query Deliveries($query:String){
-    deliveredCampaigns(query:$query){
+export const DELIVERED_DELIVERY_LIST_QUERY = gql`
+  query DeliveredDeliveries($query:String,$number:Int,$fromItem:Int){
+    deliveredCampaigns(query:$query,number:$number,fromItem:$fromItem){
       id
       name
       image

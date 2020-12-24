@@ -42,7 +42,7 @@ class ProductsPage extends React.PureComponent {
     return (
       <MDBContainer className={"pt-4 mt-4"}>
         <NextSeo title={"Products"}/>
-        <h1>Search Products</h1>
+        <h1 className="text-center">Search Products</h1>
         <MDBContainer>
           <Link href={'/products/add'}>
             <a>
@@ -67,7 +67,7 @@ class ProductsPage extends React.PureComponent {
               </MDBCol>
             </MDBRow>
           </form>
-          <ProductTableSection search={this.props.router.query.search} products={products}/>
+          <ProductTableSection fetchMore={this.props.data.fetchMore} search={this.props.router.query.search} products={products}/>
         </MDBContainer>
       </MDBContainer>
     )
@@ -83,7 +83,9 @@ export default withRouter(
           const {search} = props.router.query;
           return {
             variables: {
-              query: search
+              query: search,
+              number:10,
+              fromItem:0
             }
           }
         }

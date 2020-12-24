@@ -11,7 +11,8 @@ class FeaturedCampaignListPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      query: this.props.router.query.search
+      query: this.props.router.query.search,
+      hasMore:true
     }
   }
 
@@ -31,7 +32,24 @@ class FeaturedCampaignListPage extends React.PureComponent {
       query: e.target.value
     })
   }
-
+  loadMore = (fromItem) =>{
+    const {search} = this.props.router.query;
+    this.props.data.fetchMore({
+      variables: {
+        query: search,
+        number:10,
+        fromItem
+      },
+      // concatenate old and new entries
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const addedCampaigns = fetchMoreResult.featuredCampaigns;
+        if (addedCampaigns.length < 1){
+          this.setState({hasMore:false})
+        }
+        return { featuredCampaigns: [...previousResult.featuredCampaigns,...addedCampaigns]}
+      },
+    });
+  }
   render() {
     const {data: {error, loading, featuredCampaigns:campaigns}} = this.props;
     if (loading) return <Loader/>
@@ -105,6 +123,17 @@ class FeaturedCampaignListPage extends React.PureComponent {
               }
             </MDBTableBody>
           </MDBTable>
+          {this.state.hasMore ?
+            (<MDBCol size="12" className="mt-2 mb-2 pt-3 text-center">
+              <MDBBtn
+                onClick={()=>this.loadMore(campaigns.length)}
+                color={"white"}
+                className={"rounded-pill mt-5"} >
+                Load More
+                <MDBIcon icon={'angle-down'} className={"mx-2"}/>
+              </MDBBtn>
+            </MDBCol>):null
+          }
         </MDBContainer>
       </MDBContainer>
     )
@@ -119,7 +148,9 @@ export default withRouter(
         const {search} = props.router.query;
         return {
           variables: {
-            query: search
+            query: search,
+            number:10,
+            fromItem:0
           }
         }
       }

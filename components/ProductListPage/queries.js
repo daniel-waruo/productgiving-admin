@@ -1,10 +1,10 @@
 import gql from "graphql-tag";
 
 export const PRODUCTS_QUERY = gql`
-  query Products($query:String) {
-    products(query:$query){
+  query Products($query:String,$number:Int,$fromItem:Int) {
+    products(query:$query,number:$number,fromItem:$fromItem){
       id
-      name 
+      name
       description
       price
       image

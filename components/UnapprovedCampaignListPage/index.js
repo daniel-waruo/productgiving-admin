@@ -12,7 +12,8 @@ class UnapprovedCampaignListPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      query: this.props.router.query.search
+      query: this.props.router.query.search,
+      hasMore:true,
     }
   }
 
@@ -31,6 +32,24 @@ class UnapprovedCampaignListPage extends React.PureComponent {
     this.setState({
       query: e.target.value
     })
+  }
+  loadMore = (fromItem) =>{
+    const {search} = this.props.router.query;
+    this.props.data.fetchMore({
+      variables: {
+        query: search,
+        number:10,
+        fromItem
+      },
+      // concatenate old and new entries
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const addedCampaigns = fetchMoreResult.unapprovedCampaigns;
+        if (addedCampaigns.length < 1){
+          this.setState({hasMore:false})
+        }
+        return { unapprovedCampaigns: [...previousResult.unapprovedCampaigns,...addedCampaigns]}
+      },
+    });
   }
 
   render() {
@@ -85,7 +104,7 @@ class UnapprovedCampaignListPage extends React.PureComponent {
                           </Link>
                         </td>
                         <td><BoolIcon bool={isApproved}/></td>
-                        <td>
+                          <td>
                           <Link href={"/campaigns/[id]"} as={`/campaigns/${id}`}>
                             <a>
                               <MDBBtn size={"sm"} className={"rounded-pill"} color={"light-blue"} outline>
@@ -100,8 +119,20 @@ class UnapprovedCampaignListPage extends React.PureComponent {
                   }
                 )
               }
+
             </MDBTableBody>
           </MDBTable>
+          {this.state.hasMore ?
+          (<MDBCol size="12" className="mt-2 mb-2 pt-3 text-center">
+            <MDBBtn
+              onClick={()=>this.loadMore(campaigns.length)}
+              color={"white"}
+              className={"rounded-pill mt-5"} >
+              Load More
+              <MDBIcon icon={'angle-down'} className={"mx-2"}/>
+            </MDBBtn>
+          </MDBCol>):null
+        }
         </MDBContainer>
       </MDBContainer>
     )
@@ -116,7 +147,9 @@ export default withRouter(
         const {search} = props.router.query;
         return {
           variables: {
-            query: search
+            query: search,
+            number:10,
+            fromItem:0
           }
         }
       }

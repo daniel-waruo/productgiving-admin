@@ -28,7 +28,7 @@ class StateCard extends React.PureComponent {
           <MDBCardTitle className={"pl-2 pb-2 border-bottom border-grey mb-3"}>
             {title}
           </MDBCardTitle>
-          <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "3rem"}}>
+          <MDBCardText tag={"span"} className={"float-right"} style={{fontSize: "2rem"}}>
             {number}
           </MDBCardText>
           <Link href={`/deliveries/state/${state}`}>

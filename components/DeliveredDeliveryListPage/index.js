@@ -3,14 +3,15 @@ import {graphql} from "react-apollo"
 import Loader from "../Loader";
 import {MDBBtn, MDBCol, MDBContainer, MDBIcon, MDBInput, MDBRow} from "mdbreact";
 import {withRouter} from "next/router";
-import {DELIVERY_LIST_QUERY} from "./queries";
+import {DELIVERED_DELIVERY_LIST_QUERY} from "./queries";
 import DeliverySection from "../DeliveryListPage/components/DeliverySection";
 
 class DeliveredDeliveryListPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      query: this.props.router.query.search
+      query: this.props.router.query.search,
+      hasMore:true
     }
   }
 
@@ -29,6 +30,25 @@ class DeliveredDeliveryListPage extends React.PureComponent {
     this.setState({
       query: e.target.value
     })
+  }
+
+  loadMore = (fromItem) =>{
+    const {search} = this.props.router.query;
+    this.props.data.fetchMore({
+      variables: {
+        query: search,
+        number:10,
+        fromItem
+      },
+      // concatenate old and new entries
+      updateQuery: (previousResult, { fetchMoreResult }) => {
+        const addedCampaigns = fetchMoreResult.deliveredCampaigns;
+        if (addedCampaigns.length < 1){
+          this.setState({hasMore:false})
+        }
+        return { deliveredCampaigns: [...previousResult.deliveredCampaigns,...addedCampaigns]}
+      },
+    });
   }
 
   render() {
@@ -54,6 +74,17 @@ class DeliveredDeliveryListPage extends React.PureComponent {
           </MDBRow>
         </form>
         <DeliverySection campaigns={campaigns}/>
+        {this.state.hasMore ?
+          (<MDBCol size="12" className="mt-2 mb-2 pt-3 text-center">
+            <MDBBtn
+              onClick={()=>this.loadMore(campaigns.length)}
+              color={"white"}
+              className={"rounded-pill mt-5"} >
+              Load More
+              <MDBIcon icon={'angle-down'} className={"mx-2"}/>
+            </MDBBtn>
+          </MDBCol>):null
+        }
       </MDBContainer>
     )
   }
@@ -61,13 +92,15 @@ class DeliveredDeliveryListPage extends React.PureComponent {
 
 export default withRouter(
   graphql(
-    DELIVERY_LIST_QUERY,
+    DELIVERED_DELIVERY_LIST_QUERY,
     {
       options: (props) => {
         const {search} = props.router.query;
         return {
           variables: {
-            query: search
+            query: search,
+            number:10,
+            fromItem:0
           }
         }
       }
