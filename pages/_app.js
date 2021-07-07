@@ -17,8 +17,8 @@ function App({Component, pageProps}) {
               crossOrigin="anonymous"/>
       </Head>
       <DefaultSeo
-        title={"E donation"}
-        titleTemplate={" %s | E-donation"}
+        title={"Product Giving"}
+        titleTemplate={" %s | Product Giving"}
       />
       <Component {...pageProps} />
     </>
