@@ -47,7 +47,7 @@ export const SidenavLogout = (props) => {
   };
 
   return (
-    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} light-green darken-4 text-white mt-5`}
+    <MDBListGroupItem hover className={`z-depth-1 my-2 ${className} light-green darken-4 text-white`}
                       onClick={onClick}>
       {children}
     </MDBListGroupItem>
@@ -143,7 +143,7 @@ export const NavLogo = props => {
   return (
     <>
       <div className={"justify-content-center d-flex mb-3"}>
-        <MDBCardImage src={"/logo.png"}/>
+        <MDBCardImage src={"/logo.jpeg"} style={{height:"120px",weight:"120px"}}/>
       </div>
     </>
   )
