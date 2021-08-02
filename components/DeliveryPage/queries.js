@@ -12,9 +12,11 @@ query DeliveryQuery($id: ID!) {
     delivery{
       id
       state
+      totalDonated
       products{
         id
         number
+        totalDonated
         product{
           id
           image

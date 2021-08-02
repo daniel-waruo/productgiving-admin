@@ -25,8 +25,9 @@ class DeliveryPage extends React.PureComponent {
         <MDBAnimation type={"fadeIn"}>
           <MDBContainer className={"py-3 px-3"} fluid>
             <div className={"text-center"}>
-            <h1>{campaign.name}</h1>
-            <p className={"text-muted"}>{campaign.description}</p>
+              <h1>{campaign.name}</h1>
+              <p className={"text-muted"}>{campaign.description}</p>
+              <h5 className={"text-muted"}> Total Donated : Ksh.{campaign.delivery.totalDonated}</h5>
             </div>
             <MDBContainer fluid>
               <MDBRow center>
@@ -49,13 +50,13 @@ class DeliveryPage extends React.PureComponent {
 }
 
 export default withRouter(compose(
-  graphql(DELIVERY_QUERY, {
-    options: (props) => {
-      const {id} = props.router.query;
-      return {
-        variables: {id}
+    graphql(DELIVERY_QUERY, {
+      options: (props) => {
+        const {id} = props.router.query;
+        return {
+          variables: {id}
+        }
       }
-    }
-  }),
+    }),
   )(DeliveryPage)
 )

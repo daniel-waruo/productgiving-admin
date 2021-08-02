@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 class ProductItem extends React.PureComponent {
 
   render() {
-    const {product: {product: { name, image}, number}} = this.props;
+    const {product: {product: { name, image}, number, totalDonated}} = this.props;
     return (
       <tr>
         <td>
@@ -15,6 +15,7 @@ class ProductItem extends React.PureComponent {
         </td>
         <td>{name}</td>
         <td>{number}</td>
+        <td>Ksh.{totalDonated}</td>
       </tr>
     )
   }
@@ -39,6 +40,7 @@ class ProductsSection extends React.PureComponent {
             <tr>
               <th colSpan={"2"}>Product</th>
               <th>Number</th>
+              <th>Total Donated</th>
             </tr>
           </MDBTableHead>
           <MDBTableBody>
