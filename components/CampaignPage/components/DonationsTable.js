@@ -8,7 +8,7 @@ class DonationsTable extends React.PureComponent {
     const {donations} = this.props;
 
     return (
-      <>
+      <div className={"mt-5"}>
         <h3>Campaign Donations</h3>
         <form>
           <MDBRow>
@@ -36,7 +36,7 @@ class DonationsTable extends React.PureComponent {
           <MDBTableBody>
             {
               donations.map(
-                ({id, donorName, amountPaid, createdOn,transaction}, key) => {
+                ({id, donorName, amountPaid, createdOn, transaction}, key) => {
                   const date = new Date(createdOn);
                   return (
                     <tr key={key}>
@@ -51,7 +51,7 @@ class DonationsTable extends React.PureComponent {
             }
           </MDBTableBody>
         </MDBTable>
-      </>
+      </div>
     )
   }
 }

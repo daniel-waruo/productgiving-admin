@@ -45,17 +45,17 @@ class CampaignsPage extends Component {
           </MDBNavItem>
         </MDBNav>
         <MDBTabContent activeItem={this.state.activeItem}>
-          <MDBTabPane tabId="1" role="tabpanel" style={{minHeight:"70vh"}}>
+          <MDBTabPane tabId="1" role="tabpanel" style={{minHeight: "100vh"}}>
             <CampaignListPage/>
           </MDBTabPane>
-          <MDBTabPane tabId="2" role="tabpanel" style={{minHeight:"70vh"}}>
+          <MDBTabPane tabId="2" role="tabpanel" style={{minHeight: "100vh"}}>
             <ApprovedCampaignListPage/>
           </MDBTabPane>
-          <MDBTabPane tabId="3" role="tabpanel" style={{minHeight:"70vh"}}>
-            <FeaturedCampaignListPage/>
-          </MDBTabPane>
-          <MDBTabPane tabId="4" role="tabpanel" style={{minHeight:"70vh"}}>
+          <MDBTabPane tabId="3" role="tabpanel" style={{minHeight: "100vh"}}>
             <UnapprovedCampaignListPage/>
+          </MDBTabPane>
+          <MDBTabPane tabId="4" role="tabpanel" style={{minHeight: "100vh"}}>
+            <FeaturedCampaignListPage/>
           </MDBTabPane>
         </MDBTabContent>
       </MDBContainer>

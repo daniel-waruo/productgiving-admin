@@ -58,7 +58,7 @@ class CampaignPage extends React.PureComponent {
     if (!campaign) return <h1>No Such Campaign</h1>;
     const {owner} = campaign;
     return (
-      <MDBContainer>
+      <MDBContainer className={"mt-4"}>
         <MDBRow>
           <MDBCol size={"12"} md={"7"}>
             <MDBCardImage
@@ -69,9 +69,6 @@ class CampaignPage extends React.PureComponent {
           </MDBCol>
           <MDBCol size={"12"} md={"5"}>
             <h2 className={"text-capitalize"}>{campaign.name}</h2>
-            <p className={"text-muted"}>
-              {campaign.description}
-            </p>
             <h5>Owner Information</h5>
             <div className="ml-3">
               <p className={"pr-4"}>
