@@ -98,7 +98,7 @@ const SideNavChildren = props => {
       </SideNavItem>
       <SideNavItem pathname={pathname} className={className} href={"/account/password/reset"}>
         <MDBIcon fas icon={"lock-open"} className={"mr-2"}/>
-        Reset Password
+        Forgot Password
       </SideNavItem>
     </>
   )

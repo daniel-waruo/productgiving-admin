@@ -1,10 +1,16 @@
 import React from "react";
-import {MDBBtn,MDBIcon, MDBCol, MDBContainer, MDBRow,MDBCardImage} from "mdbreact";
+import {MDBBtn, MDBCardImage, MDBCol, MDBContainer, MDBIcon, MDBRow} from "mdbreact";
 import compose from "lodash.flowright";
 import {graphql} from "react-apollo";
-import {APPROVE_CAMPAIGN_MUTATION, CAMPAIGN_QUERY, DISAPPROVE_CAMPAIGN_MUTATION,SET_FEATURED_MUTATION} from "./queries";
+import {
+  APPROVE_CAMPAIGN_MUTATION,
+  CAMPAIGN_QUERY,
+  DISAPPROVE_CAMPAIGN_MUTATION,
+  SET_FEATURED_MUTATION
+} from "./queries";
 import {withRouter} from "next/router";
 import Loader from "../Loader";
+import DonationsTable from "./components/DonationsTable";
 
 class CampaignPage extends React.PureComponent {
 
@@ -30,7 +36,7 @@ class CampaignPage extends React.PureComponent {
     this.props.setFeatured({
       variables: {
         id: campaign.id,
-        isFeatured:true
+        isFeatured: true
       }
     })
   }
@@ -40,10 +46,11 @@ class CampaignPage extends React.PureComponent {
     this.props.setFeatured({
       variables: {
         id: campaign.id,
-        isFeatured:false
+        isFeatured: false
       }
     })
   }
+
   render() {
     const {data: {loading, error, campaign}} = this.props;
     if (loading) return <Loader/>;
@@ -61,67 +68,65 @@ class CampaignPage extends React.PureComponent {
               style={{borderRadius: "1rem",}}/>
           </MDBCol>
           <MDBCol size={"12"} md={"5"}>
-            <MDBContainer >
-              <h1 className={"text-capitalize"}>{campaign.name}</h1>
-              <p className={"text-muted"}>
-                {campaign.description}
+            <h2 className={"text-capitalize"}>{campaign.name}</h2>
+            <p className={"text-muted"}>
+              {campaign.description}
+            </p>
+            <h5>Owner Information</h5>
+            <div className="ml-3">
+              <p className={"pr-4"}>
+                <MDBIcon icon="user" className="mr-2 text-muted"/>
+                {`${owner.firstName} ${owner.lastName}`}
               </p>
-              <h2>Owner Information</h2>
-              <div className="ml-3">
-                <p className={"pr-4"}>
-                  <MDBIcon icon="user" className="mr-2 text-muted"/>
-                  {`${owner.firstName} ${owner.lastName}`}
-                </p>
-                <p className={"pr-4"}>
-                  <MDBIcon icon="envelope" className="mr-2 text-muted"/>
-                  {owner.email}</p>
-                <p className={"pr-4"}>
-                  <MDBIcon icon="phone" className="mr-2 text-muted"/>
-                  {owner.phone ? owner.phone : "N/A"}
-                </p>
-              </div>
-              <div className={"text-center"}>
-                {
-                  campaign.isApproved ?
-                    <MDBBtn
-                      outline
-                      onClick={() => this.disapproveCampaign()}
-                      color={"danger"}
-                      className={"rounded-pill text-center"}>
-                      DIS-APPROVE CAMPAIGN
-                    </MDBBtn>
-                    :
-                    <MDBBtn
-                      onClick={() => this.approveCampaign()}
-                      color={"light-green"}
-                      className={"rounded-pill text-center"}>
-                      APPROVE CAMPAIGN
-                    </MDBBtn>
-                }
-              </div>
-              <div className={"text-center"}>
-                {
-                  campaign.isFeatured ?
-                    <MDBBtn
-                      outline
-                      onClick={() => this.removeFeatured()}
-                      color={"danger"}
-                      className={"rounded-pill text-center"}>
-                      Remove Featured
-                    </MDBBtn>
-                    :
-                    <MDBBtn
-                      onClick={() => this.addFeatured()}
-                      color={"light-green"}
-                      className={"rounded-pill text-center"}>
-                      Add Featured
-                    </MDBBtn>
-                }
-              </div>
-
-            </MDBContainer>
+              <p className={"pr-4"}>
+                <MDBIcon icon="envelope" className="mr-2 text-muted"/>
+                {owner.email}</p>
+              <p className={"pr-4"}>
+                <MDBIcon icon="phone" className="mr-2 text-muted"/>
+                {owner.phone ? owner.phone : "N/A"}
+              </p>
+            </div>
+            <div>
+              {
+                campaign.isApproved ?
+                  <MDBBtn
+                    outline
+                    onClick={() => this.disapproveCampaign()}
+                    color={"danger"}
+                    className={"rounded-pill text-center"}>
+                    DIS-APPROVE CAMPAIGN
+                  </MDBBtn>
+                  :
+                  <MDBBtn
+                    onClick={() => this.approveCampaign()}
+                    color={"light-green"}
+                    className={"rounded-pill text-center"}>
+                    APPROVE CAMPAIGN
+                  </MDBBtn>
+              }
+            </div>
+            <div >
+              {
+                campaign.isFeatured ?
+                  <MDBBtn
+                    outline
+                    onClick={() => this.removeFeatured()}
+                    color={"danger"}
+                    className={"rounded-pill text-center"}>
+                    Remove Featured
+                  </MDBBtn>
+                  :
+                  <MDBBtn
+                    onClick={() => this.addFeatured()}
+                    color={"light-green"}
+                    className={"rounded-pill text-center"}>
+                    Add Featured
+                  </MDBBtn>
+              }
+            </div>
           </MDBCol>
         </MDBRow>
+        <DonationsTable donations={campaign.donations}/>
       </MDBContainer>
     )
   }

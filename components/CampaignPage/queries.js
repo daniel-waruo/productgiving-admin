@@ -28,6 +28,32 @@ export const CAMPAIGN_QUERY = gql`
         phone
         dateJoined
       }
+      donations {
+        donorName
+        amountPaid
+        createdOn
+        transaction {
+          id
+          mpesaCode
+        }
+        products {
+          id
+          productPrice
+          product {
+            id
+            numberDonated
+            product {
+              id
+              name
+              image
+              images {
+                id
+                url
+              }
+            }
+          }
+        }
+      }
     }
   }
 `
